@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "FEC Project",
   "main": "src/index.jsx",
-  "scripts": {},
+  "scripts": {
+    "client-dev": "npx webpack --watch",
+    "build": "npx webpack"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FEC-Neptune/front-end-capstone.git"
@@ -16,11 +19,18 @@
   "homepage": "https://github.com/FEC-Neptune/front-end-capstone#readme",
   "devDependencies": {
     "eslint": "^8.43.0",
-    "eslint-plugin-react": "^7.32.2"
+    "eslint-plugin-react": "^7.32.2",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
     "dotenv": "^16.3.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "webpack": "^5.41.0"
   }
 }
