@@ -2,9 +2,9 @@
   "name": "front-end-capstone",
   "version": "1.0.0",
   "description": "FEC Project",
-  "main": "src/index.jsx",
+  "main": "client/src/index.jsx",
   "scripts": {
-    "client-dev": "npx webpack --watch",
+    "client-dev": "npx webpack --watch & npx live-server --open=./client/dist/index.html",
     "build": "npx webpack"
   },
   "repository": {
@@ -20,13 +20,14 @@
   "devDependencies": {
     "eslint": "^8.43.0",
     "eslint-plugin-react": "^7.32.2",
+    "live-server": "^1.2.2",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "axios": "^0.21.1",
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
+    "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "dotenv": "^16.3.1",
     "react": "^18.2.0",
