@@ -5,7 +5,8 @@
   "main": "client/src/index.jsx",
   "scripts": {
     "client-dev": "npx webpack --watch & npx live-server --open=./client/dist/index.html",
-    "build": "npx webpack"
+    "build": "npx webpack",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
