@@ -10,7 +10,7 @@ const RatingsAndReviews = () => {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/',
       headers: {
         'User-Agent': 'request',
-        'Authorization': `token ${process.env.TIMTOKEN}`
+        'Authorization': `token ${process.env.TOKEN}`
       }
     };
     return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/', options)
