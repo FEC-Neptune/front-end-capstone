@@ -16,14 +16,16 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /nodeModules/,
         use: {
-<<<<<<< HEAD
-          loader: 'babel-loader',
-          loader: 'sass-loader'
-=======
-          loader: "babel-loader",
-          loader: "sass-loader"
->>>>>>> ef9005aa95ca17b264770c0bf4a6eb270dc7c203
+          loader: 'babel-loader'
         },
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
   },
