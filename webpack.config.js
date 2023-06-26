@@ -17,7 +17,7 @@ module.exports = {
         exclude: /nodeModules/,
         use: {
           loader: "babel-loader",
-          loader: "saas-loader"
+          loader: "sass-loader"
         },
       },
     ],
