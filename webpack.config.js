@@ -1,23 +1,28 @@
-require("dotenv").config();
+require('dotenv').config();
 
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-  mode: "development",
-  entry: path.join(__dirname, "/client/src/index.jsx"),
+  mode: 'development',
+  entry: path.join(__dirname, '/client/src/index.jsx'),
   output: {
-    path: path.join(__dirname, "/client/dist"),
-    filename: "bundle.js",
+    path: path.join(__dirname, '/client/dist'),
+    filename: 'bundle.js',
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /nodeModules/,
         use: {
+<<<<<<< HEAD
+          loader: 'babel-loader',
+          loader: 'sass-loader'
+=======
           loader: "babel-loader",
           loader: "sass-loader"
+>>>>>>> ef9005aa95ca17b264770c0bf4a6eb270dc7c203
         },
       },
     ],

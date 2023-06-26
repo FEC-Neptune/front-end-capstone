@@ -1,6 +1,7 @@
 import React from 'react';
-import Overview from './overview/Overview.jsx'
-import RatingsAndReviews from './RatingsAndReviews.jsx';
+import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
+import Overview from './overview/Overview.jsx';
+
 
 const App = () => {
 

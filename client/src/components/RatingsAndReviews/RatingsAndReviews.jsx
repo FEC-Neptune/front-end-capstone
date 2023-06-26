@@ -7,13 +7,13 @@ const RatingsAndReviews = () => {
 
   const getReviews = (username) => {
     let options = {
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/:rfp2305/',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/',
       headers: {
         'User-Agent': 'request',
         'Authorization': `token ${process.env.TOKEN}`
       }
     };
-    return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/:rfp2305/', options)
+    return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/', options)
       .then((res) => {
         return res.data;
       })
