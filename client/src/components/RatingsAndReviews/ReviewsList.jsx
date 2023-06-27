@@ -3,6 +3,10 @@ const axios = require('axios');
 import ReviewTile from './ReviewTile.jsx';
 import AddReview from './AddReview.jsx';
 
+import { token } from '../../../../config.js';
+
+
+
 const ReviewsList = () => {
   const [productData, setProductData] = useState(dummyData);
 
@@ -14,10 +18,10 @@ const ReviewsList = () => {
   const getReviews = (username) => {
     let options = {
       headers: {
-        // 'Authorization': process.env.TOKEN
+        'Authorization': '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a'
       }
     };
-    return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/', options)
+    return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/', options)
       .then((res) => {
         console.log(res.data);
         setProductData(res.data);
