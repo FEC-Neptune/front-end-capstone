@@ -9,10 +9,10 @@ import { TOKEN } from '../../../../config.js';
 
 const ReviewsList = () => {
   const [product, setProduct] = useState(40344);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    console.log('Loaded 2 most relevant reviews!');
-    // getReviews();
+    getReviews();
   }, []);
 
   const getReviews = (username) => {
@@ -21,10 +21,10 @@ const ReviewsList = () => {
         'Authorization': TOKEN
       }
     };
-    return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${product}`, options)
+    return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?sort=relevant&product_id=${product}`, options)
       .then((res) => {
-        console.log(res.data);
-        setProductData(res.data);
+        let reviews = res.data.results;
+        setReviews(reviews.slice(0, 2));
       })
       .catch((err => {
         throw (err);
@@ -37,7 +37,7 @@ const ReviewsList = () => {
 
   return (
     <>
-      {productData.results.map((review) =>
+      {reviews.map((review) =>
         <ReviewTile review={review} key={review.review_id} />
       )}
       <button onClick={addReviews}>MORE REVIEWS</button>
