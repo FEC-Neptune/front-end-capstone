@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ReviewTile from './ReviewTile.jsx';
 const axios = require('axios');
+import ReviewTile from './ReviewTile.jsx';
 import AddReview from './AddReview.jsx';
-
-// import {token} from '..../config.js';
 
 const ReviewsList = () => {
   const [productData, setProductData] = useState(dummyData);
@@ -16,7 +14,7 @@ const ReviewsList = () => {
   const getReviews = (username) => {
     let options = {
       headers: {
-        'Authorization': process.env.TOKEN
+        // 'Authorization': process.env.TOKEN
       }
     };
     return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/', options)

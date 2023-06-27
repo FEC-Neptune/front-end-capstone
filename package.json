@@ -20,22 +20,15 @@
   "homepage": "https://github.com/FEC-Neptune/front-end-capstone#readme",
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
-<<<<<<< HEAD
-=======
     "css-loader": "^6.8.1",
->>>>>>> 0ac43ef400d44d91debdd702e3b742d437ae1df2
     "eslint": "^8.43.0",
     "eslint-plugin-react": "^7.32.2",
     "jest": "^26.6.3",
     "live-server": "^1.2.2",
-<<<<<<< HEAD
     "nodemon": "^2.0.7",
     "sass": "^1.63.6",
     "val-loader": "^5.0.1",
-=======
-    "sass": "^1.63.6",
     "style-loader": "^3.3.3",
->>>>>>> 0ac43ef400d44d91debdd702e3b742d437ae1df2
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
