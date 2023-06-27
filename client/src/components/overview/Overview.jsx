@@ -28,7 +28,6 @@ const Overview = () => {
       }
     })
       .then((res) => {
-        console.log(res.data);
         setCurrentProduct(res.data);
       })
       .catch((err) => {
@@ -50,7 +49,6 @@ const Overview = () => {
       }
     })
       .then((res) => {
-        console.log(res.data.results);
         setProductStyles(res.data.results);
         return res.data.results;
       })
