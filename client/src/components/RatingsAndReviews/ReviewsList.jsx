@@ -1,7 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 const axios = require('axios');
+import AddReview from './AddReview.jsx';
 // import {token} from '..../config.js';
+
+const ReviewsList = () => {
+  const [productData, setProductData] = useState(dummyData);
+
+  useEffect(() => {
+    console.log('Loaded 2 most relevant reviews!');
+    // getReviews();
+  }, []);
+
+  const getReviews = (username) => {
+    let options = {
+      headers: {
+        'Authorization': process.env.TOKEN
+      }
+    };
+    return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/', options)
+      .then((res) => {
+        console.log(res.data);
+        setProductData(res.data);
+      })
+      .catch((err => {
+        throw (err);
+      }));
+  };
+
+  const addReviews = () => {
+    console.log('Here\'s 2 more reviews!');
+  };
+
+  return (
+    <>
+      {productData.results.map((review) =>
+        <ReviewTile review={review} key={review.review_id} />
+      )}
+      <button onClick={addReviews}>MORE REVIEWS</button>
+      <AddReview />
+    </>
+  );
+};
+
+export default ReviewsList;
+
 
 const dummyData = {
   'product': '2',
@@ -42,38 +85,4 @@ const dummyData = {
     },
   ]
 };
-
-const ReviewsList = () => {
-  const [productData, setProductData] = useState(dummyData);
-
-  // useEffect(() => {
-  //   getReviews();
-  // }, []);
-
-  const getReviews = (username) => {
-    let options = {
-      headers: {
-        'Authorization': process.env.TOKEN
-      }
-    };
-    return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/', options)
-      .then((res) => {
-        console.log(res.data);
-        setProductData(res.data);
-      })
-      .catch((err => {
-        throw (err);
-      }));
-  };
-
-  return (
-    <>
-      {productData.results.map((review) =>
-        <ReviewTile review={review} key={review.review_id} />
-      )}
-    </>
-  );
-};
-
-export default ReviewsList;
 
