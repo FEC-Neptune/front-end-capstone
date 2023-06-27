@@ -3,7 +3,7 @@ const axios = require('axios');
 import ReviewTile from './ReviewTile.jsx';
 import AddReview from './AddReview.jsx';
 
-import { token } from '../../../../config.js';
+import { TOKEN } from '../../../../config.js';
 
 
 
