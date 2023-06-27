@@ -12,16 +12,16 @@ const ReviewsList = () => {
 
   useEffect(() => {
     console.log('Loaded 2 most relevant reviews!');
-    getReviews();
+    // getReviews();
   }, []);
 
   const getReviews = (username) => {
     let options = {
       headers: {
-        'Authorization': token
+        'Authorization': TOKEN
       }
     };
-    return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/', options)
+    return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/', options)
       .then((res) => {
         console.log(res.data);
         setProductData(res.data);
