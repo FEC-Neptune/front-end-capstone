@@ -6,7 +6,7 @@ import App from '../components/App.jsx';
 describe('App', () => {
   it('renders App component', () => {
     render(<App />);
-    screen.debug();
+    // screen.debug();
   });
   it('renders the header text', () => {
     render(<App />);
