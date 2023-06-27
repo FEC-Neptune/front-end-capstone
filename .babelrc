@@ -7,9 +7,5 @@
         "runtime": "automatic"
       }
     ]
-  ],
-  "plugins": [
-    // "babel-plugin-styled-components"
-    // "react-refresh/babel"
   ]
 }
