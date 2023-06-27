@@ -8,6 +8,7 @@ const App = () => {
   return (
     <>
       <p>Hello world</p>
+      <Widget />
       <Overview />
       <RatingsAndReviews />
     </>
