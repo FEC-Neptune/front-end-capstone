@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter, faPinterest } from '@fortawesome/free-brands-svg-icons';
 
-const ProductInformation = () => {
+const ProductInformation = ({product, styles}) => {
   return (
     <section id="product-info">
       <div id="product-reviews">
