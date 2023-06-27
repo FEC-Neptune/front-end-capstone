@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter, faPinterest } from '@fortawesome/free-brands-svg-icons';
 
-const ProductInformation = ({product, styles}) => {
+const ProductInformation = ({product, style}) => {
   return (
     <section id="product-info">
       <div id="product-reviews">
@@ -10,16 +10,16 @@ const ProductInformation = ({product, styles}) => {
         <div># OF REVIEWS</div>
       </div>
       <p>
-        <small>CATEGORY</small>
+        <small>{product.category ? (product.category) : 'CATEGORY'}</small>
       </p>
       <h4>
-        EXPANDED PRODUCT NAME
+        {product.name ? (product.name) : ('EXPANDED PRODUCT NAME')}
       </h4>
       <p>
-        <small>$369</small>
+        <small>{product.default_price ? ('$' + product.default_price) : ('$369')}</small>
       </p>
       <p id="product-description">
-        Neopolitan chocolate peanuts chocolate chip bananas oreos. French vanilla chocolate chips coffee cake batter peanuts. Strawberries cake batter rocky road blueberries m&m's, bananas mint gummy worms neopolitan marshmallows caramel syrup.
+        {product.description}
       </p>
       <div id="social-container">
         <FontAwesomeIcon icon={faFacebook} size="lg" />
