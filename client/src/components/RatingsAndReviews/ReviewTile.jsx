@@ -3,7 +3,12 @@ import React from 'react';
 const ReviewTile = ({ review }) => {
   return (
     <>
-      {review}
+      <div className="review summary">
+        {review.summary}
+      </div>
+      <div className="review body">
+        {review.body}
+      </div>
     </>
   );
 };
