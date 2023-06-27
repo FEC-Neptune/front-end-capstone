@@ -53,7 +53,7 @@ const ReviewsList = () => {
   const getReviews = (username) => {
     let options = {
       headers: {
-        'Authorization': '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'
+        'Authorization': process.env.TOKEN
       }
     };
     return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/', options)
