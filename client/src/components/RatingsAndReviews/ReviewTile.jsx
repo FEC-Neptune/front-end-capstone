@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {parseISO} from 'date-fns';
 
 const ReviewTile = ({ review }) => {
+  let readableDate = parseISO(review.date.slice(0, 10)).toString();
+  const [isVerified, setIsVerified] = useState(false);
   return (
     <>
-      {review.reviewer_name}, {review.date}
+      {isVerified && '***'}
+      {review.reviewer_name}, {`${readableDate.slice(4, 10)}, ${readableDate.slice(10, 15)}`}
       <div className="review summary">
         {review.summary}
       </div>
