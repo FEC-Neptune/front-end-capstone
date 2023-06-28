@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { averageRating } from '../../lib/ratingsAndReviewsHelpers.js';
-import { getReviews, getReviewsMeta } from '../../lib/requestHelpers.js';
+import { getAverageRating } from '../../lib/ratingsAndReviewsHelpers.js';
+import { getReviewsMeta } from '../../lib/requestHelpers.js';
 
 
 const RatingBreakdown = () => {
 
-  const [average, setAverage] = useState('');
+  const [averageRating, setAverageRating] = useState('');
   const [oneStar, setOneStar] = useState('');
   const [twoStar, setTwoStar] = useState('');
   const [threeStar, setThreeStar] = useState('');
@@ -17,7 +17,7 @@ const RatingBreakdown = () => {
       .then(({ data }) => {
         let ratings = data.ratings;
         let totalReviews = calculateTotalReviews(ratings);
-        setAverage(averageRating(ratings));
+        setAverageRating(getAverageRating(ratings, 1));
         setOneStar(calculateRatingsPercentage(ratings['1'], totalReviews));
         setTwoStar(calculateRatingsPercentage(ratings['2'], totalReviews));
         setThreeStar(calculateRatingsPercentage(ratings['3'], totalReviews));
@@ -40,7 +40,7 @@ const RatingBreakdown = () => {
 
   return (
     <>
-      <div>Average Rating: {average}</div>
+      <div>Average Rating: {averageRating}</div>
       <div>5 Stars: {fiveStar}%</div>
       <div>4 Stars: {fourStar}%</div>
       <div>3 Stars: {threeStar}%</div>
