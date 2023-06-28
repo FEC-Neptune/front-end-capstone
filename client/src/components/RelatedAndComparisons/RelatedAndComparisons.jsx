@@ -17,13 +17,16 @@ const RelatedAndComparisons = () => {
         'Authorization': TOKEN
       }
     };
-    id ? id = id + '/' : id = '';
-    category ? category = category : category = '';
+    id = id ? id + '/' : '';
+    category = category ? category : '';
     return axios
       .get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}${category}`, options)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      .then((res) => (res.data))
+      .catch((err => {
+        throw (err);
+      }));
   };
+
 
   return (
     <div>
