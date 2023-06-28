@@ -5,13 +5,16 @@ import ReviewTile from './ReviewTile.jsx';
 
 import { TOKEN } from '../../../../config.js';
 
-const ReviewsList = ({product}) => {
+const ReviewsList = ({ product }) => {
 
   const [reviews, setReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState([]);
 
   useEffect(() => {
-    getReviews();
+    getReviews()
+      .then(() => {
+        setVisibleReviews(reviews.slice(0, 2));
+      });
   }, []);
 
   const getReviews = (username) => {
@@ -25,7 +28,7 @@ const ReviewsList = ({product}) => {
         let reviews = res.data.results;
         setReviews(reviews);
         console.log(reviews);
-        setVisibleReviews(reviews.slice(0, 2));
+
       })
       .catch((err => {
         throw (err);
