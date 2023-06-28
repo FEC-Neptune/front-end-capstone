@@ -3,8 +3,9 @@ import { averageRating } from '../../lib/ratingsAndReviewsHelpers.js';
 import { getReviews, getReviewsMeta } from '../../lib/requestHelpers.js';
 
 
-const RatingBreakdown = ({ reviews }) => {
+const RatingBreakdown = () => {
 
+  const [average, setAverage] = useState('');
   const [oneStar, setOneStar] = useState('');
   const [twoStar, setTwoStar] = useState('');
   const [threeStar, setThreeStar] = useState('');
@@ -15,8 +16,8 @@ const RatingBreakdown = ({ reviews }) => {
     getReviewsMeta(40346)
       .then(({ data }) => {
         let ratings = data.ratings;
-        console.log(ratings);
         let totalReviews = calculateTotalReviews(ratings);
+        setAverage(averageRating(ratings));
         setOneStar(calculateRatingsPercentage(ratings['1'], totalReviews));
         setTwoStar(calculateRatingsPercentage(ratings['2'], totalReviews));
         setThreeStar(calculateRatingsPercentage(ratings['3'], totalReviews));
@@ -39,7 +40,7 @@ const RatingBreakdown = ({ reviews }) => {
 
   return (
     <>
-      <div>Average Rating: {averageRating(40347)}</div>
+      <div>Average Rating: {average}</div>
       <div>5 Stars: {fiveStar}%</div>
       <div>4 Stars: {fourStar}%</div>
       <div>3 Stars: {threeStar}%</div>
