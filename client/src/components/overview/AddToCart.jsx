@@ -3,18 +3,20 @@ import React from 'react';
 const AddToCart = () => {
   return (
     <section id="add-to-cart">
-      <div>
-        <span>Please select a size</span>
+      <div id="size-warning-container">
+        <span id="size-warning">Please select a size</span>
       </div>
-      <div>
+      <div id="cart-form-container">
         <form>
-          <select>
-            <option value="A nice style">A nice style</option>
-          </select>
-          <select>
-            <option value="-">-</option>
-          </select>
-          <button type="submit">Add To Cart +</button>
+          <div id="select-container">
+            <select id="size-select">
+              <option value="A nice size">A nice size</option>
+            </select>
+            <select id="qty-select">
+              <option value="-">-</option>
+            </select>
+          </div>
+          <button type="submit" id="add-to-cart-button">Add To Cart +</button>
         </form>
       </div>
     </section>

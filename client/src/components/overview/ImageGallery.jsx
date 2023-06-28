@@ -2,9 +2,8 @@ import React from 'react';
 
 const ImageGallery = () => {
   return (
-    <>
-      ImageGallery 😒
-    </>
+    <section id="image-gallery">
+    </section>
   );
 };
 
