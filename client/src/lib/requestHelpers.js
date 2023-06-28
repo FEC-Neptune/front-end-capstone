@@ -8,7 +8,7 @@ module.exports = {
   getReviews: (id) => {
     var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?sort=relevant&product_id=' + id;
 
-    axios({
+    return axios({
       method: 'get',
       url: url,
       headers: {
@@ -17,7 +17,7 @@ module.exports = {
     })
       .then((res) => {
         let reviews = res.data.results;
-        console.log(reviews);
+        return reviews;
       })
       .catch((err => {
         throw (err);
@@ -26,7 +26,7 @@ module.exports = {
   getReviewsMeta: (id) => {
     var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta/?product_id=' + id;
 
-    axios({
+    return axios({
       method: 'get',
       url: url,
       headers: {
@@ -34,7 +34,7 @@ module.exports = {
       }
     })
       .then((res) => {
-        console.log(res);
+        return res;
       })
       .catch((err => {
         throw (err);

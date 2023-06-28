@@ -13,7 +13,10 @@ const RatingsAndReviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    getReviews(40344);
+    getReviews(40344)
+      .then((reviews) => {
+        setReviews(reviews);
+      });
   }, []);
 
 
