@@ -10,7 +10,7 @@ import axios from 'axios';
 const Overview = () => {
 
   const [currentProduct, setCurrentProduct] = useState({});
-  const [currentStyle, setCurrentStyle] = useState({})
+  const [currentStyle, setCurrentStyle] = useState({});
   const [productStyles, setProductStyles] = useState([]);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const Overview = () => {
       <ImageGallery />
       <aside>
         <ProductInformation product={currentProduct} style={currentStyle} />
-        <StyleSelector />
+        <StyleSelector style={currentStyle} setStyle={setCurrentStyle} />
         <AddToCart />
       </aside>
     </section>
