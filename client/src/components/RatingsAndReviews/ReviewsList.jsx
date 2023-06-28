@@ -5,8 +5,6 @@ import AddReview from './AddReview.jsx';
 
 import { TOKEN } from '../../../../config.js';
 
-
-
 const ReviewsList = () => {
   const [product, setProduct] = useState(40347);
   const [reviews, setReviews] = useState([]);
