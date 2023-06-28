@@ -18,6 +18,7 @@ const ReviewTile = ({ review }) => {
       <div className="review body">
         Body: {review.body}
       </div>
+      {review.response && <div>Response: {review.response}</div> }
     </>
   );
 };
