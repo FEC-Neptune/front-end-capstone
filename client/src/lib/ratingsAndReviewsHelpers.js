@@ -12,3 +12,15 @@ export const getAverageRating = (ratingsObj, decimalPlace) => {
   avgRating = (Math.round(avgRating * 4) / 4).toFixed(decimalPlace);
   return avgRating;
 };
+
+export const calculateTotalReviews = (ratingsObj) => {
+  var sum = 0;
+  for (var key in ratingsObject) {
+    sum += parseInt(ratingsObject[key]);
+  }
+  return sum;
+};
+
+export const calculateRatingsPercentage = (starRating, totalReviews) => {
+  return Math.round(starRating * 100 / totalReviews);
+};

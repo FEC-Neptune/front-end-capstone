@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAverageRating } from '../../lib/ratingsAndReviewsHelpers.js';
+import { getAverageRating, calculateTotalReviews, calculateRatingsPercentage } from '../../lib/ratingsAndReviewsHelpers.js';
 import { getReviewsMeta } from '../../lib/requestHelpers.js';
 
 
@@ -25,18 +25,6 @@ const RatingBreakdown = () => {
         setFiveStar(calculateRatingsPercentage(ratings['5'], totalReviews));
       });
   }, []);
-
-  const calculateTotalReviews = (ratingsObject) => {
-    var sum = 0;
-    for (var key in ratingsObject) {
-      sum += parseInt(ratingsObject[key]);
-    }
-    return sum;
-  };
-
-  const calculateRatingsPercentage = (starRating, totalReviews) => {
-    return Math.round(starRating * 100 / totalReviews);
-  };
 
   return (
     <>
