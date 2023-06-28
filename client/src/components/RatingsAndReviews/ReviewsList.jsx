@@ -5,8 +5,6 @@ import AddReview from './AddReview.jsx';
 
 import { TOKEN } from '../../../../config.js';
 
-
-
 const ReviewsList = () => {
   const [product, setProduct] = useState(40347);
   const [reviews, setReviews] = useState([]);
@@ -26,6 +24,7 @@ const ReviewsList = () => {
       .then((res) => {
         let reviews = res.data.results;
         setReviews(reviews);
+        console.log(reviews);
         setVisibleReviews(reviews.slice(0, 2));
       })
       .catch((err => {
@@ -40,6 +39,7 @@ const ReviewsList = () => {
 
   return (
     <>
+      <div>{reviews.length} reviews, sorted by relevance</div>
       {visibleReviews.map((review) =>
         <ReviewTile review={review} key={review.review_id} />
       )}
