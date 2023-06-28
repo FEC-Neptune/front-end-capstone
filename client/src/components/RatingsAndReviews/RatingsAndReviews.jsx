@@ -3,9 +3,8 @@ import ReviewsList from './ReviewsList.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import NewReviewForm from './NewReviewForm.jsx';
 import AddReview from './AddReview.jsx';
-import { TOKEN } from '../../../../config.js';
 import {getReviews, getReviewsMeta} from '../../lib/requestHelpers.js';
-const axios = require('axios');
+
 
 const RatingsAndReviews = () => {
 
@@ -13,7 +12,7 @@ const RatingsAndReviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    getReviews(40344)
+    getReviews(40347)
       .then((reviews) => {
         setReviews(reviews);
       });
