@@ -1,39 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { averageRating } from '../../lib/ratingsAndReviewsHelpers.js';
+import { getReviews, getReviewsMeta } from '../../lib/requestHelpers.js';
+
 
 const RatingBreakdown = ({ reviews }) => {
 
-  const findAverage = (reviewsArray) => {
-    let sum = 0;
-    reviewsArray.forEach((review) => {
-      sum += review.rating;
-    });
-    return (sum / reviewsArray.length);
-  };
+  const [metaData, setMetaData] = useState('foo');
 
-  let ratingsCounter = {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0
-  };
+  useEffect(() => {
+    getReviewsMeta(40347)
+      .then((data) => {
+        setMetaData(data.data);
+      });
+  }, []);
 
-  reviews.forEach((review) => {
-    if (!ratingsCounter[review.rating]) {
-      ratingsCounter[review.rating] = 1;
-    } else {
-      ratingsCounter[review.rating] ++;
+  const calculateTotalReviews = (data) => {
+    var sum = 0;
+    for (var key in data.ratings) {
+      sum += data.ratings[key];
     }
-  });
+    return sum;
+  };
+
+  const calculateRatingsPercentage = (starRating) => {
+    // console.log(starRating);
+    let totalReviews = calculateTotalReviews(metaData);
+    return Math.round(starRating * 100 / totalReviews);
+  };
+
 
   return (
     <>
-      <div>Average Rating: {findAverage(reviews)}</div>
-      <div>5 Stars: {(ratingsCounter[5] * 100) / (reviews.length)}%</div>
-      <div>4 Stars: {(ratingsCounter[4] * 100) / (reviews.length)}%</div>
-      <div>3 Stars: {(ratingsCounter[3] * 100) / (reviews.length)}%</div>
-      <div>2 Stars: {(ratingsCounter[2] * 100) / (reviews.length)}%</div>
-      <div>1 Stars: {(ratingsCounter[1] * 100) / (reviews.length)}%</div>
+      <div>Average Rating: {averageRating(40347)}</div>
+      <div>5 Stars: {calculateRatingsPercentage(13)}%</div>
+      {/* <div>4 Stars: {(ratingsCounter[4] * 100) / (totalReviews.length)}%</div>
+      <div>3 Stars: {(ratingsCounter[3] * 100) / (totalReviews.length)}%</div>
+      <div>2 Stars: {(ratingsCounter[2] * 100) / (totalReviews.length)}%</div>
+      <div>1 Stars: {(ratingsCounter[1] * 100) / (totalReviews.length)}%</div> */}
     </>
   );
 };
