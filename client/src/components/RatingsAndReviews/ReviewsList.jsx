@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 const axios = require('axios');
-import ReviewTile from './ReviewTile.jsx';
 import AddReview from './AddReview.jsx';
+import ReviewTile from './ReviewTile.jsx';
 
 import { TOKEN } from '../../../../config.js';
 
-const ReviewsList = () => {
-  const [product, setProduct] = useState(40347);
+const ReviewsList = ({product}) => {
+
   const [reviews, setReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState([]);
 
