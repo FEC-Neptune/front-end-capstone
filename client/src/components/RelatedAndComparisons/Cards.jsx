@@ -1,10 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
+import ProductInfo from './ProductInfo.jsx';
 
-const Cards = () => (
+const Cards = ( { product } ) => (
   <div>
     <div>product image</div>
-    <div>product info component</div>
+    <ProductInfo product={product}/>
   </div>
 );
 
