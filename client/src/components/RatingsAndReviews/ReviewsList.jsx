@@ -21,7 +21,7 @@ const ReviewsList = ({ product, getReviews, reviews }) => {
       {visibleReviews.map((review) =>
         <ReviewTile review={review} key={review.review_id} />
       )}
-      <button onClick={addReviews}>MORE REVIEWS</button>
+      {reviews.length !== visibleReviews.length && <button onClick={addReviews}>MORE REVIEWS</button>}
       <AddReview />
     </>
   );
