@@ -3,7 +3,8 @@ import { useState } from 'react';
 
 const RelatedAndComparisons = () => (
   <div>
-
+    <div>Related Component</div>
+    <div>Outfit Component</div>
   </div>
 );
 
