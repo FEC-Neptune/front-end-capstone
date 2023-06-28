@@ -8,7 +8,7 @@ const axios = require('axios');
 
 const RatingsAndReviews = () => {
 
-  const [product, setProduct] = useState(40345);
+  const [product, setProduct] = useState(40347);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
