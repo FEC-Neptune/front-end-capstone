@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { parseISO } from 'date-fns';
 
-const ReviewTile = ({ review }) => {
+const ReviewTile = ({review}) => {
   let readableDate = parseISO(review.date.slice(0, 10)).toString();
   const [isVerified, setIsVerified] = useState(false);
   return (

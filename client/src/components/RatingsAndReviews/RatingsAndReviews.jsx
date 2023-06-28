@@ -7,7 +7,7 @@ const axios = require('axios');
 
 const RatingsAndReviews = () => {
 
-  const [product, setProduct] = useState(40347);
+  const [product, setProduct] = useState(40345);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const RatingsAndReviews = () => {
     return axios(options)
       .then((res) => {
         let reviews = res.data.results;
+        console.log(reviews);
         setReviews(reviews);
       })
       .catch((err => {
@@ -36,7 +37,7 @@ const RatingsAndReviews = () => {
   return (
     <>
       <h2>Ratings and Reviews</h2>
-      <RatingBreakdown product={product} />
+      <RatingBreakdown reviews={reviews} />
       {reviews.length > 0 && <ReviewsList reviews={reviews} getReviews={getReviews} product={product} />}
     </>
   );
