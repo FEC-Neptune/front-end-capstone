@@ -41,6 +41,7 @@ const ReviewsList = () => {
 
   return (
     <>
+      <div>{reviews.length} reviews, sorted by relevance</div>
       {visibleReviews.map((review) =>
         <ReviewTile review={review} key={review.review_id} />
       )}
