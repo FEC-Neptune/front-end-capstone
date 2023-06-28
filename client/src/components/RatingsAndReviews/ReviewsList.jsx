@@ -8,7 +8,7 @@ import { TOKEN } from '../../../../config.js';
 
 
 const ReviewsList = () => {
-  const [product, setProduct] = useState(40348);
+  const [product, setProduct] = useState(40347);
   const [reviews, setReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState([]);
 
@@ -25,7 +25,6 @@ const ReviewsList = () => {
     return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?sort=relevant&product_id=${product}`, options)
       .then((res) => {
         let reviews = res.data.results;
-        console.log(reviews);
         setReviews(reviews);
         setVisibleReviews(reviews.slice(0, 2));
       })
@@ -35,7 +34,8 @@ const ReviewsList = () => {
   };
 
   const addReviews = () => {
-    console.log('Here\'s 2 more reviews!');
+    var index = visibleReviews.length;
+    setVisibleReviews(reviews.slice(0, index + 2));
   };
 
   return (
