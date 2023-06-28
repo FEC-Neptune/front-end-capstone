@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { parseISO } from 'date-fns';
 
-const ReviewTile = ({ review }) => {
+const ReviewTile = ({review}) => {
   let readableDate = parseISO(review.date.slice(0, 10)).toString();
   const [isVerified, setIsVerified] = useState(false);
   return (
@@ -18,6 +18,7 @@ const ReviewTile = ({ review }) => {
       <div className="review body">
         Body: {review.body}
       </div>
+      {review.recommend && <div>~CHECKMARK~ I recommend this product</div>}
       {review.response && <div>Response: {review.response}</div> }
     </>
   );
