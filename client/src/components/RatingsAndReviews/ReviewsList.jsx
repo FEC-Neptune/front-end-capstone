@@ -1,39 +1,14 @@
 import React, { useState, useEffect } from 'react';
-const axios = require('axios');
 import AddReview from './AddReview.jsx';
 import ReviewTile from './ReviewTile.jsx';
 
-import { TOKEN } from '../../../../config.js';
+const ReviewsList = ({ product, getReviews, reviews }) => {
 
-const ReviewsList = ({ product }) => {
-
-  const [reviews, setReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState([]);
 
   useEffect(() => {
-    getReviews()
-      .then(() => {
-        setVisibleReviews(reviews.slice(0, 2));
-      });
+    setVisibleReviews(reviews.slice(0, 2));
   }, []);
-
-  const getReviews = (username) => {
-    let options = {
-      headers: {
-        'Authorization': TOKEN
-      }
-    };
-    return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?sort=relevant&product_id=${product}`, options)
-      .then((res) => {
-        let reviews = res.data.results;
-        setReviews(reviews);
-        console.log(reviews);
-
-      })
-      .catch((err => {
-        throw (err);
-      }));
-  };
 
   const addReviews = () => {
     var index = visibleReviews.length;

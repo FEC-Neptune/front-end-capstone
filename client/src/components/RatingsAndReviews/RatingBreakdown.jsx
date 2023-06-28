@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RatingBreakdown = () => {
+const RatingBreakdown = ({product}) => {
   return (
     <>
     </>
