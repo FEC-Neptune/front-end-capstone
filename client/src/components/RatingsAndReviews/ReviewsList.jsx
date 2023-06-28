@@ -22,7 +22,6 @@ const ReviewsList = ({ product, getReviews, reviews }) => {
         <ReviewTile review={review} key={review.review_id} />
       )}
       {reviews.length !== visibleReviews.length && <button onClick={addReviews}>MORE REVIEWS</button>}
-      <AddReview />
     </>
   );
 };

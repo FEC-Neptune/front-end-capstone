@@ -11,7 +11,7 @@ const RatingBreakdown = ({reviews}) => {
   };
 
   return (
-    reviews.length > 0 && <div>Average Rating: {findAverage(reviews)}</div>
+    <div>Average Rating: {findAverage(reviews)}</div>
   );
 };
 
