@@ -1,36 +1,25 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import axios from 'axios';
-import { TOKEN } from '../../../../config.js';
+import fetchProducts from '../../lib/requestHelpers.js';
+import Related from './Related.jsx';
 
 const RelatedAndComparisons = () => {
+  const [prodArr, setProdArr] = useState([]);
 
-
-  //API Call that takes in optional id (INT) and category ('styles' or 'related')
-  //returns full product list array if no params
-  //returns single product object if only id
-  //returns styles or related products array if id and category
-  const fetchProducts = function (id, category) {
-    let options = {
-      headers: {
-        'Authorization': TOKEN
-      }
-    };
-    id = id ? id + '/' : '';
-    category = category ? category : '';
-    return axios
-      .get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${id}${category}`, options)
-      .then((res) => (res.data))
-      .catch((err => {
+  useEffect(() => {
+    fetchProducts()
+      .then(res => setProdArr(res))
+      .catch(err => {
         throw (err);
-      }));
-  };
+      });
+  }, []);
+
 
 
   return (
     <div>
-      <div>Related Component</div>
+      <Related products={prodArr} />
       <div>Outfit Component</div>
     </div>
   );

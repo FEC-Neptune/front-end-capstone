@@ -2,18 +2,13 @@ import React from 'react';
 import { useState } from 'react';
 
 
-const ProductInfo = () => {
-
-  const [category, setCategory] = useState('N/A');
-  const [name, setName] = useState('N/A');
-  const [price, setPrice] = useState('N/A');
-  const [rating, setRating] = useState('N/A');
+const ProductInfo = ( { product } ) => {
 
   return (
     <div>
-      <div>Category</div>
-      <div>Name</div>
-      <div>Price</div>
+      <div>{product.category}</div>
+      <div>{product.name}</div>
+      <div>{product.default_price}</div>
       <div>*****</div>
     </div>
   );
