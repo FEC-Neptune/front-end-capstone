@@ -26,6 +26,7 @@ const ReviewsList = () => {
       .then((res) => {
         let reviews = res.data.results;
         setReviews(reviews);
+        console.log(reviews);
         setVisibleReviews(reviews.slice(0, 2));
       })
       .catch((err => {
