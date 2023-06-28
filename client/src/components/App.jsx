@@ -9,12 +9,12 @@ import RelatedAndComparisons from './RelatedAndComparisons/RelatedAndComparisons
 const App = () => {
 
   return (
-    <>
+    <section id="container">
       <p>Hello world</p>
       <Overview />
       <RelatedAndComparisons />
       <RatingsAndReviews />
-    </>
+    </section>
   );
 };
 

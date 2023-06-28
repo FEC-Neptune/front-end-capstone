@@ -15,4 +15,4 @@ const isDefaultStyle = (styleObj) => {
   return styleObj['default?'];
 };
 
-module.exports = { findDefaultStyle, isDefaultStyle };
+export { findDefaultStyle, isDefaultStyle };
