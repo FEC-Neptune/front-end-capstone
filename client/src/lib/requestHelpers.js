@@ -1,5 +1,5 @@
-import { TOKEN } from '../../../config.js';
-
+const { TOKEN } = require('../../../config.js');
+const axios = require('axios');
 // get product
 // get product styles
 // get product reviews meta
