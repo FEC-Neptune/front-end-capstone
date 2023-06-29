@@ -10,11 +10,26 @@
     .card
       display: flex
       flex-direction: column
+      justify-content: space-between
       padding: 15px
 
       .thumbnail-container
+        display: flex
+        align-items: center
+        justify-content: center
+        margin: 5px
+        border: 1px solid grey
+        border-radius: 50%
+        height: 200px
         width: 200px
+        background-position-x: 50%
+        background-position-y: 75%
+        background-repeat: no-repeat
+        background-size: cover
         overflow: hidden
 
         .thumbnail
-          width: 100%
+          height: 100%
+
+      .info
+        padding-top: 5px
