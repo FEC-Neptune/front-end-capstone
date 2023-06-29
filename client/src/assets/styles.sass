@@ -1,13 +1,14 @@
+html
+  font-family: Arial, Helvetica, sans-serif
+
 #root
   display: flex
   justify-content: center
-
 
 #container
   display: flex
   flex-direction: column
   width: 1200px
-
 
 // Overview Component
 #overview
@@ -22,7 +23,6 @@
     background-position: center
     background-repeat: no-repeat
     background-size: cover
-
   aside
     align-self: baseline
     display: flex
@@ -35,22 +35,29 @@
       border: 1px solid grey
       padding-left: 10px
       padding-right: 10px
-
     #product-info
       min-height: 280px
-
     #style-selector
       display: flex
       flex-direction: column
       min-height: 100px
       #style-name-container
         min-height: 30px
-
-
-      .styles-row
+      #styles-container
         margin-bottom: 10px
-
-
+        display: flex
+        flex-wrap: wrap
+        justify-content: flex-start
+        .style-thumbnail
+          margin: 5px
+          border: 1px solid grey
+          border-radius: 50%
+          height: 75px
+          width: 75px
+          background-position-x: 50%
+          background-position-y: 75%
+          background-repeat: no-repeat
+          background-size: cover
     #add-to-cart
       display: flex
       flex-direction: column
@@ -58,7 +65,6 @@
       width: 360px
       #size-warning-container
         min-height: 10px
-
       #cart-form-container
         width: 100%
         display: flex
@@ -68,15 +74,11 @@
           select
             height: 50px
             margin-bottom: 5px
-
           #size-select
             width: 200px
-
           #qty-select
             width: 155px
             align-self: baseline
-
-
         button
           height: 50px
           width: 360px
