@@ -11,7 +11,7 @@ const RatingBreakdown = ({ metaData }) => {
   let recommendPercentage = getRecommendPercentage(metaData.recommended);
 
   return (
-    <>
+    <section id="breakdown">
       <div>Average Rating: {averageRating}</div>
       <div>5 Stars: {percentage['5']}%</div>
       <div>4 Stars: {percentage['4']}%</div>
@@ -19,7 +19,7 @@ const RatingBreakdown = ({ metaData }) => {
       <div>2 Stars: {percentage['2']}%</div>
       <div>1 Stars: {percentage['1']}%</div>
       <div>{recommendPercentage}% of reviews recommend this product</div>
-    </>
+    </section>
   );
 };
 

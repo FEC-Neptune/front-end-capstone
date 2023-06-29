@@ -11,7 +11,7 @@ const Characteristics = ({metaData}) => {
   }
 
   return (
-    <div>{charsArray.map((pair) => {
+    <div id="characteristics">{charsArray.map((pair) => {
       return <div key={pair[0]}>{pair[0]}: {pair[1]}</div>;
     })}
     </div>
