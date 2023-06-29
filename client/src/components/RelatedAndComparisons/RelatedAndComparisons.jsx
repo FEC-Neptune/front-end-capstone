@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { fetchProducts } from '../../lib/requestHelpers.js';
 import Related from './Related.jsx';
+import Outfit from './Outfit.jsx';
 
 const RelatedAndComparisons = () => {
   const [prodArr, setProdArr] = useState([]);
+  const [currentThumbnail, setCurrentThumbnail] = useState('');
 
   useEffect(() => {
     fetchProducts()
@@ -18,9 +20,9 @@ const RelatedAndComparisons = () => {
 
 
   return (
-    <div>
-      <Related products={prodArr} />
-      <div>Outfit Component</div>
+    <div id='widget'>
+      <Related products={prodArr} fetchProducts={fetchProducts} />
+      <Outfit outfitItems={prodArr} />
     </div>
   );
 
