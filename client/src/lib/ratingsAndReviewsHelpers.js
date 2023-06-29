@@ -1,14 +1,26 @@
-export const averageRating = (ratingsObj) => {
+export const getAverageRating = (ratingsObj, decimalPlace) => {
   let totalRatings = 0;
   let totalScore = 0;
 
   Object.keys(ratingsObj).forEach((score) => {
-    totalRatings += ratingsObj[score];
+    totalRatings += parseInt(ratingsObj[score]);
     totalScore += ratingsObj[score] * score;
   });
 
   let avgRating = totalScore / totalRatings;
 
-  avgRating = (Math.round(avgRating * 4) / 4).toFixed(2);
+  avgRating = (Math.round(avgRating * 4) / 4).toFixed(decimalPlace);
   return avgRating;
+};
+
+export const calculateTotalReviews = (ratingsObj) => {
+  var sum = 0;
+  for (var key in ratingsObject) {
+    sum += parseInt(ratingsObject[key]);
+  }
+  return sum;
+};
+
+export const calculateRatingsPercentage = (starRating, totalReviews) => {
+  return Math.round(starRating * 100 / totalReviews);
 };
