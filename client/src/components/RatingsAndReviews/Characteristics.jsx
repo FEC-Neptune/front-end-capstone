@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const Characteristics = () => {
+const Characteristics = ({product}) => {
   return (
     <>
     </>

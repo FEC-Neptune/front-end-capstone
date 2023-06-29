@@ -3,7 +3,7 @@ import { getAverageRating, calculateTotalReviews, calculateRatingsPercentage, ge
 import { getReviewsMeta } from '../../lib/requestHelpers.js';
 
 
-const RatingBreakdown = () => {
+const RatingBreakdown = ({product}) => {
 
   const [averageRating, setAverageRating] = useState('');
   const [oneStar, setOneStar] = useState('');
@@ -14,7 +14,7 @@ const RatingBreakdown = () => {
   const [recommendPercentage, setRecommendPercentage] = useState('');
 
   useEffect(() => {
-    getReviewsMeta(40346)
+    getReviewsMeta(product)
       .then(({ data }) => {
         let ratings = data.ratings;
         let totalReviews = calculateTotalReviews(ratings);

@@ -12,13 +12,11 @@ const RatingsAndReviews = ({product, setProduct}) => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    getReviews(40347)
+    getReviews(product)
       .then((reviews) => {
         setReviews(reviews);
       });
   }, []);
-
-
 
   return (
     <>
@@ -26,8 +24,8 @@ const RatingsAndReviews = ({product, setProduct}) => {
 
       {reviews.length > 0 &&
         <div>
-          <RatingBreakdown reviews={reviews} />
-          <Characteristics />
+          <RatingBreakdown product={product}/>
+          <Characteristics product={product}/>
           <ReviewsList reviews={reviews} getReviews={getReviews} product={product} />
         </div>}
       <AddReview />
