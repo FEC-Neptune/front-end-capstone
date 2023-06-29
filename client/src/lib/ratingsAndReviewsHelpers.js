@@ -15,12 +15,24 @@ export const getAverageRating = (ratingsObj, decimalPlace) => {
 
 export const calculateTotalReviews = (ratingsObj) => {
   var sum = 0;
-  for (var key in ratingsObject) {
-    sum += parseInt(ratingsObject[key]);
+  for (var key in ratingsObj) {
+    sum += parseInt(ratingsObj[key]);
   }
   return sum;
 };
 
-export const calculateRatingsPercentage = (starRating, totalReviews) => {
-  return Math.round(starRating * 100 / totalReviews);
+export const calculateRatingsPercentage = (ratingsObj, totalReviews) => {
+  var result = {};
+  for (var key in ratingsObj) {
+    result[key] = Math.round(ratingsObj[key] * 100 / totalReviews);
+  }
+  return result;
+};
+
+export const getRecommendPercentage = (recommendObj) => {
+  var sum = 0;
+  var recs = parseInt(recommendObj.true);
+  sum += recs;
+  sum += parseInt(recommendObj.false);
+  return Math.round((recs * 100) / sum);
 };
