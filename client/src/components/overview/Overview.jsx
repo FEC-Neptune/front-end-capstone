@@ -15,7 +15,7 @@ const Overview = ({ productId }) => {
   const [productStyles, setProductStyles] = useState([]);
   const [reviewsData, setreviewsData] = useState({});
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [expandedView, setExpandedView] = useState(false);
+  const [expandedView, setExpandedView] = useState(true);
 
   useEffect(() => {
     fetchProducts(productId)
@@ -39,9 +39,9 @@ const Overview = ({ productId }) => {
       <ImageGallery style={style} activeImageIndex={activeImageIndex} setActiveImageIndex={setActiveImageIndex} expandedView={expandedView} />
       { !expandedView ? (
         <aside>
-          <ProductInformation product={currentProduct} style={style} />
+          <ProductInformation product={currentProduct} style={style} reviewsData={reviewsData} />
           <StyleSelector productStyles={productStyles} style={style} setStyle={setStyle} />
-          <AddToCart />
+          <AddToCart style={style} />
         </aside>
       ) : (
         <></>
