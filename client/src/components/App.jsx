@@ -13,7 +13,7 @@ const App = () => {
   return (
     <section id="container">
       <p>Hello Neptune</p>
-      <Overview product={product} setProduct={setProduct}/>
+      <Overview productId={product} />
       <RelatedAndComparisons product={product} setProduct={setProduct}/>
       <RatingsAndReviews product={product} setProduct={setProduct}/>
     </section>

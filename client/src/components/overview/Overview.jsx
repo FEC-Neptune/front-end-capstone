@@ -8,12 +8,14 @@ import {findDefaultStyle} from '../../lib/overviewHelpers.js';
 import axios from 'axios';
 
 
-const Overview = () => {
+const Overview = ({ productId }) => {
 
-  const [productId, setProductId] = useState(40344);
   const [currentProduct, setCurrentProduct] = useState({});
   const [style, setStyle] = useState({});
   const [productStyles, setProductStyles] = useState([]);
+  const [reviewsData, setreviewsData] = useState({});
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [expandedView, setExpandedView] = useState(false);
 
   useEffect(() => {
     fetchProducts(productId)
@@ -34,12 +36,16 @@ const Overview = () => {
 
   return (
     <section id="overview">
-      <ImageGallery />
-      <aside>
-        <ProductInformation product={currentProduct} style={style} />
-        <StyleSelector productStyles={productStyles} style={style} setStyle={setStyle} />
-        <AddToCart />
-      </aside>
+      <ImageGallery style={style} activeImageIndex={activeImageIndex} setActiveImageIndex={setActiveImageIndex} expandedView={expandedView} />
+      { !expandedView ? (
+        <aside>
+          <ProductInformation product={currentProduct} style={style} />
+          <StyleSelector productStyles={productStyles} style={style} setStyle={setStyle} />
+          <AddToCart />
+        </aside>
+      ) : (
+        <></>
+      )}
     </section>
   );
 };
