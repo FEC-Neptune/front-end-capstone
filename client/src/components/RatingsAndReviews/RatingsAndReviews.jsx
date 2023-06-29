@@ -37,7 +37,7 @@ const RatingsAndReviews = ({ product, setProduct }) => {
         <div>
           {reviewsMeta && <RatingBreakdown metaData={reviewsMeta} />}
           {reviewsMeta && <Characteristics metaData={reviewsMeta} />}
-          <ReviewsList reviews={reviews} getReviews={getReviews} product={product} />
+          <ReviewsList reviews={reviews} />
         </div>}
       <div>
         <AddReview />
