@@ -28,14 +28,6 @@ const RatingBreakdown = () => {
       });
   }, []);
 
-  const getRecommendPercentage = (recommendObj) => {
-    var sum = 0;
-    var recs = parseInt(recommendObj.true);
-    sum += recs;
-    sum += parseInt(recommendObj.false);
-    return Math.round((recs * 100) / sum);
-  };
-
   return (
     <>
       <div>Average Rating: {averageRating}</div>
