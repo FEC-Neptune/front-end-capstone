@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-import Cards from './Cards.jsx';
+import Card from './Card.jsx';
 
 const Comparisons = ( { products } ) => (
-  <div id='related-carousel'>
-    {products.map((product) => <Cards product={product} key={product.id}/>)}
+  <div className='carousel'>
+    {products.map((product) => <Card product={product} key={product.id} />)}
   </div>
 );
 

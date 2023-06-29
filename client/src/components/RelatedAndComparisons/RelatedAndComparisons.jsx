@@ -7,6 +7,7 @@ import Outfit from './Outfit.jsx';
 
 const RelatedAndComparisons = () => {
   const [prodArr, setProdArr] = useState([]);
+  const [currentThumbnail, setCurrentThumbnail] = useState('');
 
   useEffect(() => {
     fetchProducts()
@@ -20,8 +21,8 @@ const RelatedAndComparisons = () => {
 
   return (
     <div id='widget'>
-      <Related products={prodArr} />
-      <Outfit />
+      <Related products={prodArr} fetchProducts={fetchProducts} />
+      <Outfit outfitItems={prodArr} />
     </div>
   );
 
