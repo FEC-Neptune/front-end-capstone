@@ -9,7 +9,6 @@ const Characteristics = ({metaData}) => {
     result.push(Math.round(metaData.characteristics[key].value));
     charsArray.push(result);
   }
-  console.log(charsArray);
 
   return (
     <div>{charsArray.map((pair) => {
