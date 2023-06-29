@@ -3,6 +3,7 @@ import ReviewsList from './ReviewsList.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import NewReviewForm from './NewReviewForm.jsx';
 import AddReview from './AddReview.jsx';
+import Characteristics from './Characteristics.jsx';
 import {getReviews, getReviewsMeta} from '../../lib/requestHelpers.js';
 
 
@@ -27,6 +28,7 @@ const RatingsAndReviews = () => {
       {reviews.length > 0 &&
         <div>
           <RatingBreakdown reviews={reviews} />
+          <Characteristics />
           <ReviewsList reviews={reviews} getReviews={getReviews} product={product} />
         </div>}
       <AddReview />
