@@ -4,10 +4,10 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import NewReviewForm from './NewReviewForm.jsx';
 import AddReview from './AddReview.jsx';
 import Characteristics from './Characteristics.jsx';
-import {getReviews, getReviewsMeta} from '../../lib/requestHelpers.js';
+import { getReviews, getReviewsMeta } from '../../lib/requestHelpers.js';
 
 
-const RatingsAndReviews = ({product, setProduct}) => {
+const RatingsAndReviews = ({ product, setProduct }) => {
 
   const [reviews, setReviews] = useState([]);
   const [reviewsMeta, setReviewsMeta] = useState('');
@@ -20,7 +20,7 @@ const RatingsAndReviews = ({product, setProduct}) => {
       .then(() => {
         return getReviewsMeta(product);
       })
-      .then(({data}) => {
+      .then(({ data }) => {
         console.log(data);
         setReviewsMeta(data);
       })
@@ -35,11 +35,13 @@ const RatingsAndReviews = ({product, setProduct}) => {
 
       {reviews.length > 0 &&
         <div>
-          {reviewsMeta && <RatingBreakdown metaData={reviewsMeta}/>}
-          <Characteristics metaData={reviewsMeta}/>
+          {reviewsMeta && <RatingBreakdown metaData={reviewsMeta} />}
+          {reviewsMeta && <Characteristics metaData={reviewsMeta} />}
           <ReviewsList reviews={reviews} getReviews={getReviews} product={product} />
         </div>}
-      <AddReview />
+      <div>
+        <AddReview />
+      </div>
     </>
   );
 };

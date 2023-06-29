@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { getAverageRating, calculateTotalReviews, calculateRatingsPercentage, getRecommendPercentage } from '../../lib/ratingsAndReviewsHelpers.js';
 import { getReviewsMeta } from '../../lib/requestHelpers.js';
 
-
 const RatingBreakdown = ({ metaData }) => {
 
   let ratings = metaData.ratings;

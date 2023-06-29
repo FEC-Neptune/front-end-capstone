@@ -26,7 +26,6 @@ export const calculateRatingsPercentage = (ratingsObj, totalReviews) => {
   for (var key in ratingsObj) {
     result[key] = Math.round(ratingsObj[key] * 100 / totalReviews);
   }
-  console.log(result);
   return result;
 };
 
