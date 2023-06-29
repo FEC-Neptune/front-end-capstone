@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const AddToCart = () => {
+const AddToCart = ({style}) => {
+
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedQty, setSelectedQty] = useState(0);
+  const [warning, setWarning] = useState(false);
+
+  // Todo
+  // handle change (size and qty)
+  // on submit
+  // map options to available sizes for style
+  // map qty to available qty for selected size
+  // import api helper to post to add to cart API
+
   return (
     <section id="add-to-cart">
       <div id="size-warning-container">
-        <span id="size-warning">Please select a size</span>
+        { warning ? (
+          <span id="size-warning">Please select a size</span>
+        ) : (
+          <></>
+        )}
       </div>
       <div id="cart-form-container">
         <form>

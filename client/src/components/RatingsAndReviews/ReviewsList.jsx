@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AddReview from './AddReview.jsx';
 import ReviewTile from './ReviewTile.jsx';
 
-const ReviewsList = ({ product, getReviews, reviews }) => {
+const ReviewsList = ({ reviews }) => {
 
   const [visibleReviews, setVisibleReviews] = useState([]);
 
