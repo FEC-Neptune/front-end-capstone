@@ -15,7 +15,7 @@ const Overview = ({ productId }) => {
   const [productStyles, setProductStyles] = useState([]);
   const [reviewsData, setreviewsData] = useState({});
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [expandedView, setExpandedView] = useState(true);
+  const [expandedView, setExpandedView] = useState(false);
 
   useEffect(() => {
     fetchProducts(productId)
@@ -32,11 +32,11 @@ const Overview = ({ productId }) => {
           .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));
-  }, [productId]);
+  }, []);
 
   return (
     <section id="overview">
-      <ImageGallery style={style} activeImageIndex={activeImageIndex} setActiveImageIndex={setActiveImageIndex} expandedView={expandedView} />
+      <ImageGallery style={style} activeImageIndex={activeImageIndex} setActiveImageIndex={setActiveImageIndex} expandedView={expandedView} setExpandedView={setExpandedView} />
       { !expandedView ? (
         <aside>
           <ProductInformation product={currentProduct} style={style} reviewsData={reviewsData} />
