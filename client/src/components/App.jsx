@@ -10,7 +10,7 @@ const App = () => {
 
   return (
     <section id="container">
-      <p>Hello world</p>
+      <p>Hello Neptune</p>
       <Overview />
       <RelatedAndComparisons />
       <RatingsAndReviews />
