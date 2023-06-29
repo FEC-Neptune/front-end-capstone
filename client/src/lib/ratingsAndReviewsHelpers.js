@@ -21,8 +21,12 @@ export const calculateTotalReviews = (ratingsObj) => {
   return sum;
 };
 
-export const calculateRatingsPercentage = (starRating, totalReviews) => {
-  return Math.round(starRating * 100 / totalReviews);
+export const calculateRatingsPercentage = (ratingsObj, totalReviews) => {
+  var result = {};
+  for (var key in ratingsObj) {
+    result[key] = Math.round(ratingsObj[key] * 100 / totalReviews);
+  }
+  return result;
 };
 
 export const getRecommendPercentage = (recommendObj) => {
