@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAverageRating, calculateTotalReviews, calculateRatingsPercentage } from '../../lib/ratingsAndReviewsHelpers.js';
+import { getAverageRating, calculateTotalReviews, calculateRatingsPercentage, getRecommendPercentage } from '../../lib/ratingsAndReviewsHelpers.js';
 import { getReviewsMeta } from '../../lib/requestHelpers.js';
 
 
@@ -11,6 +11,7 @@ const RatingBreakdown = () => {
   const [threeStar, setThreeStar] = useState('');
   const [fourStar, setFourStar] = useState('');
   const [fiveStar, setFiveStar] = useState('');
+  const [recommendPercentage, setRecommendPercentage] = useState('');
 
   useEffect(() => {
     getReviewsMeta(40346)
@@ -23,6 +24,7 @@ const RatingBreakdown = () => {
         setThreeStar(calculateRatingsPercentage(ratings['3'], totalReviews));
         setFourStar(calculateRatingsPercentage(ratings['4'], totalReviews));
         setFiveStar(calculateRatingsPercentage(ratings['5'], totalReviews));
+        setRecommendPercentage(getRecommendPercentage(data.recommended));
       });
   }, []);
 
@@ -34,6 +36,7 @@ const RatingBreakdown = () => {
       <div>3 Stars: {threeStar}%</div>
       <div>2 Stars: {twoStar}%</div>
       <div>1 Stars: {oneStar}%</div>
+      <div>{recommendPercentage}% of reviews recommend this product</div>
     </>
   );
 };

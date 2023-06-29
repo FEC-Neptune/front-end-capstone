@@ -6,9 +6,8 @@ import AddReview from './AddReview.jsx';
 import {getReviews, getReviewsMeta} from '../../lib/requestHelpers.js';
 
 
-const RatingsAndReviews = () => {
+const RatingsAndReviews = ({product, setProduct}) => {
 
-  const [product, setProduct] = useState(40347);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
