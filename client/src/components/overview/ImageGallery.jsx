@@ -18,14 +18,18 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
     setThumbnailRange(newRange);
   };
 
-  const updateMainPhoto = (incrementValue) => {
+  const updateActivePhotoIndex = (incrementValue) => {
+    var newIndex = activeImageIndex + incrementValue;
+    setActiveImageIndex(newIndex);
 
+    if (newIndex < thumbnailRange[0]) {
+      setThumbnailRange([newIndex, newIndex + 7]);
+    } else if (newIndex > (thumbnailRange[1] - 1)) {
+      setThumbnailRange([newIndex - 6, newIndex + 1]);
+    }
   };
 
   // Todo
-  // set image-gallery background image to be style.photos[activeImageIndex].thumbnail_url
-  //
-  // handleThumbnail click (updates activeImageIndex)
   //
   // handleExpandedView click (sets expanded view to true)
   // #image-gallery expands to fit parent element width
@@ -44,9 +48,15 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
           </div>
           {photos.map((photo, i) => {
             if (i >= thumbnailRange[0] && i < thumbnailRange[1]) {
-              return (
-                <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`}} className="ig-thumbnail" onClick={() => setActiveImageIndex(i)}></div>
-              );
+              if (i === activeImageIndex) {
+                return (
+                  <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`, filter: 'drop-shaddow(0 0 3px #FFF)', border: '1px solid white'}} className="ig-thumbnail" onClick={() => setActiveImageIndex(i)}></div>
+                );
+              } else {
+                return (
+                  <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`}} className="ig-thumbnail" onClick={() => setActiveImageIndex(i)}></div>
+                );
+              }
             }
           })}
           <div className="thumbnail-chevron-container">
@@ -63,14 +73,14 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
           </div>
           <div id="image-nav-chevron-container">
             { activeImageIndex > 0 ? (
-              <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg" fixedWidth onClick={() => setActiveImageIndex(activeImageIndex - 1)}/>
+              <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg" fixedWidth onClick={() => updateActivePhotoIndex(-1)}/>
             ) : (
               <span></span>
             )}
             { activeImageIndex === photos.length - 1 ? (
               <></>
             ) : (
-              <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg" fixedWidth onClick={() => setActiveImageIndex(activeImageIndex + 1)}/>
+              <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg" fixedWidth onClick={() => updateActivePhotoIndex(1)}/>
             )}
           </div>
           <div></div>
