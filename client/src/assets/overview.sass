@@ -120,10 +120,42 @@
 
 // Image Gallery
 #image-gallery
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
   min-width: 780px
   max-width: 100%
   height: 100%
   max-height: 1000px
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg)
   background-position: center
   background-repeat: no-repeat
   background-size: cover
+  #thumbnail-container
+    display: flex
+    flex-direction: column
+    width: 75px
+    align-content: center
+    justify-content: center
+    padding: 10px
+    .ig-thumbnail
+      height: 75px
+      width: 75px
+      margin-top: 5px
+      margin-bottom: 5px
+      background-size: cover
+      background-position: 50% 50%
+      filter: drop-shadow(0 0 3px rgba(1, 1, 1, 0.5))
+      cursor: pointer
+    .ig-thumbnail:hover
+      filter: drop-shaddow(0 0 3px #F7FF7D)
+  #image-nav-container
+    width: 705px
+    height: 100%
+    display: flex
+    flex-wrap: wrap
+
+.ig-nav
+  color: rgba(256, 256, 256, 0.5)
+  filter: drop-shadow(1px 1px 1px #000)
+  cursor: pointer

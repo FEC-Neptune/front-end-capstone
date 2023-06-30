@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronUp, faChevronDown, faCircleChevronRight, faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faChevronUp, faChevronDown, faCircleChevronRight, faCircleChevronLeft, faExpand } from '@fortawesome/free-solid-svg-icons';
 
 const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedView, setExpandedView }) => {
 
@@ -25,17 +25,19 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
   if (Array.isArray(photos) && photos.length) {
     return (
       <section id="image-gallery" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}}>
-        <div id="thumbnail-container" style={{display: 'flex', flexDirection: 'column', width: 'auto', alignContent: 'center', justifyContent: 'center'}}>
-          <FontAwesomeIcon icon={faChevronUp} color="grey"/>
+        <div id="thumbnail-container">
+          <FontAwesomeIcon icon={faChevronUp} className="ig-nav" size="lg" />
           {photos.map((photo, i) => {
             return (
-              <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`, height: '75px', width: '75px', margin: '5px', backgroundSize: 'cover', backgroundPositionX: '50%', backgroundPositionY: '50%', border: '1px solid grey'}} className="ig-thumbnail"></div>
+              <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`}} className="ig-thumbnail"></div>
             );
           })}
-          <FontAwesomeIcon icon={faChevronDown} color="grey"/>
+          <FontAwesomeIcon icon={faChevronDown} className="ig-nav" size="lg"/>
         </div>
         <div id="image-nav-container">
-
+          <FontAwesomeIcon icon={faExpand} className="ig-nav" size="lg"/>
+          <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg"/>
+          <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg"/>
         </div>
       </section>
     );

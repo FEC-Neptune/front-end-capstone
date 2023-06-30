@@ -28,7 +28,6 @@ const Overview = ({ productId }) => {
             return res.results;
           })
           .then((res) => {
-            console.log(findDefaultStyle(res));
             setStyle(findDefaultStyle(res));
           })
           .catch((err) => console.error(err));
