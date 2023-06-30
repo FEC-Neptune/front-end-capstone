@@ -1,30 +1,63 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter, faPinterest } from '@fortawesome/free-brands-svg-icons';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-const ProductInformation = ({product, style}) => {
+const ProductInformation = ({product, style, reviewsData}) => {
   return (
     <section id="product-info">
-      <div id="product-reviews">
-        <div>STARS</div>
-        <div># OF REVIEWS</div>
+      <div id="product-reviews-container">
+        <div id="product-rating-container">
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+        </div>
+        <a hred="#" id="product-review-count-text">Read all {reviewsData.count} reviews</a>
       </div>
-      <p>
-        <small>{product.category ? (product.category) : 'CATEGORY'}</small>
-      </p>
-      <h4>
-        {product.name ? (product.name) : ('EXPANDED PRODUCT NAME')}
-      </h4>
-      <p>
-        <small>{product.default_price ? ('$' + product.default_price) : ('$369')}</small>
-      </p>
-      <p id="product-description">
-        {product.description}
-      </p>
+      <div id="product-category-container">
+        <span id="product-category-text">{product.category ? (product.category) : ''}</span>
+      </div>
+      <div id="product-name-container">
+        <h1 id="product-name-text">
+          {product.name ? (product.name) : ('')}
+        </h1>
+      </div>
+      <div id="product-price-container">
+        { !!style.sale_price ? (
+          <>
+            <span id="product-sale-price-text">
+              ${Math.round(parseInt(style.sale_price))}
+            </span>
+            <small id="product-default-price-text" style={{textDecoration: 'line-through'}}>
+              ${Math.round(parseInt(product.default_price))}
+            </small>
+          </>
+        ) : (
+          <>
+            <span id="product-default-price-text">
+              ${Math.round(parseInt(product.default_price))}
+            </span>
+          </>
+        )}
+
+      </div>
+      <div id="product-description-container">
+        <p id="product-description-text">
+          {product.description}
+        </p>
+      </div>
       <div id="social-container">
-        <FontAwesomeIcon icon={faFacebook} size="lg" />
-        <FontAwesomeIcon icon={faTwitter} size="lg" />
-        <FontAwesomeIcon icon={faPinterest} size="lg" />
+        <a href="https://facebook.com" target="_blank">
+          <FontAwesomeIcon icon={faFacebook} size="2xl" color="#4267B2" fixedWidth />
+        </a>
+        <a href="https://twitter.com/intent/tweet?text=Hey%20check%20out%20this%20amazing%20item%20I%20found." target="_blank">
+          <FontAwesomeIcon icon={faTwitter} size="2xl" color="#1DA1F2" fixedWidth />
+        </a>
+        <a href="https://pinterest.com" target="_blank">
+          <FontAwesomeIcon icon={faPinterest} size="2xl" color="#E60023" fixedWidth />
+        </a>
       </div>
     </section>
   );

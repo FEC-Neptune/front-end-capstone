@@ -3,8 +3,9 @@ import ImageGallery from './ImageGallery.jsx';
 import ProductInformation from './ProductInformation.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
-import {fetchProducts} from '../../lib/requestHelpers.js';
+import {fetchProducts, getReviewsMeta} from '../../lib/requestHelpers.js';
 import {findDefaultStyle} from '../../lib/overviewHelpers.js';
+import {getAverageRating, calculateTotalReviews} from '../../lib/ratingsAndReviewsHelpers.js';
 import axios from 'axios';
 
 
@@ -13,7 +14,7 @@ const Overview = ({ productId }) => {
   const [currentProduct, setCurrentProduct] = useState({});
   const [style, setStyle] = useState({});
   const [productStyles, setProductStyles] = useState([]);
-  const [reviewsData, setreviewsData] = useState({});
+  const [reviewsData, setReviewsData] = useState({});
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [expandedView, setExpandedView] = useState(false);
 
@@ -27,11 +28,22 @@ const Overview = ({ productId }) => {
             return res.results;
           })
           .then((res) => {
+            console.log(findDefaultStyle(res));
             setStyle(findDefaultStyle(res));
           })
           .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));
+
+    getReviewsMeta(productId)
+      .then((res) => {
+        var ratings = {
+          average: getAverageRating(res.data.ratings, 2),
+          count: calculateTotalReviews(res.data.ratings)
+        };
+        setReviewsData(ratings);
+      });
+
   }, []);
 
   return (
