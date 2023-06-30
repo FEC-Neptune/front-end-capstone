@@ -62,7 +62,7 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
               if (i >= thumbnailRange[0] && i < thumbnailRange[1]) {
                 if (i === activeImageIndex) {
                   return (
-                    <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`, border: '1px solid rgba(255, 255, 255, 1'}} className="ig-thumbnail" onClick={() => selectThumbnail(i)}></div>
+                    <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`, filter: 'drop-shadow(0 0 1px rgba(255, 255, 255, 0.1)) brightness(1.1)'}} className="ig-thumbnail" onClick={() => selectThumbnail(i)}></div>
                   );
                 } else {
                   return (
