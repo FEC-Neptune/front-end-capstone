@@ -2,27 +2,78 @@
   display: flex
   flex-direction: column
   width: 100%
+  background-color: #f9f8f8
+  margin-bottom: 10px
+
+  .carousel-title-container
+    display: flex
+    justify-content: center
+    align-content: center
+    font-family: 'verdana'
+    font-size: 30px
+    font-weight: bold
+    padding-bottom: 15px
+    background-color: #f9f8f8
+
+    .carousel-title
+      border-bottom-style: solid
+      border-width: 3px
+      border-color
+      color: #2c474f
+
+  #related-carousel
+    padding-bottom: 10px
 
   .carousel
     width: 100%
     display: flex
+    position: relative
 
     .cards-container
      display: flex
+     min-height: 50px
      width: 100%
      margin-right: 8px
      border-right-style: solid
      border-width: 1px
      border-color: #2c474f
+     background-color: #f9f8f8
 
     #related-cards-container
+      display: flex
       border-top-style: solid
       border-bottom-style: solid
       border-width: 1px
       border-color: #2c474f
 
+    .arrow-button
+      border: solid #2c474f
+      border-width: 0 5px 5px 0
+      display: inline-block
+      padding: 3px
+      background-color: #f9f8f8
+
+    .left-arrow-button
+      position: absolute
+      top: 50%
+      left: 1.1%
+      transform: translate(-50%, -50%)
+      cursor: pointer
+      transform: rotate(135deg)
+      -webkit-transform: rotate(135deg)
+
+    .right-arrow-button
+      position: absolute
+      top: 50%
+      right: 2%
+      transform: translate(-50%, -50%)
+      cursor: pointer
+      transform: rotate(-45deg)
+      -webkit-transform: rotate(-45deg)
+
     #outfit-cards-container
       border-bottom-style: solid
+      border-top-style: solid
       border-width: 1px
       border-color: #2c474f
 
@@ -39,6 +90,7 @@
         justify-content: space-between
         align-items: center
         padding-top: 10px
+
 
         .thumbnail-container
           display: flex
@@ -66,7 +118,7 @@
         .info
           display: flex
           justify-content: center
-          padding-bottom: 10px
+          margin-bottom: 10px
           text-align: center
           font-family: 'verdana'
           color: #809791
@@ -77,8 +129,16 @@
           font-size: 16px
           font-weight: bold
 
-        #info-category-text
-          color: #395657
+        #info-category-container
+          display: flex
+          flex-grow: 1
+          justify-content: center
+
+          #info-category-text
+            color: #395657
+            border-bottom-style: solid
+            border-width: 2px
+            border-color: #395657
 
         #info-price-text
           font-size: 12px

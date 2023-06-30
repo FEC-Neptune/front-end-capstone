@@ -7,7 +7,7 @@ const ProductInfo = ( { product } ) => {
   return (
     <div className='info-container'>
       <div className='info' id='info-name-text'>{product.name}</div>
-      <div className='info' id='info-category-text'>{product.category}</div>
+      <div id='info-category-container'><div className='info' id='info-category-text'>{product.category}</div></div>
       <div className='info' id='info-price-text'>{product.default_price}</div>
       <div className='info' id='rating'>*****</div>
     </div>

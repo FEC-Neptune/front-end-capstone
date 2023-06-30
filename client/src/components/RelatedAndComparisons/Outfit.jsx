@@ -7,6 +7,8 @@ const Outfit = ( {outfitItems} ) => (
     <div className='cards-container' id='outfit-cards-container'>
       {outfitItems.map((product) => <Card product={product} key={product.id}/>)}
     </div>
+    <button className='arrow-button left-arrow-button' id='left-arrow-outfit'></button>
+    <button className='arrow-button right-arrow-button' id='right-arrow-outfit'></button>
   </div>
 );
 
