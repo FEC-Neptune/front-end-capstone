@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronUp, faChevronDown, faCircleChevronRight, faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedView, setExpandedView }) => {
 
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
-    setPhotos(style.photos);
+    if (!!style.photos) {
+      console.log(Array.isArray(style.photos));
+      setPhotos(style.photos.slice(0, 7));
+    }
   }, [style]);
 
   // Todo
@@ -20,6 +25,18 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
   if (Array.isArray(photos) && photos.length) {
     return (
       <section id="image-gallery" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}}>
+        <div id="thumbnail-container" style={{display: 'flex', flexDirection: 'column', width: 'auto', alignContent: 'center', justifyContent: 'center'}}>
+          <FontAwesomeIcon icon={faChevronUp} color="grey"/>
+          {photos.map((photo, i) => {
+            return (
+              <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`, height: '75px', width: '75px', margin: '5px', backgroundSize: 'cover', backgroundPositionX: '50%', backgroundPositionY: '50%', border: '1px solid grey'}} className="ig-thumbnail"></div>
+            );
+          })}
+          <FontAwesomeIcon icon={faChevronDown} color="grey"/>
+        </div>
+        <div id="image-nav-container">
+
+        </div>
       </section>
     );
   } else {
