@@ -6,6 +6,7 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
 
   const [photos, setPhotos] = useState([]);
   const [thumbnailRange, setThumbnailRange] = useState([0, 7]);
+  const [zoomMode, setZoomMode] = useState(false);
 
   useEffect(() => {
     if (!!style.photos) {
@@ -16,6 +17,12 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
   const scrollThumbnails = (incrementValue) => {
     var newRange = [thumbnailRange[0] + incrementValue, thumbnailRange[1] + incrementValue];
     setThumbnailRange(newRange);
+  };
+
+  const selectThumbnail = (index) => {
+    if (index !== activeImageIndex) {
+      setActiveImageIndex(index);
+    }
   };
 
   const updateActivePhotoIndex = (incrementValue) => {
@@ -29,6 +36,10 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
     }
   };
 
+  const toggleExpandedView = () => {
+    setExpandedView(!expandedView);
+  };
+
   // Todo
   //
   // handleExpandedView click (sets expanded view to true)
@@ -36,57 +47,67 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
   // thumbnails disappear and numbers take their place
 
   if (Array.isArray(photos) && photos.length) {
-    return (
-      <section id="image-gallery" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}}>
-        <div id="thumbnail-container">
-          <div className="thumbnail-chevron-container">
-            { thumbnailRange[0] > 0 ? (
-              <FontAwesomeIcon icon={faChevronUp} className="ig-nav" size="lg" fixedWidth onClick={() => scrollThumbnails(-1)} />
-            ) : (
-              <></>
-            )}
-          </div>
-          {photos.map((photo, i) => {
-            if (i >= thumbnailRange[0] && i < thumbnailRange[1]) {
-              if (i === activeImageIndex) {
-                return (
-                  <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`, filter: 'drop-shaddow(0 0 3px #FFF)', border: '1px solid white'}} className="ig-thumbnail" onClick={() => setActiveImageIndex(i)}></div>
-                );
-              } else {
-                return (
-                  <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`}} className="ig-thumbnail" onClick={() => setActiveImageIndex(i)}></div>
-                );
+    if (expandedView === false) {
+      return (
+        <section id="image-gallery" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}}>
+          <div id="thumbnail-container">
+            <div className="thumbnail-chevron-container">
+              { thumbnailRange[0] > 0 ? (
+                <FontAwesomeIcon icon={faChevronUp} className="ig-nav" size="lg" fixedWidth onClick={() => scrollThumbnails(-1)} />
+              ) : (
+                <></>
+              )}
+            </div>
+            {photos.map((photo, i) => {
+              if (i >= thumbnailRange[0] && i < thumbnailRange[1]) {
+                if (i === activeImageIndex) {
+                  return (
+                    <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`, border: '1px solid rgba(255, 255, 255, 1'}} className="ig-thumbnail" onClick={() => selectThumbnail(i)}></div>
+                  );
+                } else {
+                  return (
+                    <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`}} className="ig-thumbnail" onClick={() => setActiveImageIndex(i)}></div>
+                  );
+                }
               }
-            }
-          })}
-          <div className="thumbnail-chevron-container">
-            { photos.length > thumbnailRange[1] ? (
-              <FontAwesomeIcon icon={faChevronDown} className="ig-nav" size="lg" fixedWidth onClick={() => scrollThumbnails(1)} />
-            ) : (
-              <></>
-            )}
+            })}
+            <div className="thumbnail-chevron-container">
+              { photos.length > thumbnailRange[1] ? (
+                <FontAwesomeIcon icon={faChevronDown} className="ig-nav" size="lg" fixedWidth onClick={() => scrollThumbnails(1)} />
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
-        </div>
-        <div id="image-nav-container">
-          <div id="image-nav-expand-container">
-            <FontAwesomeIcon icon={faExpand} className="ig-nav" size="lg" fixedWidth />
+          <div id="image-nav-container">
+            <div id="image-nav-expand-container">
+              <FontAwesomeIcon icon={faExpand} className="ig-nav" size="lg" fixedWidth />
+            </div>
+            <div id="image-nav-chevron-container">
+              { activeImageIndex > 0 ? (
+                <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg" fixedWidth onClick={() => updateActivePhotoIndex(-1)}/>
+              ) : (
+                <span></span>
+              )}
+              { activeImageIndex === photos.length - 1 ? (
+                <></>
+              ) : (
+                <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg" fixedWidth onClick={() => updateActivePhotoIndex(1)}/>
+              )}
+            </div>
+            <div></div>
           </div>
-          <div id="image-nav-chevron-container">
-            { activeImageIndex > 0 ? (
-              <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg" fixedWidth onClick={() => updateActivePhotoIndex(-1)}/>
-            ) : (
-              <span></span>
-            )}
-            { activeImageIndex === photos.length - 1 ? (
-              <></>
-            ) : (
-              <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg" fixedWidth onClick={() => updateActivePhotoIndex(1)}/>
-            )}
-          </div>
-          <div></div>
-        </div>
-      </section>
-    );
+        </section>
+      );
+    } else if (expandedView === true && zoomMode === false) {
+      return (
+        <section id="image-gallery"></section>
+      );
+    } else if (expandedView === true && zoomMode === true) {
+      return (
+        <section id="image-gallery"></section>
+      );
+    }
   } else {
     return (
       <section id="image-gallery"></section>
