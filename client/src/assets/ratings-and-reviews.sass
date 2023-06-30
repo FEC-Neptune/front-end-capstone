@@ -1,7 +1,6 @@
-// Ratings and Reviews component(s)
-  #mainTitle
-    font-weight: thick
-    font-size: 30px
+#mainTitle
+  font-weight: thick
+  font-size: 30px
 
 #ratingsAndReviews
   display: flex
@@ -10,7 +9,7 @@
   margin-bottom: 30px
 
   #breakdown
-    font-weight: thicker
+    font-weight: bold
     font-size: 60px
 
     .starPercentage
@@ -29,11 +28,37 @@
     flex-direction: column
 
     #listSortHeading
-      font-size: 50
-      font-weight: thick
+      font-size: 20px
+      font-weight: bold
 
     .reviewTile
       border: 1px solid grey
+      display: flex
+      flex-direction: column
+
+    .reviewHeading
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+
+      .reviewSummary
+        font-size: 18px
+        font-weight: bold
+
+      .reviewBody
+        font-size: 16px
+
+      .reviewerName
+        font-size: 14px
+
+        .review
+          display: flex
+          flex-direction: column
+
+    .helpful
+      display: flex
+      flex-display: row
+
 
 
 

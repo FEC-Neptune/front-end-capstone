@@ -41,7 +41,7 @@ const RatingsAndReviews = ({ product, setProduct }) => {
             </div>}
         </section>
         <aside id="reviewsList">
-          <ReviewsList reviews={reviews} />
+          {reviews.length > 0 && <ReviewsList reviews={reviews} />}
         </aside>
 
       </div>

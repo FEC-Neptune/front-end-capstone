@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AddReview from './AddReview.jsx';
 import ReviewTile from './ReviewTile.jsx';
 
-const ReviewsList = ({ reviews}) => {
+const ReviewsList = ({reviews}) => {
 
   const [visibleReviews, setVisibleReviews] = useState([]);
 
@@ -23,7 +23,7 @@ const ReviewsList = ({ reviews}) => {
       )}
       {reviews.length !== visibleReviews.length && <button id="moreReviews" onClick={addReviews}>MORE REVIEWS</button>}
 
-      <div id="addReview"><AddReview /></div>
+      <button id="addReview">ADD REVIEW +</button>
     </div>
   );
 };
