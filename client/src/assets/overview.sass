@@ -11,9 +11,9 @@
     justify-content: space-between
     padding: 0 10px
     min-width: 380px
-    min-height: 600px
+    height: 100%
     section
-      border: 1px solid grey
+      // border: 1px solid grey
       padding-left: 10px
       padding-right: 10px
 
@@ -101,36 +101,96 @@
   #cart-form-container
     width: 100%
     display: flex
-    #select-container
-      display: flex
-      justify-content: space-between
-      select
+    form
+      width: 100%
+      #select-container
+        display: flex
+        justify-content: space-between
+        select
+          height: 50px
+          margin-bottom: 5px
+        #size-select
+          width: 250px
+        #qty-select
+          width: 125px
+          align-self: baseline
+      button
         height: 50px
-        margin-bottom: 5px
-      #size-select
-        width: 200px
-      #qty-select
-        width: 155px
-        align-self: baseline
-    button
-      height: 50px
-      width: 360px
-      font-size: large
-      margin-bottom: 10px
-      background-color: #0066cc
-      color: #fff
-      border: none
-      border-radius: 4px
-      cursor: pointer
-      &:hover
-        background-color: #004c99
+        width: 100%
+        font-size: large
+        margin-bottom: 10px
+        background-color: #0066cc
+        color: #fff
+        border: none
+        border-radius: 4px
+        cursor: pointer
+        &:hover
+          background-color: #004c99
 
 // Image Gallery
 #image-gallery
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
   min-width: 780px
   max-width: 100%
-  height: 100%
-  max-height: 1000px
+  width: 100%
+  height: 680px
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg)
   background-position: center
   background-repeat: no-repeat
   background-size: cover
+  #thumbnail-container
+    display: flex
+    flex-direction: column
+    width: 75px
+    align-content: center
+    justify-content: center
+    padding: 10px
+    .thumbnail-chevron-container
+      display: flex
+      justify-content: center
+      align-content: center
+      height: 25px
+    .ig-thumbnail
+      height: 75px
+      width: 75px
+      margin-top: 5px
+      margin-bottom: 5px
+      background-size: cover
+      background-position: 50% 50%
+      // border: 1px solid rgba(0,0,0,0)
+      filter: drop-shadow(0 0 3px rgba(1, 1, 1, 0.5)) brightness(0.8)
+      border-radius: 4px
+      cursor: pointer
+      &:hover
+        filter: drop-shadow(0 0 3px rgba(1, 1, 1, 0.5)) brightness(1)
+      &:active
+        filter: drop-shadow(0 0 3px rgba(1, 1, 1, 0.5)) brightness(0.8)
+  #image-nav-container
+    width: 705px
+    height: 100%
+    display: flex
+    flex-direction: column
+    padding: 10px 10px 10px 0
+    div
+      height: 33%
+      width: 100%
+    #image-nav-expand-container
+      display: flex
+      flex-direction: row-reverse
+    #image-nav-chevron-container
+      width: 100%
+      display: flex
+      justify-content: space-between
+      align-items: center
+
+// Nav Icons
+.ig-nav
+  color: rgba(255, 255, 255, 0.5)
+  filter: drop-shadow(0 0 1px #000)
+  cursor: pointer
+  &:hover
+    color: rgba(255, 255, 255, 0.6)
+  &:active
+    color: rgba(255, 255, 255, 0.5)
