@@ -12,10 +12,10 @@ const ReviewTile = ({review}) => {
       <div className="reviewerName">{isVerified && '***'}
         {review.reviewer_name}, {`${readableDate.slice(4, 10)}, ${readableDate.slice(10, 15)}`}
       </div>
-      <div className="review summary">
+      <div className="review Summary">
         Summary: {review.summary}
       </div>
-      <div className="review body">
+      <div className="review Bod">
         Body: {review.body}
       </div>
       {review.photos.map((photo) => {

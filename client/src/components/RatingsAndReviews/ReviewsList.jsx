@@ -16,13 +16,15 @@ const ReviewsList = ({ reviews}) => {
   };
 
   return (
-    <section id="reviewsList">
+    <div>
       <div id="listSortHeading">{reviews.length} reviews, sorted by relevance</div>
       {visibleReviews.map((review) =>
         <ReviewTile review={review} key={review.review_id} />
       )}
       {reviews.length !== visibleReviews.length && <button id="moreReviews" onClick={addReviews}>MORE REVIEWS</button>}
-    </section>
+
+      <div id="addReview"><AddReview /></div>
+    </div>
   );
 };
 
