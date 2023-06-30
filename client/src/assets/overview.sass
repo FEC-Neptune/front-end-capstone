@@ -4,13 +4,6 @@
   width: 100%
   min-height: 600px
   margin-bottom: 20px
-  #image-gallery
-    min-width: 780px
-    max-width: 100%
-    padding: 10px
-    background-position: center
-    background-repeat: no-repeat
-    background-size: cover
   aside
     align-self: baseline
     display: flex
@@ -23,53 +16,114 @@
       border: 1px solid grey
       padding-left: 10px
       padding-right: 10px
-    #product-info
-      min-height: 280px
-    #style-selector
-      display: flex
-      flex-direction: column
-      min-height: 100px
-      #style-name-container
-        min-height: 30px
-      #styles-container
-        margin-bottom: 10px
-        display: flex
-        flex-wrap: wrap
-        justify-content: flex-start
-        .style-thumbnail
-          margin: 5px
-          border: 1px solid grey
-          border-radius: 50%
-          height: 75px
-          width: 75px
-          background-position-x: 50%
-          background-position-y: 75%
-          background-repeat: no-repeat
-          background-size: cover
-    #add-to-cart
-      display: flex
-      flex-direction: column
-      min-height: 100px
-      width: 360px
-      #size-warning-container
-        min-height: 10px
-      #cart-form-container
-        width: 100%
-        display: flex
-        #select-container
-          display: flex
-          justify-content: space-between
-          select
-            height: 50px
-            margin-bottom: 5px
-          #size-select
-            width: 200px
-          #qty-select
-            width: 155px
-            align-self: baseline
-        button
-          height: 50px
-          width: 360px
-          font-size: large
-          margin-bottom: 10px
 
+// Product Information
+#product-info
+  min-height: 280px
+  div
+    margin-top: 10px
+    margin-bottom: 10px
+    display: flex
+  #product-reviews-container
+    align-content: center
+    #product-rating-container
+      display: flex
+      justify-content: center
+      align-items: center
+      font-size: 20px
+      margin-right: 10px
+    #product-review-count-text
+      font-size: 14px
+      text-decoration: underline
+      cursor: pointer
+      align-self: center
+  #product-category-container
+    #product-category-text
+      text-transform: uppercase
+      font-size: 14px
+  #product-name-container
+    margin: 15px 0
+    #product-name-text
+      font-size: 36px
+      margin: 0 0
+  #product-price-container
+    #product-sale-price-text
+      font-size: 18px
+      color: #ff0000
+      margin-right: 5px
+    #product-default-price-text
+      font-size: 18px
+  #product-description-container
+    #product-description-text
+      font-size: 16px
+  #social-container
+    margin-top: 0
+    padding: 0 0 5px 5px
+    a
+      margin-right: 3px
+
+
+
+
+
+
+
+// Style Selector
+#style-selector
+  display: flex
+  flex-direction: column
+  min-height: 100px
+  #style-name-container
+    min-height: 30px
+  #styles-container
+    margin-bottom: 10px
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-evenly
+    .style-thumbnail
+      margin: 5px
+      border: 1px solid grey
+      border-radius: 50%
+      height: 70px
+      width: 70px
+      background-position-x: 50%
+      background-position-y: 50%
+      background-repeat: no-repeat
+      background-size: cover
+
+// Add To Cart
+#add-to-cart
+  display: flex
+  flex-direction: column
+  min-height: 100px
+  #size-warning-container
+    min-height: 10px
+  #cart-form-container
+    width: 100%
+    display: flex
+    #select-container
+      display: flex
+      justify-content: space-between
+      select
+        height: 50px
+        margin-bottom: 5px
+      #size-select
+        width: 200px
+      #qty-select
+        width: 155px
+        align-self: baseline
+    button
+      height: 50px
+      width: 360px
+      font-size: large
+      margin-bottom: 10px
+
+// Image Gallery
+#image-gallery
+  min-width: 780px
+  max-width: 100%
+  height: 100%
+  max-height: 1000px
+  background-position: center
+  background-repeat: no-repeat
+  background-size: cover
