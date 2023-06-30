@@ -5,13 +5,22 @@ import { faChevronUp, faChevronDown, faCircleChevronRight, faCircleChevronLeft, 
 const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedView, setExpandedView }) => {
 
   const [photos, setPhotos] = useState([]);
+  const [thumbnailRange, setThumbnailRange] = useState([0, 7]);
 
   useEffect(() => {
     if (!!style.photos) {
-      console.log(Array.isArray(style.photos));
-      setPhotos(style.photos.slice(0, 7));
+      setPhotos(style.photos);
     }
   }, [style]);
+
+  const scrollThumbnails = (incrementValue) => {
+    var newRange = [thumbnailRange[0] + incrementValue, thumbnailRange[1] + incrementValue];
+    setThumbnailRange(newRange);
+  };
+
+  const selectPhoto = (index) => {
+
+  };
 
   // Todo
   // set image-gallery background image to be style.photos[activeImageIndex].thumbnail_url
@@ -26,18 +35,34 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
     return (
       <section id="image-gallery" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}}>
         <div id="thumbnail-container">
-          <FontAwesomeIcon icon={faChevronUp} className="ig-nav" size="lg" />
+          <div className="thumbnail-chevron-container">
+            { thumbnailRange[0] > 0 ? (
+              <FontAwesomeIcon icon={faChevronUp} className="ig-nav" size="lg" fixedWidth onClick={() => scrollThumbnails(-1)} />
+            ) : (
+              <></>
+            )}
+          </div>
           {photos.map((photo, i) => {
-            return (
-              <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`}} className="ig-thumbnail"></div>
-            );
+            if (i >= thumbnailRange[0] && i < thumbnailRange[1]) {
+              return (
+                <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`}} className="ig-thumbnail" onClick={() => setActiveImageIndex(i)}></div>
+              );
+            }
           })}
-          <FontAwesomeIcon icon={faChevronDown} className="ig-nav" size="lg"/>
+          <div className="thumbnail-chevron-container">
+            { (style.photos.length - 1) > thumbnailRange[1] ? (
+              <FontAwesomeIcon icon={faChevronDown} className="ig-nav" size="lg" fixedWidth onClick={() => scrollThumbnails(1)} />
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
         <div id="image-nav-container">
-          <FontAwesomeIcon icon={faExpand} className="ig-nav" size="lg"/>
-          <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg"/>
-          <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg"/>
+          <FontAwesomeIcon icon={faExpand} className="ig-nav" size="lg" fixedWidth />
+          <div id="image-nav-chevron-container">
+            <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg" fixedWidth />
+            <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg" fixedWidth />
+          </div>
         </div>
       </section>
     );
