@@ -31,16 +31,19 @@ const RatingsAndReviews = ({ product, setProduct }) => {
 
   return (
     <>
-      <h2>Ratings and Reviews</h2>
+      <div id="mainTitle">RATINGS AND REVIEWS</div>
+      <div id="ratingsAndReviews">
+        <section id="breakdown">
+          {reviews.length > 0 &&
+            <div>
+              {reviewsMeta && <RatingBreakdown metaData={reviewsMeta} />}
+              {reviewsMeta && <Characteristics metaData={reviewsMeta} />}
+            </div>}
+        </section>
+        <aside id="reviewsList">
+          {reviews.length > 0 && <ReviewsList reviews={reviews} />}
+        </aside>
 
-      {reviews.length > 0 &&
-        <div>
-          {reviewsMeta && <RatingBreakdown metaData={reviewsMeta} />}
-          {reviewsMeta && <Characteristics metaData={reviewsMeta} />}
-          <ReviewsList reviews={reviews} />
-        </div>}
-      <div>
-        <AddReview />
       </div>
     </>
   );
