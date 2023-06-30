@@ -18,7 +18,7 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
     setThumbnailRange(newRange);
   };
 
-  const selectPhoto = (index) => {
+  const updateMainPhoto = (incrementValue) => {
 
   };
 
@@ -50,7 +50,7 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
             }
           })}
           <div className="thumbnail-chevron-container">
-            { (style.photos.length - 1) > thumbnailRange[1] ? (
+            { photos.length > thumbnailRange[1] ? (
               <FontAwesomeIcon icon={faChevronDown} className="ig-nav" size="lg" fixedWidth onClick={() => scrollThumbnails(1)} />
             ) : (
               <></>
@@ -58,11 +58,22 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
           </div>
         </div>
         <div id="image-nav-container">
-          <FontAwesomeIcon icon={faExpand} className="ig-nav" size="lg" fixedWidth />
-          <div id="image-nav-chevron-container">
-            <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg" fixedWidth />
-            <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg" fixedWidth />
+          <div id="image-nav-expand-container">
+            <FontAwesomeIcon icon={faExpand} className="ig-nav" size="lg" fixedWidth />
           </div>
+          <div id="image-nav-chevron-container">
+            { activeImageIndex > 0 ? (
+              <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg" fixedWidth onClick={() => setActiveImageIndex(activeImageIndex - 1)}/>
+            ) : (
+              <span></span>
+            )}
+            { activeImageIndex === photos.length - 1 ? (
+              <></>
+            ) : (
+              <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg" fixedWidth onClick={() => setActiveImageIndex(activeImageIndex + 1)}/>
+            )}
+          </div>
+          <div></div>
         </div>
       </section>
     );
