@@ -4,7 +4,9 @@ import Card from './Card.jsx';
 
 const Outfit = ( {outfitItems} ) => (
   <div className='carousel' id='outfit-carousel'>
-    {outfitItems.map((product) => <Card product={product} key={product.id}/>)}
+    <div className='cards-container' id='outfit-cards-container'>
+      {outfitItems.map((product) => <Card product={product} key={product.id}/>)}
+    </div>
   </div>
 );
 

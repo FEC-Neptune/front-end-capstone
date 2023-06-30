@@ -6,9 +6,11 @@ import CurrentImage from './CurrentImage.jsx';
 const Cards = ( { product } ) => {
 
   return (
-    <div className='card'>
-      <CurrentImage product={product} />
-      <ProductInfo product={product} />
+    <div className='card-container'>
+      <div className='card'>
+        <CurrentImage product={product} />
+        <ProductInfo product={product} />
+      </div>
     </div>
   );
 
