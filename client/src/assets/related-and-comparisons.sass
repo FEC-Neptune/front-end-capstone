@@ -1,51 +1,90 @@
 #widget
   display: flex
   flex-direction: column
+  width: 100%
 
   .carousel
     width: 100%
     display: flex
 
+    .cards-container
+     display: flex
+     width: 100%
+     margin-right: 8px
+     border-right-style: solid
+     border-width: 1px
+     border-color: #2c474f
 
-    .card
+    #related-cards-container
+      border-top-style: solid
+      border-bottom-style: solid
+      border-width: 1px
+      border-color: #2c474f
+
+    #outfit-cards-container
+      border-bottom-style: solid
+      border-width: 1px
+      border-color: #2c474f
+
+    .card-container
       display: flex
-      flex-direction: column
-      justify-content: space-between
-      padding: 15px
+      flex-grow: 1
+      justify-content: center
+      border-left-style: solid
+      border-width: 1px
 
-      .thumbnail-container
+      .card
         display: flex
+        flex-direction: column
+        justify-content: space-between
         align-items: center
-        justify-content: center
-        margin: 5px
-        border: 1px solid grey
-        border-radius: 50%
-        height: 200px
-        width: 200px
-        background-position-x: 50%
-        background-position-y: 75%
-        background-repeat: no-repeat
-        background-size: cover
-        overflow: hidden
 
-        .thumbnail
-          height: 100%
+        .thumbnail-container
+          display: flex
+          align-items: center
+          justify-content: center
+          border: 1px solid grey
+          border-radius: 50%
+          height: 200px
+          width: 200px
+          background-position-x: 50%
+          background-position-y: 75%
+          background-repeat: no-repeat
+          background-size: cover
+          overflow: hidden
 
-      .info-container
-         display: flex
-         flex-direction: column
-         justify-content: space-between
-         padding-top:20px
+          .thumbnail
+            height: 100%
 
-      .info
-        display: flex
-        justify-content: center
-        padding-bottom: 10px
+        .info-container
+          display: flex
+          flex-direction: column
+          justify-content: space-between
+          padding-top:20px
 
-      #info-name
+        .info
           display: flex
           justify-content: center
-          border: 3px solid grey
-          border-radius: 25px
+          padding-bottom: 10px
+          text-align: center
+          font-family: 'verdana'
+          color: #809791
+
+        #info-name-text
+          display: flex
+          color: #2c474f
+          font-size: 16px
+          font-weight: bold
+
+        #info-category-text
+          color: #395657
+
+        #info-price-text
+          font-size: 12px
+          font-weight: bold
+
+
+
+
 
 
