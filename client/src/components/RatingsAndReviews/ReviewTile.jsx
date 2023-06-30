@@ -19,7 +19,7 @@ const ReviewTile = ({review}) => {
         Body: {review.body}
       </div>
       {review.photos.map((photo) => {
-        return <img className="thumbnail" src={photo.url} width="50" height="50"></img>;
+        return <img className="thumbnail" src={photo.url} width="50" height="50" key={photo.url}></img>;
       })}
       {review.recommend && <div>~CHECKMARK~ I recommend this product</div>}
       {review.response && <div>Response: {review.response}</div> }

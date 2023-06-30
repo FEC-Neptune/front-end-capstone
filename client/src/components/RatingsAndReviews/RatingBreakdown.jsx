@@ -12,13 +12,13 @@ const RatingBreakdown = ({ metaData }) => {
 
   return (
     <section id="breakdown">
-      <div>Average Rating: {averageRating}</div>
-      <div>5 Stars: {percentage['5']}%</div>
-      <div>4 Stars: {percentage['4']}%</div>
-      <div>3 Stars: {percentage['3']}%</div>
-      <div>2 Stars: {percentage['2']}%</div>
-      <div>1 Stars: {percentage['1']}%</div>
-      <div>{recommendPercentage}% of reviews recommend this product</div>
+      <div>{averageRating}</div>
+      <div className="starPercentage">5 Stars: {percentage['5']}%</div>
+      <div className="starPercentage">4 Stars: {percentage['4']}%</div>
+      <div className="starPercentage">3 Stars: {percentage['3']}%</div>
+      <div className="starPercentage">2 Stars: {percentage['2']}%</div>
+      <div className="starPercentage">1 Stars: {percentage['1']}%</div>
+      <div className="recommendPercentage">{recommendPercentage}% of reviews recommend this product</div>
     </section>
   );
 };

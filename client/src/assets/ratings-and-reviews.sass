@@ -1,24 +1,46 @@
 // Ratings and Reviews component(s)
 
 #ratingsAndReviews
-  display: grid
-  grid-template-columns: repeat(3, 1/3)
-  width: 100%
+  display: flex
+  flex-direction: column
 
   #mainTitle
-  grid-column: 3/4
+    display: flex
+    font-weight: thick
+    font-size: 20px
+    align-self: flex-start
 
   #breakdown
+    font-weight: thicker
+    font-size: 60px
+    .starPercentage
+      text-decoration: underline
+      font-size: 18px
+    .recommendPercentage
+      font-size: 18px
 
   #characteristics
+    font-size: 18px
 
   #reviewsList
+    border: 1px solid grey
+    display: flex
+    flex-direction: column
+    color: green
+
+
     #listSortHeading
+
+
     .reviewTile
-    #moreReviews
+      border: 1px solid grey
+
+      #moreReviews
+       color: pink
+
 
   #addReview
-
+    color: brown
 
 
 

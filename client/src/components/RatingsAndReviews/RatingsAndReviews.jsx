@@ -31,7 +31,7 @@ const RatingsAndReviews = ({ product, setProduct }) => {
 
   return (
     <section id="ratingsAndReviews">
-      <div id="mainTitle">Ratings and Reviews</div>
+      <div id="mainTitle">RATINGS AND REVIEWS</div>
 
       {reviews.length > 0 &&
         <div>
