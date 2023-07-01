@@ -38,13 +38,18 @@ const RatingsAndReviews = ({ product, setProduct }) => {
   };
 
   const sortReviews = (newStar) => {
-
     let resultArray = [];
-    let newStarIndex = activeStars.indexOf(newStarIndex);
+    let newStarIndex = activeStars.indexOf(newStar);
     if (newStarIndex !== -1) {
-      activeStars.splice(index, 1);
+      console.log('removing');
+      let array = activeStars;
+      array.splice(newStarIndex, 1);
+      setActiveStars(array);
     } else {
-      setActiveStars(activeStars.push(newStar));
+      console.log('adding');
+      let array = activeStars;
+      array.push(newStar);
+      setActiveStars(array);
     }
     console.log('ACTIVE STARS:', activeStars);
     reviews.forEach((review) => {
@@ -53,7 +58,7 @@ const RatingsAndReviews = ({ product, setProduct }) => {
       }
     });
 
-    setReviews(resultArray);
+    setVisibleReviews(resultArray);
   };
 
   return (
