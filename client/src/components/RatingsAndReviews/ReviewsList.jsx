@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AddReview from './AddReview.jsx';
 import ReviewTile from './ReviewTile.jsx';
 
-const ReviewsList = ({reviews}) => {
-
-  const [visibleReviews, setVisibleReviews] = useState([]);
+const ReviewsList = ({reviews, visibleReviews, setVisibleReviews}) => {
 
   useEffect(() => {
     setVisibleReviews(reviews.slice(0, 2));

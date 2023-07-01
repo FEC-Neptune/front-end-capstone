@@ -11,6 +11,7 @@ const RatingsAndReviews = ({ product, setProduct }) => {
 
   const [reviews, setReviews] = useState([]);
   const [reviewsMeta, setReviewsMeta] = useState('');
+  const [visibleReviews, setVisibleReviews] = useState([]);
 
   useEffect(() => {
     getReviews(product)
@@ -41,7 +42,7 @@ const RatingsAndReviews = ({ product, setProduct }) => {
             </div>}
         </section>
         <aside id="reviewsList">
-          {reviews.length > 0 && <ReviewsList reviews={reviews} />}
+          {reviews.length > 0 && <ReviewsList visibleReviews={visibleReviews} setVisibleReviews={setVisibleReviews} reviews={reviews} />}
         </aside>
 
       </div>
