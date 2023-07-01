@@ -50,8 +50,11 @@ const Overview = ({ productId }) => {
       <ImageGallery style={style} activeImageIndex={activeImageIndex} setActiveImageIndex={setActiveImageIndex} expandedView={expandedView} setExpandedView={setExpandedView} />
       { !expandedView ? (
         <aside>
-          <ProductInformation product={currentProduct} style={style} reviewsData={reviewsData} />
-          <StyleSelector productStyles={productStyles} style={style} setStyle={setStyle} />
+          <div>
+            <ProductInformation product={currentProduct} style={style} reviewsData={reviewsData} />
+            <hr />
+            <StyleSelector productStyles={productStyles} style={style} setStyle={setStyle} />
+          </div>
           <AddToCart style={style} />
         </aside>
       ) : (
