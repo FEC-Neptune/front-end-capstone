@@ -41,53 +41,52 @@ const RatingsAndReviews = ({ product, setProduct }) => {
     let resultArray = [];
     let newStarIndex = activeStars.indexOf(newStar);
     if (newStarIndex !== -1) {
-      console.log('removing');
       let array = activeStars;
       array.splice(newStarIndex, 1);
       setActiveStars(array);
     } else {
-      console.log('adding');
       let array = activeStars;
       array.push(newStar);
       setActiveStars(array);
     }
-    console.log('ACTIVE STARS:', activeStars);
     reviews.forEach((review) => {
       if (activeStars.includes(review.rating)) {
         resultArray.push(review);
       }
     });
-
     setVisibleReviews(resultArray);
   };
 
   return (
     <>
-      <div id="mainTitle">RATINGS AND REVIEWS</div>
       <div id="ratingsAndReviews">
 
-        <section id="breakdown">
+        <div id="mainTitle">RATINGS AND REVIEWS</div>
+
+        <section id="breakdownAndReviews">
           {reviews.length > 0 &&
-            <div>
-              {reviewsMeta && <RatingBreakdown sortReviews={sortReviews} metaData={reviewsMeta} reviews={reviews} setReviews={setReviews}/>}
+            <div id="breakdownAndCharacteristics">
+              {reviewsMeta && <RatingBreakdown sortReviews={sortReviews} metaData={reviewsMeta} reviews={reviews} setReviews={setReviews} />}
               {reviewsMeta && <Characteristics metaData={reviewsMeta} />}
             </div>}
+
+          <div id="reviewsListAndButtons">
+            <div id="listSortHeading">{reviews.length} reviews, sorted by relevance</div>
+            {reviews.length > 0 && <ReviewsList visibleReviews={visibleReviews} setVisibleReviews={setVisibleReviews} reviews={reviews} />}
+
+            <div id="bottomButtons">
+              {reviews.length !== visibleReviews.length && <button className="reviewButton" onClick={addReviews}>MORE REVIEWS</button>}
+              {!isOpen && <button className="reviewButton" onClick={() => {
+                setIsOpen(true);
+              }}>ADD REVIEW +</button>}
+              <AddReviewModal reviewsMeta={reviewsMeta} open={isOpen} onClose={() => {
+                setIsOpen(false);
+              }} >Here is a Modal!</AddReviewModal>
+            </div>
+
+          </div>
         </section>
 
-        <aside id="reviewsList">
-          {reviews.length > 0 && <ReviewsList visibleReviews={visibleReviews} setVisibleReviews={setVisibleReviews} reviews={reviews} />}
-        </aside>
-
-        <div id="bottomButtons">
-          {reviews.length !== visibleReviews.length && <button id="moreReviews" onClick={addReviews}>MORE REVIEWS</button>}
-
-          {!isOpen && <button id="addReview" onClick={() => {
-            setIsOpen(true);
-          }}>ADD REVIEW +</button>}
-          <AddReviewModal reviewsMeta={reviewsMeta} open={isOpen} onClose={() => {
-            setIsOpen(false);
-          }} >Here is a Modal!</AddReviewModal>
-        </div>
       </div>
     </>
   );

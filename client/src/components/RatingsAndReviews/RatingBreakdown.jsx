@@ -12,7 +12,7 @@ const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews }) => {
 
   return (
     <div id="breakdown">
-      <div className="averageRating">{averageRating}</div>
+      <div id="averageRating">{averageRating}</div>
       <div className="starPercentage" onClick={() => {
         sortReviews(5);
       }}>5 Stars: {percentage['5']}%</div>
@@ -28,7 +28,7 @@ const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews }) => {
       <div className="starPercentage" onClick={() => {
         sortReviews(1);
       }}>1 Stars: {percentage['1']}%</div>
-      <div className="recommendPercentage">{recommendPercentage}% of reviews recommend this product</div>
+      <div id="recommendPercentage">{recommendPercentage}% of reviews recommend this product</div>
     </div>
   );
 };
