@@ -5,12 +5,12 @@ const ReviewTile = ({ review }) => {
   let readableDate = parseISO(review.date.slice(0, 10)).toString();
   const [isVerified, setIsVerified] = useState(false);
   return (
-    <section className="reviewTile">
+    <div className="reviewTile">
       <div className="reviewHeading">
         <div className="reviewRating">
           Rating: {review.rating}
         </div>
-        <div className="reviewerName">{isVerified && '***'}
+        <div className="reviewName">{isVerified && '***'}
           {review.reviewer_name}, {`${readableDate.slice(4, 10)}, ${readableDate.slice(10, 15)}`}
         </div>
       </div>
@@ -36,7 +36,7 @@ const ReviewTile = ({ review }) => {
           <div>No</div>{review.nothelpful && review.nothelpful}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

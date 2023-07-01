@@ -1,63 +1,81 @@
-#mainTitle
-  font-weight: thick
-  font-size: 30px
-
 #ratingsAndReviews
   display: flex
-  width: 100%
-  justify-content: space-around
+  flex-direction: column
   margin-bottom: 30px
+  padding: 7px
 
-  #breakdown
-    font-weight: bold
-    font-size: 60px
+  #mainTitle
+    font-weight: thick
+    font-size: 22px
 
-    .starPercentage
-      text-decoration: underline
-      font-size: 16px
-
-    .recommendPercentage
-      font-size: 16px
-
-  #characteristics
-    font-size: 16px
-
-  #reviewsList
-    min-width: 850px
+  #breakdownAndReviews
     display: flex
-    flex-direction: column
+    flex-direction: row
+    justify-content: space-around
 
-    #listSortHeading
-      font-size: 20px
-      font-weight: bold
-
-    .reviewTile
-      border: 1px solid grey
+    #breakdownAndCharacteristics
       display: flex
       flex-direction: column
 
-    .reviewHeading
-      display: flex
-      flex-direction: row
-      justify-content: space-between
+      #breakdown
+        font-size: 18px
 
-    .reviewSummary
-      font-size: 18px
-      font-weight: bold
+        #averageRating
+          font-size: 70px
+          font-weight: bolder
 
-    .reviewBody
-      font-size: 16px
+        .starPercentage
+          text-decoration: underline
+          cursor: pointer
 
-    .reviewerName
-      font-size: 14px
+        #recommendPercentage
+          font-size: 14px
 
-    .review
+    #reviewsListAndButtons
+      min-width: 800px
       display: flex
       flex-direction: column
 
-    .helpful
-      display: flex
-      flex-display: row
+      #listSortHeading
+        font-size: 20px
+        font-weight: bold
+
+      #reviewsList
+        display: flex
+        flex-direction: column
+        justify-content: center
+
+        .reviewTile
+          border: 1px solid grey
+          display: flex
+          flex-direction: column
+          border-radius: 5px
+          padding: 8px
+
+          .reviewHeading
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+
+            .reviewRating
+              font-weight: bold
+              font-size: 14px
+
+            .reviewName
+              font-size: 14px
+
+      #bottomButtons
+        display: flex
+        flex-direction: row
+        padding: 8px
+
+        .reviewButton
+          height: 80px
+          width: 200px
+          font-weight: bold
+          border: 1px solid black
+          border-radius: 1px
+          font-size: 18px
 
 
 

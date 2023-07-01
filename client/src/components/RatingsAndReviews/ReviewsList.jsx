@@ -11,8 +11,7 @@ const ReviewsList = ({reviews, visibleReviews, setVisibleReviews}) => {
 
 
   return (
-    <div>
-      <div id="listSortHeading">{reviews.length} reviews, sorted by relevance</div>
+    <div id="reviewsList">
       {visibleReviews.map((review) =>
         <ReviewTile review={review} key={review.review_id} />
       )}
