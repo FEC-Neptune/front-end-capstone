@@ -21,7 +21,9 @@ const RelatedAndComparisons = () => {
 
   return (
     <div id='widget'>
+      <div className='carousel-title-container'><div className='carousel-title'>Related Items</div></div>
       <Related products={prodArr} fetchProducts={fetchProducts} />
+      <div className='carousel-title-container'><div className='carousel-title'>Your Outfit</div></div>
       <Outfit outfitItems={prodArr} />
     </div>
   );
