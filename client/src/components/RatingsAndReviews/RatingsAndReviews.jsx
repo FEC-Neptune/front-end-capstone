@@ -62,7 +62,7 @@ const RatingsAndReviews = ({ product, setProduct }) => {
           {!isOpen && <button id="addReview" onClick={() => {
             setIsOpen(true);
           }}>ADD REVIEW +</button>}
-          <AddReviewModal open={isOpen} onClose={() => {
+          <AddReviewModal reviewsMeta={reviewsMeta} open={isOpen} onClose={() => {
             setIsOpen(false);
           }} >Here is a Modal!</AddReviewModal>
         </div>
