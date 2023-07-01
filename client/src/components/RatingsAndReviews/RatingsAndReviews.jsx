@@ -14,6 +14,7 @@ const RatingsAndReviews = ({ product, setProduct }) => {
   const [reviewsMeta, setReviewsMeta] = useState('');
   const [visibleReviews, setVisibleReviews] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [activeStars, setActiveStars] = useState([]);
 
   useEffect(() => {
     getReviews(product)
@@ -24,7 +25,6 @@ const RatingsAndReviews = ({ product, setProduct }) => {
         return getReviewsMeta(product);
       })
       .then(({ data }) => {
-        console.log(data);
         setReviewsMeta(data);
       })
       .catch((err) => {
@@ -37,7 +37,24 @@ const RatingsAndReviews = ({ product, setProduct }) => {
     setVisibleReviews(reviews.slice(0, index + 2));
   };
 
+  const sortReviews = (newStar) => {
 
+    let resultArray = [];
+    let newStarIndex = activeStars.indexOf(newStarIndex);
+    if (newStarIndex !== -1) {
+      activeStars.splice(index, 1);
+    } else {
+      setActiveStars(activeStars.push(newStar));
+    }
+    console.log('ACTIVE STARS:', activeStars);
+    reviews.forEach((review) => {
+      if (activeStars.includes(review.rating)) {
+        resultArray.push(review);
+      }
+    });
+
+    setReviews(resultArray);
+  };
 
   return (
     <>
@@ -47,7 +64,7 @@ const RatingsAndReviews = ({ product, setProduct }) => {
         <section id="breakdown">
           {reviews.length > 0 &&
             <div>
-              {reviewsMeta && <RatingBreakdown metaData={reviewsMeta} />}
+              {reviewsMeta && <RatingBreakdown sortReviews={sortReviews} metaData={reviewsMeta} reviews={reviews} setReviews={setReviews}/>}
               {reviewsMeta && <Characteristics metaData={reviewsMeta} />}
             </div>}
         </section>
