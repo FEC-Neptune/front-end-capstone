@@ -13,7 +13,6 @@
     min-width: 380px
     height: 100%
     section
-      // border: 1px solid grey
       padding-left: 10px
       padding-right: 10px
 
@@ -75,23 +74,34 @@
   min-height: 100px
   #style-name-container
     min-height: 30px
+    font-size: 18px
+    #style-name-prefix
+      text-transform: uppercase
+      font-weight: bold
+    #style-name-text
+      font-weight: thin
   #styles-container
     margin-bottom: 10px
     display: flex
     flex-wrap: wrap
-    justify-content: space-evenly
-    .style-thumbnail
-      margin: 5px
-      border: 1px solid grey
-      border-radius: 50%
-      height: 70px
-      width: 70px
-      background-position-x: 50%
-      background-position-y: 50%
-      background-repeat: no-repeat
-      background-size: cover
+    justify-content: center
+    .styles-row
       display: flex
-      justify-content: flex-end
+      justify-content: flex-start
+      width: 328px
+      .style-thumbnail
+        cursor: pointer
+        margin: 5px
+        border: 1px solid grey
+        border-radius: 50%
+        height: 70px
+        width: 70px
+        background-position-x: 50%
+        background-position-y: 50%
+        background-repeat: no-repeat
+        background-size: cover
+        display: flex
+        justify-content: flex-end
 
 // Add To Cart
 #add-to-cart
