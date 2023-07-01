@@ -37,10 +37,13 @@ const RatingsAndReviews = ({ product, setProduct }) => {
     setVisibleReviews(reviews.slice(0, index + 2));
   };
 
+
+
   return (
     <>
       <div id="mainTitle">RATINGS AND REVIEWS</div>
       <div id="ratingsAndReviews">
+
         <section id="breakdown">
           {reviews.length > 0 &&
             <div>
@@ -48,15 +51,17 @@ const RatingsAndReviews = ({ product, setProduct }) => {
               {reviewsMeta && <Characteristics metaData={reviewsMeta} />}
             </div>}
         </section>
+
         <aside id="reviewsList">
           {reviews.length > 0 && <ReviewsList visibleReviews={visibleReviews} setVisibleReviews={setVisibleReviews} reviews={reviews} />}
         </aside>
+
         <div id="bottomButtons">
           {reviews.length !== visibleReviews.length && <button id="moreReviews" onClick={addReviews}>MORE REVIEWS</button>}
 
-          <button id="addReview" onClick={() => {
+          {!isOpen && <button id="addReview" onClick={() => {
             setIsOpen(true);
-          }}>ADD REVIEW +</button>
+          }}>ADD REVIEW +</button>}
           <AddReviewModal open={isOpen} onClose={() => {
             setIsOpen(false);
           }} >Here is a Modal!</AddReviewModal>
