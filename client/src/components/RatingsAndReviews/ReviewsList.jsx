@@ -8,10 +8,7 @@ const ReviewsList = ({reviews, visibleReviews, setVisibleReviews}) => {
     setVisibleReviews(reviews.slice(0, 2));
   }, []);
 
-  const addReviews = () => {
-    var index = visibleReviews.length;
-    setVisibleReviews(reviews.slice(0, index + 2));
-  };
+
 
   return (
     <div>
@@ -19,9 +16,6 @@ const ReviewsList = ({reviews, visibleReviews, setVisibleReviews}) => {
       {visibleReviews.map((review) =>
         <ReviewTile review={review} key={review.review_id} />
       )}
-      {reviews.length !== visibleReviews.length && <button id="moreReviews" onClick={addReviews}>MORE REVIEWS</button>}
-
-      <button id="addReview">ADD REVIEW +</button>
     </div>
   );
 };
