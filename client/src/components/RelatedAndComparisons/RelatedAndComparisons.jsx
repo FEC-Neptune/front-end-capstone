@@ -5,7 +5,7 @@ import { fetchProducts } from '../../lib/requestHelpers.js';
 import Related from './Related.jsx';
 import Outfit from './Outfit.jsx';
 
-const RelatedAndComparisons = () => {
+const RelatedAndComparisons = React.memo(() => {
   const [prodArr, setProdArr] = useState([]);
   const [currentThumbnail, setCurrentThumbnail] = useState('');
   const [relatedIndex, setRelatedIndex] = useState(0);
@@ -14,11 +14,13 @@ const RelatedAndComparisons = () => {
   const [outfitPosition, setOutfitPosition] = useState();
 
   useEffect(() => {
-    fetchProducts()
-      .then(res => setProdArr(res))
-      .catch(err => {
-        throw (err);
-      });
+    if (prodArr.length === 0) {
+      fetchProducts()
+        .then(res => setProdArr(res))
+        .catch(err => {
+          throw (err);
+        });
+    }
   }, []);
 
 
@@ -86,6 +88,6 @@ const RelatedAndComparisons = () => {
     </div>
   );
 
-};
+});
 
 export default RelatedAndComparisons;
