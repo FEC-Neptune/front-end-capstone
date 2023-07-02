@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import StarRating from './StarRating.jsx';
 import { getAverageRating, calculateTotalReviews, calculateRatingsPercentage, getRecommendPercentage } from '../../lib/ratingsAndReviewsHelpers.js';
 import { getReviewsMeta } from '../../lib/requestHelpers.js';
 
@@ -17,7 +18,7 @@ const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews, activeSta
 
   return (
     <div id="breakdown">
-      <div id="averageRating">{averageRating}</div>
+      <StarRating rating={4} />
       <div onClick={() => {
         sortReviews(5);
       }}><span className="starPercentage" >5 Stars: {percentage['5']}%</span></div>
@@ -36,7 +37,7 @@ const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews, activeSta
       <div className="recommendPercentage">{recommendPercentage}% of reviews recommend this product</div>
 
       {activeStars.length ? <div id="filterDisplay">
-        {activeStars.map((star) =>{
+        {activeStars.map((star) => {
           return <div>Showing {star} star reviews</div>;
         })}
         <button onClick={removeAllFilters}>Remove all filters</button>
