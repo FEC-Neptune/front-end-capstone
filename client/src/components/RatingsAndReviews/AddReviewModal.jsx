@@ -1,66 +1,76 @@
 import React, { useState } from 'react';
 
 const AddReviewModal = ({ open, onClose, reviewsMeta }) => {
+
   if (!open) {
     return null;
   }
   return (
-    <>
-      <div id="modalOverlay" />
-      <div id="modalBackground">
-        <div id="modalContainer" >
-          <button onClick={onClose}> X </button>
+    <div id="modalBackground">
+      <div id="modalContainer">
 
-          <div className="modalTitle">
-            <h2>Submit a new review</h2>
+        <div id="modalHeading">
+          <h1>Submit a new review</h1>
+          <button id="closeModal" onClick={onClose}> X </button>
+        </div>
+
+        <div id="overallRating">
+          <h2 className="reviewHeading">Overall Rating</h2>
+          <div id="chooseStar">
+
+            <input className="radio" type="radio" id="oneStar" name="overallRating"></input>
+            <label for="oneStar">1 Star - Poor</label>
+
+            <input className="radio" type="radio" id="twoStar" name="overallRating" ></input>
+            <label for="twoStar">2 Star - Fair</label>
+
+            <input className="radio" type="radio" id="threeStar" name="overallRating" ></input>
+            <label for="threeStar">3 Star - Average</label>
+
+
+            <input className="radio" type="radio" id="fourStar" name="overallRating" ></input>
+            <label for="fourStar">4 Star - Good</label>
+
+
+            <input className="radio" type="radio" id="fiveStar" name="overallRating" ></input>
+            <label for="fiveStar">5 Star - Great</label>
+
           </div>
+        </div>
 
-          <div className="overallRating">
-            <h2>Overall Rating</h2>
-            <input type="radio" id="oneStar" name="overallRating"></input>
-            <label for="oneStar">One Star - Poor</label>
-            <input type="radio" id="twoStar" name="overallRating" ></input>
-            <label for="twoStar">Two Star - Fair</label>
-            <input type="radio" id="threeStar" name="overallRating" ></input>
-            <label for="threeStar">Three Star - Average</label>
-            <input type="radio" id="fourStar" name="overallRating" ></input>
-            <label for="fourStar">Four Star - Good</label>
-            <input type="radio" id="fiveStar" name="overallRating" ></input>
-            <label for="fiveStar">Five Star - Great</label>
-          </div>
-
-          <div className="recommendQuestion">
-            <h2>Do you recommend this product?</h2>
+        <div id="recommendQuestion">
+          <h2 className="reviewHeading">Do you recommend this product?</h2>
+          <div id="recommendation">
             <input type="radio" id="recommendYes" name="recommendQuestion" ></input>
             <label for="Four Star">Yes</label>
             <input type="radio" id="recommendNo" name="recommendQuestion" ></input>
             <label for="Five Star">No</label>
           </div>
-
-          <div className="reviewSummary">
-            <h2>Please submit a summary of your review</h2>
-            <textarea className="summaryText" rows="4" cols="50"></textarea>
-          </div>
-
-          <div className="reviewBody">
-            <h2>Please submit a detailed review</h2>
-            <textarea className="bodyText" rows="4" cols="50"></textarea>
-          </div>
-
-          <div className="nickname">
-            <h2>Please submit a nickname</h2>
-            <input className="nicknameText"></input>
-          </div>
-
-          <div className="email">
-            <h2>Please enter your email</h2>
-            <input className="emailText"></input>
-          </div>
-
-          <button>Submit</button>
         </div>
+
+        <div id="reviewSummary">
+          <h2 className="reviewHeading">Please submit a summary of your review</h2>
+          <textarea className="reviewInput" rows="4" cols="50"></textarea>
+        </div>
+
+        <div id="reviewBody">
+          <h2 className="reviewHeading">Please submit a detailed review</h2>
+          <textarea className="reviewInput" rows="4" cols="50"></textarea>
+        </div>
+
+        <div id="nickname">
+          <h2 className="reviewHeading">Please submit a nickname</h2>
+          <input className="reviewInput"></input>
+        </div>
+
+        <div id="email">
+          <h2 className="reviewHeading">Please enter your email</h2>
+          <input className="reviewInput"></input>
+        </div>
+
+        <button id="submitButton">Submit</button>
       </div>
-    </>
+    </div>
   );
 };
 

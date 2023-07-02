@@ -79,28 +79,82 @@
           border-radius: 1px
           font-size: 18px
 
-        #modalOverlay
+        #modalBackground
           position: fixed
           top: 0
           left: 0
           right: 0
           bottom: 0
-          transform: translate(-50%, -50%)
-          backgroundColor: rgba(0, 0, 0, .7)
-          zIndex: 1000
-
-        #modalBackground
-          color: red
-          position: fixed
-          top: 50%
-          left: 50%
-          transform: translate(-50%, -50%)
-          backgroundColor: green
-          padding: 50px
+          background-color: rgba(0, 0, 0, .7)
           zIndex: 1000
 
           #modalContainer
-            backgroundColor: green
+            display: flex
+            flex-direction: column
+            position: fixed
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%)
+            background-color: white
+            padding: 40px
+            zIndex: 1000
+
+            #modalHeading
+              display: flex
+              flex-direction: row
+              justify-content: space-between
+
+              #closeModal
+                align-self: flex-end
+                font-size: 36px
+                height: 36px
+                color: grey
+                background-color: transparent
+                cursor: pointer
+                border: none
+
+            #overallRating
+              display: flex
+              flex-direction: column
+
+              #chooseStar
+                display: flex
+                flex-direction: row
+
+              .radio
+                height: 20px
+                width: 20px
+
+            #recommendation
+              display: flex
+              flex-direction: row
+              justify-content: flex-start
+
+            .reviewInput
+              text-align: left
+
+            #submitButton
+              height: 36px
+              width: 68px
+              font-size: 16px
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -81,7 +81,7 @@ const RatingsAndReviews = ({ product, setProduct }) => {
               }}>ADD REVIEW +</button>}
               <AddReviewModal reviewsMeta={reviewsMeta} open={isOpen} onClose={() => {
                 setIsOpen(false);
-              }} >Here is a Modal!</AddReviewModal>
+              }} />
             </div>
 
           </div>
