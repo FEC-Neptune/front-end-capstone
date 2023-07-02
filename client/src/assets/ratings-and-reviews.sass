@@ -18,6 +18,8 @@
       flex-direction: column
 
       #breakdown
+        display: flex
+        flex-direction: column
         font-size: 18px
 
         #averageRating
@@ -88,13 +90,17 @@
           zIndex: 1000
 
         #modalBackground
+          color: red
           position: fixed
           top: 50%
           left: 50%
           transform: translate(-50%, -50%)
-          backgroundColor: white
+          backgroundColor: green
           padding: 50px
           zIndex: 1000
+
+          #modalContainer
+            backgroundColor: green
 
 
 

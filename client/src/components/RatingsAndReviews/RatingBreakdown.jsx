@@ -13,22 +13,22 @@ const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews }) => {
   return (
     <div id="breakdown">
       <div id="averageRating">{averageRating}</div>
-      <div className="starPercentage" onClick={() => {
+      <div onClick={() => {
         sortReviews(5);
-      }}>5 Stars: {percentage['5']}%</div>
-      <div className="starPercentage" onClick={() => {
+      }}><span className="starPercentage" >5 Stars: {percentage['5']}%</span></div>
+      <div onClick={() => {
         sortReviews(4);
-      }}>4 Stars: {percentage['4']}%</div>
-      <div className="starPercentage" onClick={() => {
+      }}><span className="starPercentage" >4 Stars: {percentage['4']}%</span></div>
+      <div onClick={() => {
         sortReviews(3);
-      }}>3 Stars: {percentage['3']}%</div>
-      <div className="starPercentage" onClick={() => {
+      }}><span className="starPercentage">3 Stars: {percentage['3']}%</span></div>
+      <div onClick={() => {
         sortReviews(2);
-      }}>2 Stars: {percentage['2']}%</div>
-      <div className="starPercentage" onClick={() => {
+      }}><span className="starPercentage">2 Stars: {percentage['2']}%</span></div>
+      <div onClick={() => {
         sortReviews(1);
-      }}>1 Stars: {percentage['1']}%</div>
-      <div id="recommendPercentage">{recommendPercentage}% of reviews recommend this product</div>
+      }}><span className="starPercentage">1 Stars: {percentage['1']}%</span></div>
+      <div className="recommendPercentage">{recommendPercentage}% of reviews recommend this product</div>
     </div>
   );
 };

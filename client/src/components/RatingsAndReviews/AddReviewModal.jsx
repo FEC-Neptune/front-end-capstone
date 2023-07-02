@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
 
-const MODAL_STYLES = {
-
-};
-const OVERLAY_STYLES = {
-
-};
-
 const AddReviewModal = ({ open, onClose, reviewsMeta }) => {
   if (!open) {
     return null;
@@ -14,8 +7,8 @@ const AddReviewModal = ({ open, onClose, reviewsMeta }) => {
   return (
     <>
       <div id="modalOverlay" />
-      <div id="modalBackground" style={MODAL_STYLES}>
-        <div className="modalContainer" >
+      <div id="modalBackground">
+        <div id="modalContainer" >
           <button onClick={onClose}> X </button>
 
           <div className="modalTitle">
