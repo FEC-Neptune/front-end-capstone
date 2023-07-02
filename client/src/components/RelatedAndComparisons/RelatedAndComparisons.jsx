@@ -23,16 +23,16 @@ const RelatedAndComparisons = () => {
 
 
   const scrollToCard = (cardIndex, buttonId) => {
-    buttonId.includes('related') ? setRelatedPosition(cardIndex * 238) : setOutfitPosition(cardIndex * 238);
+    const cardWidth = 239.9;
+    buttonId.includes('related') ? setRelatedPosition(cardIndex * cardWidth) : setOutfitPosition(cardIndex * cardWidth);
   };
 
   const handleLeftClick = () => {
     const buttonId = event.target.id;
-    const arrLength = prodArr.length - 1;
+    const arrLength = prodArr.length;
 
     if (buttonId.includes('related')) {
       if (-arrLength !== relatedIndex) {
-        console.log(relatedIndex);
         setRelatedIndex((prevIndex) => {
           const newIndex = prevIndex - 1;
           scrollToCard(newIndex, buttonId);
@@ -73,9 +73,15 @@ const RelatedAndComparisons = () => {
 
   return (
     <div id='widget'>
-      <div className='carousel-title-container'><div className='carousel-title'>Related Items</div></div>
+      <div className='carousel-title-container' id='related-title-container' style={{
+        transform: `translateX(${-relatedPosition}px)`,
+        transition: 'transform .5s ease-in-out',
+      }}><div className='carousel-title'>Related Items</div></div>
       <Related products={prodArr} fetchProducts={fetchProducts} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={relatedPosition}/>
-      <div className='carousel-title-container'><div className='carousel-title'>Your Outfit</div></div>
+      <div className='carousel-title-container' id='outfit-title-container' style={{
+        transform: `translateX(${-outfitPosition}px)`,
+        transition: 'transform .5s ease-in-out',
+      }}><div className='carousel-title'>Your Outfit</div></div>
       <Outfit outfitItems={prodArr} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={outfitPosition}/>
     </div>
   );
