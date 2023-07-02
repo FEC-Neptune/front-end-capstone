@@ -22,22 +22,24 @@
         flex-direction: column
         font-size: 18px
 
-        .star-rating
-          font-size: 24px
+        #averageRatingHeading
+          display: flex
+          flex-direction: row
 
-        .star
-          color: #d3d3d3
+          #averageRatingNumber
+            font-weight: bold
+            font-size: 70px
 
-        .filled
-          color: #ffc107
+          #averageRatingStars
+            display: flex
+            flex-direction: row
 
-        .outlined
-          color: transparent
-          text-shadow: 0 0 1px #d3d3d3
+            .rating
+              display: none
 
-        #averageRating
-          font-size: 70px
-          font-weight: bolder
+          .star
+            cursor: pointer
+            transition: color 200ms
 
         .starPercentage
           text-decoration: underline

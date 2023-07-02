@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import StarRating from './StarRating.jsx';
 import { getAverageRating, calculateTotalReviews, calculateRatingsPercentage, getRecommendPercentage } from '../../lib/ratingsAndReviewsHelpers.js';
 import { getReviewsMeta } from '../../lib/requestHelpers.js';
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
+
 
 const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews, activeStars, removeAllFilters }) => {
 
@@ -13,12 +15,43 @@ const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews, activeSta
   let percentage = calculateRatingsPercentage(ratings, totalReviews);
   let recommendPercentage = getRecommendPercentage(metaData.recommended);
 
+  const convertRatingToStars = (rating) => {
+    let fullStars = Math.floor(rating);
+    let remainder = 5 - rating;
+    let emptyStars = Math.floor(remainder);
+    let partial = remainder - emptyStars;
 
+    const renderStar = (type) =>{
+      if (type === 'full') {
+        return <FaStar />;
+      } else if (type === 'half') {
+        return <FaStarHalfAlt />;
+      } else if (type === 'empty') {
+        return <FaRegStar />;
+      }
+    };
 
+    let stars = [];
+
+    for (let i = 0; i < fullStars; i ++) {
+      stars.push(renderStar('full'));
+    }
+    if (partial) {
+      stars.push(renderStar('half'));
+    }
+    for (let j = 0; j < emptyStars; j ++) {
+      stars.push(renderStar('empty'));
+    }
+    console.log('STARS', stars);
+    return stars;
+  };
 
   return (
     <div id="breakdown">
-      <StarRating rating={4} />
+      <div id="averageRatingHeading">
+        <div id="averageRatingNumber">{averageRating}</div>
+        {convertRatingToStars(averageRating)}
+      </div>
       <div onClick={() => {
         sortReviews(5);
       }}><span className="starPercentage" >5 Stars: {percentage['5']}%</span></div>

@@ -1,37 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FaStar } from 'react-icons/fa';
 
-const StarRating = ({ rating }) => {
-  const renderStar = (starValue, filled) => {
-    const starClassName = filled ? 'star filled' : 'star outlined';
-    return <span className={starClassName}>&#9733;</span>;
-  };
 
-  const renderRating = () => {
-    const fullStars = Math.floor(rating);
-    const remaining = rating - fullStars;
-    const stars = [];
+const StarRating = () => {
+  const [rating, setRating] = useState(null);
 
-    // Render full stars
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(renderStar(i, true));
-    }
+  return (
+    <div id="averageRatingStars">
+      {[...Array(5)].map((star, i) => {
 
-    // Render remaining stars (up to a quarter star)
-    if (remaining > 0 && remaining <= 0.25) {
-      stars.push(renderStar(fullStars, true));
-    } else if (remaining > 0.25 && remaining <= 0.75) {
-      stars.push(renderStar(fullStars, true));
-      stars.push(renderStar(fullStars, false));
-    } else if (remaining > 0.75 && remaining < 1) {
-      stars.push(renderStar(fullStars, true));
-      stars.push(renderStar(fullStars, false));
-      stars.push(renderStar(fullStars, true));
-    }
-
-    return stars;
-  };
-
-  return <div className="star-rating">{renderRating()}</div>;
+        const ratingValue = i + 1;
+        return (<label>
+          <input
+            type="radio"
+            name="rating"
+            className="rating"
+            value={ratingValue}
+            onClick={setRating(ratingValue)} />
+          <FaStar className="star" color={ratingValue <= rating ? '#ffc107' : '#e4e5e9'} size={16} />
+        </label>);
+      })}
+    </div>
+  );
 };
 
 export default StarRating;
+
