@@ -39,24 +39,26 @@ const AddReviewModal = ({ open, onClose, metaData, product }) => {
 
           <div id="reviewSummary">
             <h2 className="reviewHeading">Please submit a summary of your review</h2>
-            <textarea placeholder="Example: Best Purchase Ever!" className="reviewInput" rows="1" cols="60"></textarea>
+            <textarea maxlength="60" placeholder="Example: Best Purchase Ever!" className="reviewInput" rows="1" cols="60"></textarea>
           </div>
 
           <div id="reviewBody">
             <h2 className="reviewHeading">Please submit a detailed review</h2>
-            <textarea required className="reviewInput" rows="4" cols="50"></textarea>
+            <textarea maxlength="1000" required className="reviewInput" rows="4" cols="50"></textarea>
           </div>
 
           <div id="reviewPhotos"></div>
 
           <div id="nickname">
             <h2 className="reviewHeading">Please submit a nickname</h2>
-            <input required className="reviewInput"></input>
+            <input maxlength="60" required className="reviewInput" placeholder="Example: jackson11!" ></input>
+            <h4>For privacy reasons, do not user your full name or email address</h4>
           </div>
 
           <div id="email">
             <h2 className="reviewHeading">Please enter your email</h2>
-            <input required className="reviewInput"></input>
+            <input placeholder="jackson11@gmail.com" maxlength="60" required className="reviewInput"></input>
+            <h4>For authentication reasons, you will not be emailed</h4>
           </div>
 
           <button id="submitButton" type="submit" >Submit</button>
