@@ -18,7 +18,22 @@
       flex-direction: column
 
       #breakdown
+        display: flex
+        flex-direction: column
         font-size: 18px
+
+        .star-rating
+          font-size: 24px
+
+        .star
+          color: #d3d3d3
+
+        .filled
+          color: #ffc107
+
+        .outlined
+          color: transparent
+          text-shadow: 0 0 1px #d3d3d3
 
         #averageRating
           font-size: 70px
@@ -76,6 +91,84 @@
           border: 1px solid black
           border-radius: 1px
           font-size: 18px
+
+        #modalBackground
+          position: fixed
+          top: 0
+          left: 0
+          right: 0
+          bottom: 0
+          background-color: rgba(0, 0, 0, .7)
+          zIndex: 1000
+
+          #modalContainer
+            display: flex
+            flex-direction: column
+            position: fixed
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%)
+            background-color: white
+            padding: 40px
+            zIndex: 1000
+
+            #modalHeading
+              display: flex
+              flex-direction: row
+              justify-content: space-between
+
+              #closeModal
+                align-self: flex-end
+                font-size: 36px
+                height: 36px
+                color: grey
+                background-color: transparent
+                cursor: pointer
+                border: none
+
+            #overallRating
+              display: flex
+              flex-direction: column
+
+              #chooseStar
+                display: flex
+                flex-direction: row
+
+              .radio
+                height: 20px
+                width: 20px
+
+            #recommendation
+              display: flex
+              flex-direction: row
+              justify-content: flex-start
+
+            .reviewInput
+              text-align: left
+
+            #submitButton
+              height: 36px
+              width: 68px
+              font-size: 16px
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

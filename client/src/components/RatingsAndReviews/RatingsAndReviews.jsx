@@ -40,7 +40,11 @@ const RatingsAndReviews = ({ product, setProduct }) => {
   const sortReviews = (newStar) => {
     let resultArray = [];
     let newStarIndex = activeStars.indexOf(newStar);
-    if (newStarIndex !== -1) {
+    if ((newStarIndex !== -1) && activeStars[0] === newStar) {
+      setActiveStars([]);
+      setVisibleReviews(reviews.slice(0, 2));
+      return;
+    } else if (newStarIndex !== -1) {
       let array = activeStars;
       array.splice(newStarIndex, 1);
       setActiveStars(array);
@@ -57,6 +61,11 @@ const RatingsAndReviews = ({ product, setProduct }) => {
     setVisibleReviews(resultArray);
   };
 
+  const removeAllFilters = () => {
+    setActiveStars([]);
+    setVisibleReviews(reviews.slice(0, 2));
+  };
+
   return (
     <>
       <div id="ratingsAndReviews">
@@ -66,7 +75,7 @@ const RatingsAndReviews = ({ product, setProduct }) => {
         <section id="breakdownAndReviews">
           {reviews.length > 0 &&
             <div id="breakdownAndCharacteristics">
-              {reviewsMeta && <RatingBreakdown sortReviews={sortReviews} metaData={reviewsMeta} reviews={reviews} setReviews={setReviews} />}
+              {reviewsMeta && <RatingBreakdown sortReviews={sortReviews} metaData={reviewsMeta} reviews={reviews} setReviews={setReviews} activeStars={activeStars} removeAllFilters={removeAllFilters}/>}
               {reviewsMeta && <Characteristics metaData={reviewsMeta} />}
             </div>}
 
@@ -81,7 +90,7 @@ const RatingsAndReviews = ({ product, setProduct }) => {
               }}>ADD REVIEW +</button>}
               <AddReviewModal reviewsMeta={reviewsMeta} open={isOpen} onClose={() => {
                 setIsOpen(false);
-              }} >Here is a Modal!</AddReviewModal>
+              }} />
             </div>
 
           </div>
