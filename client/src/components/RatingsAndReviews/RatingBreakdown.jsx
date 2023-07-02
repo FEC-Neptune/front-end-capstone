@@ -18,7 +18,10 @@ const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews, activeSta
 
   return (
     <div id="breakdown">
-      <StarRating rating={4} />
+      <div id="averageRatingHeading">
+        <div id="averageRatingNumber">3.5</div>
+        <StarRating />
+      </div>
       <div onClick={() => {
         sortReviews(5);
       }}><span className="starPercentage" >5 Stars: {percentage['5']}%</span></div>
