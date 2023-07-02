@@ -10,7 +10,7 @@ const ReviewTile = ({ review }) => {
     <div className="reviewTile">
       <div className="reviewHeading">
         <div className="reviewRating">
-          {[...Array(review.rating)].map((star) => {
+          {[...Array(review.rating)].map(() => {
             return <FaStar size={16} />;
           })}
         </div>
