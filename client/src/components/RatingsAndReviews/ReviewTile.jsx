@@ -19,7 +19,7 @@ const ReviewTile = ({ review }) => {
         </div>
       </div>
 
-      <div className="review">
+      <div className="review" >
         <div className="reviewSummary">
           Summary: {review.summary}
         </div>

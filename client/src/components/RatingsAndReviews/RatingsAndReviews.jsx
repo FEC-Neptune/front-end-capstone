@@ -8,7 +8,7 @@ import AddReviewModal from './AddReviewModal.jsx';
 import { getReviews, getReviewsMeta } from '../../lib/requestHelpers.js';
 
 
-const RatingsAndReviews = ({ product, setProduct }) => {
+const RatingsAndReviews = ({ product }) => {
 
   const [reviews, setReviews] = useState([]);
   const [reviewsMeta, setReviewsMeta] = useState('');
@@ -85,10 +85,10 @@ const RatingsAndReviews = ({ product, setProduct }) => {
 
             <div id="bottomButtons">
               {reviews.length !== visibleReviews.length && <button className="reviewButton" onClick={addReviews}>MORE REVIEWS</button>}
-              {!isOpen && <button className="reviewButton" onClick={() => {
+              {reviewsMeta && !isOpen && <button className="reviewButton" onClick={() => {
                 setIsOpen(true);
               }}>ADD REVIEW +</button>}
-              <AddReviewModal reviewsMeta={reviewsMeta} open={isOpen} onClose={() => {
+              <AddReviewModal product={product} metaData={reviewsMeta} open={isOpen} onClose={() => {
                 setIsOpen(false);
               }} />
             </div>

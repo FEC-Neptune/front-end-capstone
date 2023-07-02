@@ -42,7 +42,6 @@ const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews, activeSta
     for (let j = 0; j < emptyStars; j ++) {
       stars.push(renderStar('empty'));
     }
-    console.log('STARS', stars);
     return stars;
   };
 
