@@ -2,39 +2,53 @@
   display: flex
   flex-direction: column
   width: 100%
-  background-color: #f9f8f8
+  background-image: url('https://images.rawpixel.com/image_1300/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcGQzNi0xLWdzZmNfMjAxNzEyMDhfYXJjaGl2ZV9lMDAwMTIwNi5qcGc.jpg')
   margin-bottom: 10px
+  overflow: hidden
 
   .carousel-title-container
     display: flex
     justify-content: center
     align-content: center
+    border-left-style: solid
+    border-top-style: solid
+    border-right-style: solid
+    border-width: 2px
+    border-color: #2c474f
     font-family: 'verdana'
     font-size: 30px
     font-weight: bold
-    padding-bottom: 15px
+    padding-top: 10px
+    padding-bottom: 10px
     background-color: #f9f8f8
 
-    .carousel-title
-      border-bottom-style: solid
-      border-width: 3px
-      border-color
-      color: #2c474f
+  #related-title-container
+    border-bottom: solid
+    border-width: 1px
+    border-top-width: 2px
+    border-color: #2c474f
 
-  #related-carousel
-    padding-bottom: 10px
+  #outfit-title-container
+    border-top: solid
+    border-bottom: solid
+    border-width: 1px
+    border-color: #2c474f
+
+  .carousel-title
+     border-bottom-style: solid
+     border-width: 3px
+     border-color
+     color: #2c474f
 
   .carousel
     width: 100%
     display: flex
     position: relative
-    overflow: hidden
 
     .cards-container
      display: flex
      min-height: 50px
      width: 100%
-     margin-right: 8px
      border-right-style: solid
      border-width: 2px
      border-color: #2c474f
@@ -44,7 +58,7 @@
       display: flex
       border-top-style: solid
       border-bottom-style: solid
-      border-width: 2px
+      border-width: 1px
       border-color: #2c474f
 
     .arrow-button
@@ -76,6 +90,7 @@
       border-bottom-style: solid
       border-top-style: solid
       border-width: 2px
+      border-top-width: 1px
       border-color: #2c474f
 
     .card-container
@@ -92,6 +107,7 @@
         justify-content: space-between
         align-items: center
         padding-top: 10px
+
 
 
         .thumbnail-container
