@@ -1,4 +1,4 @@
-const findDefaultStyle = (stylesArray) => {
+export const findDefaultStyle = (stylesArray) => {
   if (stylesArray.length) {
     for (var i = 0; i < stylesArray.length; i++) {
       if (isDefaultStyle(stylesArray[i])) {
@@ -11,11 +11,11 @@ const findDefaultStyle = (stylesArray) => {
   }
 };
 
-const isDefaultStyle = (styleObj) => {
+export const isDefaultStyle = (styleObj) => {
   return styleObj['default?'];
 };
 
-const createSubarray = (array, n) => {
+export const createSubarray = (array, n) => {
   var newArray = [];
   for (var i = 0; i < array.length; i += n) {
     newArray.push(array.slice(i, i + n));
@@ -23,4 +23,18 @@ const createSubarray = (array, n) => {
   return newArray;
 };
 
-export { findDefaultStyle, isDefaultStyle, createSubarray };
+export const createArrayFromInt = (maxInt) => {
+  var array = [];
+
+  if (isNaN(maxInt)) {
+    return array;
+  }
+
+  for (var i = 1; i < maxInt; i++) {
+    array.push(i);
+    if (i >= 15) {
+      break;
+    }
+  }
+  return array;
+};
