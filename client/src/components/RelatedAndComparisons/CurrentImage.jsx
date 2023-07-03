@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { fetchProducts } from '../../lib/requestHelpers.js';
 import React from 'react';
 
-const CurrentImage = React.memo(( { product } ) => {
+const CurrentImage = ( { product } ) => {
 
   const [currentThumbnail, setCurrentThumbnail] = useState('');
 
@@ -25,6 +25,6 @@ const CurrentImage = React.memo(( { product } ) => {
     </div>
   );
 
-});
+};
 
 export default CurrentImage;
