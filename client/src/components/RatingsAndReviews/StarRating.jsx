@@ -1,37 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FaStar } from 'react-icons/fa';
 
-const StarRating = ({ rating }) => {
-  const renderStar = (starValue, filled) => {
-    const starClassName = filled ? 'star filled' : 'star outlined';
-    return <span className={starClassName}>&#9733;</span>;
+
+const StarRating = () => {
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+  const [ratingText, setRatingText] = useState(null);
+
+  const ratingKey = {
+    1: 'Poor',
+    2: 'Fair',
+    3: 'Average',
+    4: 'Good',
+    5: 'Great'
   };
 
-  const renderRating = () => {
-    const fullStars = Math.floor(rating);
-    const remaining = rating - fullStars;
-    const stars = [];
-
-    // Render full stars
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(renderStar(i, true));
-    }
-
-    // Render remaining stars (up to a quarter star)
-    if (remaining > 0 && remaining <= 0.25) {
-      stars.push(renderStar(fullStars, true));
-    } else if (remaining > 0.25 && remaining <= 0.75) {
-      stars.push(renderStar(fullStars, true));
-      stars.push(renderStar(fullStars, false));
-    } else if (remaining > 0.75 && remaining < 1) {
-      stars.push(renderStar(fullStars, true));
-      stars.push(renderStar(fullStars, false));
-      stars.push(renderStar(fullStars, true));
-    }
-
-    return stars;
-  };
-
-  return <div className="star-rating">{renderRating()}</div>;
+  return (
+    <div className="star-rating">
+      {[...Array(5)].map((star, index) => {
+        index += 1;
+        return (
+          <button
+            type="button"
+            key={index}
+            className={index <= (hover || rating) ? 'on' : 'off'}
+            onClick={() => setRating(index)}
+            onMouseEnter={() => {
+              setHover(index);
+              setRatingText(ratingKey[index]);
+            }}
+            onMouseLeave={() => setHover(rating)}
+          >
+            <span className="star">{<FaStar size={26} />}</span>
+          </button>
+        );
+      })}
+      <div className ="ratingText" >{ratingText}</div>
+    </div>
+  );
 };
 
 export default StarRating;
+

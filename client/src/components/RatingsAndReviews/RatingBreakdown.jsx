@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import StarRating from './StarRating.jsx';
-import { getAverageRating, calculateTotalReviews, calculateRatingsPercentage, getRecommendPercentage } from '../../lib/ratingsAndReviewsHelpers.js';
+import { getAverageRating, calculateTotalReviews, calculateRatingsPercentage, getRecommendPercentage, convertRatingToStars } from '../../lib/ratingsAndReviewsHelpers.js';
 import { getReviewsMeta } from '../../lib/requestHelpers.js';
+
+
 
 const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews, activeStars, removeAllFilters }) => {
 
@@ -13,12 +15,14 @@ const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews, activeSta
   let percentage = calculateRatingsPercentage(ratings, totalReviews);
   let recommendPercentage = getRecommendPercentage(metaData.recommended);
 
-
-
-
   return (
     <div id="breakdown">
-      <StarRating rating={4} />
+      <div id="averageRatingHeading">
+        <div id="averageRatingNumber">{averageRating}</div>
+        <div id="averageRatingStars">
+          {convertRatingToStars(averageRating)}
+        </div>
+      </div>
       <div onClick={() => {
         sortReviews(5);
       }}><span className="starPercentage" >5 Stars: {percentage['5']}%</span></div>
