@@ -15,6 +15,16 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
 
+  const characteristicsKey = {
+    Size: ['A size too small', '1/2 size too small', 'Perfect', '1/2 size too big', 'A size too wide'],
+    Width: ['Too narrow', 'Slightly Narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+    Comfort: ['Uncomfortable', 'Slightly comfortable', 'Ok', 'Comfortable', 'Perfect'],
+    Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+    Length: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+    Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
+  };
+
+
   if (!open) {
     return null;
   }
