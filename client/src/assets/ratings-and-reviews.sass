@@ -7,6 +7,8 @@
   #mainTitle
     font-weight: thick
     font-size: 22px
+    margin-top: 60px
+    margin-bottom: 30px
 
   #breakdownAndReviews
     display: flex
@@ -56,6 +58,7 @@
       #listSortHeading
         font-size: 20px
         font-weight: bold
+        margin-bottom: 24px
 
       #reviewsList
         display: flex
@@ -63,23 +66,56 @@
         justify-content: center
 
         .reviewTile
-          border: 1px solid grey
+          border-bottom: 1px solid grey
           display: flex
           flex-direction: column
-          border-radius: 5px
           padding: 8px
 
           .reviewHeading
             display: flex
             flex-direction: row
             justify-content: space-between
+            margin-top: 5px
+            margin-bottom: 5px
 
             .reviewRating
               font-weight: bold
               font-size: 14px
+              margin-bottom: 5px
 
             .reviewName
               font-size: 14px
+              margin-bottom: 5px
+
+          .reviewSummary
+            font-weight: bold
+            margin-bottom: 5px
+
+          .reviewBody
+            margin-bottom: 5px
+
+          .thumbnail
+            cursor: pointer
+            margin-bottom: 5px
+
+          .recommend
+            display: flex
+            flex-direction: row
+            margin-bottom: 5px
+
+            .check
+              margin-right: 8px
+
+          .helpful
+            display: flex
+            flex-direction: row
+
+            .helpfulButton
+              margin-right: 2px
+              cursor: pointer
+              text-decoration: underline
+
+
 
       #bottomButtons
         display: flex
@@ -87,12 +123,15 @@
         padding: 8px
 
         .reviewButton
+          margin-top: 45px
+          margin-right: 22px
           height: 80px
           width: 200px
           font-weight: bold
           border: 1px solid black
           border-radius: 1px
           font-size: 18px
+          background-color: white
 
         #modalBackground
           position: fixed

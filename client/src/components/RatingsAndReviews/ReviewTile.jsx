@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { parseISO } from 'date-fns';
-import { FaStar } from 'react-icons/fa';
+import { FaStar, FaCheck } from 'react-icons/fa';
 
+const updateHelpful = (choice) => {
+
+};
 
 const ReviewTile = ({ review, convertRatingToStars }) => {
   let readableDate = parseISO(review.date.slice(0, 10)).toString();
@@ -19,23 +22,23 @@ const ReviewTile = ({ review, convertRatingToStars }) => {
 
       <div className="review" >
         <div className="reviewSummary">
-          Summary: {review.summary}
+          {review.summary}
         </div>
         <div className="reviewBody">
-          Body: {review.body}
+          {review.body}
         </div>
         {review.photos.map((photo) => {
           return <img className="thumbnail" src={photo.url} width="50" height="50" key={photo.url}></img>;
         })}
-        {review.recommend && <div>~CHECKMARK~ I recommend this product</div>}
+        {review.recommend && <div className="recommend"><FaCheck className="check"/><div>I recommend this product</div></div>}
         {review.response && <div>
           <div className="responseText">Response:</div>
           <div className="response"> {review.response}</div>
         </div>}
         <div>Was this review helpful?</div>
         <div className="helpful">
-          <div>Yes</div>{review.helpfulness && review.helpfulness}
-          <div>No</div>{review.nothelpful && review.nothelpful}
+          <div className="helpfulButton" onClick={() => updateHelpful('helpful')} >Yes</div>{review.helpfulness && <div>({review.helpfulness})</div>}
+          <div className="helpfulButton" onClick={() => updateHelpful('not')} >No</div>{review.nothelpful && <div>({review.nothelpful})</div>}
         </div>
       </div>
     </div>

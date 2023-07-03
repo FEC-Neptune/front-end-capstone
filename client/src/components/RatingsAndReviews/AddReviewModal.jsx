@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import StarRating from './StarRating.jsx';
 
-const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta }) => {
+const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, productName }) => {
+
+  const [photos, setPhotos] = useState([]);
+
+
   if (!open) {
     return null;
   }
@@ -18,7 +22,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta })
           <div id="modalHeading">
             <div id="writeReview">
               <h1>Write Your Review</h1>
-              <h2>About The {metaData.product_id}</h2>
+              <h2>About The {productName}</h2>
             </div>
             <button id="closeModal" onClick={onClose}> X </button>
           </div>
@@ -54,7 +58,14 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta })
             <textarea maxlength="1000" required className="reviewInput" rows="4" cols="50"></textarea>
           </div>
 
-          <div id="reviewPhotos"></div>
+          <div id="reviewPhotos">
+            <div id="photos">
+              {photos.map((photo) => {
+                return <img className="thumbnail" src={photo.url} width="50" height="50" key={photo.url}></img>;
+              })}
+            </div>
+            <button id="addPhoto">Add photo</button>
+          </div>
 
           <div id="nickname">
             <h2 className="reviewHeading">Please submit a nickname</h2>

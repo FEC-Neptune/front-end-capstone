@@ -5,7 +5,7 @@ import NewReviewForm from './NewReviewForm.jsx';
 import AddReview from './AddReview.jsx';
 import Characteristics from './Characteristics.jsx';
 import AddReviewModal from './AddReviewModal.jsx';
-import { getReviews, getReviewsMeta } from '../../lib/requestHelpers.js';
+import { getReviews, getReviewsMeta, fetchProducts } from '../../lib/requestHelpers.js';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
 
@@ -16,11 +16,7 @@ const RatingsAndReviews = ({ product }) => {
   const [visibleReviews, setVisibleReviews] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [activeStars, setActiveStars] = useState([]);
-
-  const returnReviewsMeta = () => {
-    return reviewsMeta;
-  };
-
+  const [productName, setProductName] = useState('');
 
   useEffect(() => {
     getReviews(product)
@@ -32,6 +28,12 @@ const RatingsAndReviews = ({ product }) => {
       })
       .then(({ data }) => {
         setReviewsMeta(data);
+      })
+      .then(() => {
+        return fetchProducts(product);
+      })
+      .then(({name}) => {
+        setProductName(name);
       })
       .catch((err) => {
         throw (err);
@@ -80,11 +82,11 @@ const RatingsAndReviews = ({ product }) => {
 
     const renderStar = (type) =>{
       if (type === 'full') {
-        return <FaStar />;
+        return <FaStar size={20}/>;
       } else if (type === 'half') {
-        return <FaStarHalfAlt />;
+        return <FaStarHalfAlt size={20}/>;
       } else if (type === 'empty') {
-        return <FaRegStar />;
+        return <FaRegStar size={20} />;
       }
     };
 
@@ -124,7 +126,7 @@ const RatingsAndReviews = ({ product }) => {
               {reviewsMeta && !isOpen && <button className="reviewButton" onClick={() => {
                 setIsOpen(true);
               }}>ADD REVIEW +</button>}
-              <AddReviewModal returnReviewsMeta={returnReviewsMeta} product={product} metaData={reviewsMeta} open={isOpen} onClose={() => {
+              <AddReviewModal productName={productName} metaData={reviewsMeta} open={isOpen} onClose={() => {
                 setIsOpen(false);
               }} />
             </div>
