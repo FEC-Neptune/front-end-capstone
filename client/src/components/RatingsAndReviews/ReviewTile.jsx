@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { parseISO } from 'date-fns';
 import { FaStar, FaCheck } from 'react-icons/fa';
+import { convertRatingToStars } from '../../lib/ratingsAndReviewsHelpers.js';
 
 const updateHelpful = (choice) => {
 
 };
 
-const ReviewTile = ({ review, convertRatingToStars }) => {
+const ReviewTile = ({ review }) => {
   let readableDate = parseISO(review.date.slice(0, 10)).toString();
   const [isVerified, setIsVerified] = useState(false);
   return (

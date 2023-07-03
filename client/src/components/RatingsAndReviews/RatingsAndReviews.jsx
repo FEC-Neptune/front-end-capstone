@@ -6,8 +6,6 @@ import AddReview from './AddReview.jsx';
 import Characteristics from './Characteristics.jsx';
 import AddReviewModal from './AddReviewModal.jsx';
 import { getReviews, getReviewsMeta, fetchProducts } from '../../lib/requestHelpers.js';
-import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
-
 
 const RatingsAndReviews = ({ product }) => {
 
@@ -74,35 +72,7 @@ const RatingsAndReviews = ({ product }) => {
     setVisibleReviews(reviews.slice(0, 2));
   };
 
-  const convertRatingToStars = (rating) => {
-    let fullStars = Math.floor(rating);
-    let remainder = 5 - rating;
-    let emptyStars = Math.floor(remainder);
-    let partial = remainder - emptyStars;
 
-    const renderStar = (type) =>{
-      if (type === 'full') {
-        return <FaStar size={20}/>;
-      } else if (type === 'half') {
-        return <FaStarHalfAlt size={20}/>;
-      } else if (type === 'empty') {
-        return <FaRegStar size={20} />;
-      }
-    };
-
-    let stars = [];
-
-    for (let i = 0; i < fullStars; i ++) {
-      stars.push(renderStar('full'));
-    }
-    if (partial) {
-      stars.push(renderStar('half'));
-    }
-    for (let j = 0; j < emptyStars; j ++) {
-      stars.push(renderStar('empty'));
-    }
-    return stars;
-  };
 
   return (
     <>
@@ -113,13 +83,13 @@ const RatingsAndReviews = ({ product }) => {
         <section id="breakdownAndReviews">
           {reviews.length > 0 &&
             <div id="breakdownAndCharacteristics">
-              {reviewsMeta && <RatingBreakdown convertRatingToStars={convertRatingToStars} sortReviews={sortReviews} metaData={reviewsMeta} reviews={reviews} setReviews={setReviews} activeStars={activeStars} removeAllFilters={removeAllFilters}/>}
+              {reviewsMeta && <RatingBreakdown sortReviews={sortReviews} metaData={reviewsMeta} reviews={reviews} setReviews={setReviews} activeStars={activeStars} removeAllFilters={removeAllFilters}/>}
               {reviewsMeta && <Characteristics metaData={reviewsMeta} />}
             </div>}
 
           <div id="reviewsListAndButtons">
             <div id="listSortHeading">{reviews.length} reviews, sorted by relevance</div>
-            {reviews.length > 0 && <ReviewsList convertRatingToStars={convertRatingToStars} visibleReviews={visibleReviews} setVisibleReviews={setVisibleReviews} reviews={reviews} />}
+            {reviews.length > 0 && <ReviewsList visibleReviews={visibleReviews} setVisibleReviews={setVisibleReviews} reviews={reviews} />}
 
             <div id="bottomButtons">
               {reviews.length !== visibleReviews.length && <button className="reviewButton" onClick={addReviews}>MORE REVIEWS</button>}
