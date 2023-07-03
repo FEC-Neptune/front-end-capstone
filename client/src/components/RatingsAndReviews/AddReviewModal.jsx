@@ -7,6 +7,12 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
   const [photos, setPhotos] = useState([]);
   const [errorList, setErrorList] = useState([]);
   const [photoFormOpen, setPhotoFormOpen] = useState(false);
+  const [rating, setRating] = useState(null);
+  const [recommend, setRecommend] = useState(null);
+  const [summary, setSummary] = useState('');
+  const [body, setBody] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
 
   if (!open) {
     return null;
