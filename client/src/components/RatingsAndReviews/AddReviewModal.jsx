@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import StarRating from './StarRating.jsx';
+import PhotoForm from './PhotoForm.jsx';
 
 const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, productName }) => {
 
   const [photos, setPhotos] = useState([]);
-
+  const [errorList, setErrorList] = useState([]);
+  const [photoFormOpen, setPhotoFormOpen] = useState(false);
 
   if (!open) {
     return null;
@@ -15,12 +17,21 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
     array.push(keys);
   }
 
+  const validateAndSubmit = () => {
+    event.preventDefault();
+    console.log('validating');
+  };
+
+  const openPhotoForm = () => {
+    console.log('photoForm');
+  };
+
   return (
     <div onClick={onClose} id="modalBackground">
       <div onClick={(e) => {
         e.stopPropagation();
       }}id="modalContainer">
-        <form>
+        <form id="reviewForm" onSubmit={validateAndSubmit}>
           <div id="modalHeading">
             <div id="writeReview">
               <h1>Write Your Review</h1>
@@ -66,7 +77,8 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
                 return <img className="thumbnail" src={photo.url} width="50" height="50" key={photo.url}></img>;
               })}
             </div>
-            <button id="addPhoto">Add photo</button>
+            <button onClick={() => setPhotoFormOpen(true)} id="addPhoto">Add photo</button>
+            <PhotoForm open={photoFormOpen} />
           </div>
 
           <div id="nickname">
@@ -79,6 +91,15 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
             <h2 className="reviewHeading">Please enter your email</h2>
             <input placeholder="jackson11@gmail.com" maxlength="60" required className="reviewInput"></input>
             <h4>For authentication reasons, you will not be emailed</h4>
+          </div>
+
+          <div id="errors">
+            <div id="errorMessage">You must enter the following:</div>
+            <div id="errorList">
+              {errorList.map((error) => {
+                return <div>{error}</div>;
+              })}
+            </div>
           </div>
 
           <button id="submitButton" type="submit" >Submit</button>
