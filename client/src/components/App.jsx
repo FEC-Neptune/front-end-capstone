@@ -14,7 +14,7 @@ const App = () => {
     <section id="container">
       <p>Hello Neptune</p>
       <Overview productId={product} />
-      <RelatedAndComparisons product={product} setProduct={setProduct}/>
+      <RelatedAndComparisons currentProduct={product} setCurrentProduct={setProduct}/>
       <RatingsAndReviews product={product} setProduct={setProduct}/>
     </section>
   );

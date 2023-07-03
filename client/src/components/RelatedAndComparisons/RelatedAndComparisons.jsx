@@ -5,7 +5,7 @@ import { fetchProducts } from '../../lib/requestHelpers.js';
 import Related from './Related.jsx';
 import Outfit from './Outfit.jsx';
 
-const RelatedAndComparisons = React.memo(() => {
+const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
   const [prodArr, setProdArr] = useState([]);
   const [currentThumbnail, setCurrentThumbnail] = useState('');
   const [relatedIndex, setRelatedIndex] = useState(0);
@@ -14,11 +14,19 @@ const RelatedAndComparisons = React.memo(() => {
   const [outfitPosition, setOutfitPosition] = useState();
 
   useEffect(() => {
+    let relArr = [];
     if (prodArr.length === 0) {
-      fetchProducts()
-        .then(res => setProdArr(res))
+      fetchProducts(currentProduct, 'related')
+        .then(res => {
+          const promise = res.map(product => fetchProducts(product));
+          return Promise.all(promise);
+        })
+        .then(products => {
+          const relArr = [...new Set(products.map(JSON.stringify))].map(JSON.parse);
+          setProdArr(relArr);
+        })
         .catch(err => {
-          throw (err);
+          throw err;
         });
     }
   }, []);
@@ -79,7 +87,7 @@ const RelatedAndComparisons = React.memo(() => {
         transform: `translateX(${-relatedPosition}px)`,
         transition: 'transform .5s ease-in-out',
       }}><div className='carousel-title'>Related Items</div></div>
-      <Related products={prodArr} fetchProducts={fetchProducts} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={relatedPosition}/>
+      <Related products={prodArr} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={relatedPosition}/>
       <div className='carousel-title-container' id='outfit-title-container' style={{
         transform: `translateX(${-outfitPosition}px)`,
         transition: 'transform .5s ease-in-out',
@@ -88,6 +96,6 @@ const RelatedAndComparisons = React.memo(() => {
     </div>
   );
 
-});
+};
 
 export default RelatedAndComparisons;
