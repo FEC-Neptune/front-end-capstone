@@ -23,7 +23,7 @@ export const fetchProducts = function (id, category) {
 };
 
 export const getReviews = (id) => {
-  var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?sort=relevant&product_id=' + id;
+  var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?page=1&count=100&sort=relevant&product_id=' + id;
 
   return axios({
     method: 'get',
@@ -50,6 +50,25 @@ export const getReviewsMeta = (id) => {
     headers: {
       'Authorization': TOKEN
     }
+  })
+    .then((res) => {
+      return res;
+    })
+    .catch((err => {
+      throw (err);
+    }));
+};
+
+export const addReview = (requestBody) => {
+  var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/';
+
+  return axios({
+    method: 'post',
+    url: url,
+    headers: {
+      'Authorization': TOKEN
+    },
+    data: requestBody
   })
     .then((res) => {
       return res;
