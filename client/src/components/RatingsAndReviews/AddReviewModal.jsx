@@ -16,8 +16,10 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
   }
 
   return (
-    <div id="modalBackground">
-      <div id="modalContainer">
+    <div onClick={onClose} id="modalBackground">
+      <div onClick={(e) => {
+        e.stopPropagation();
+      }}id="modalContainer">
         <form>
           <div id="modalHeading">
             <div id="writeReview">
