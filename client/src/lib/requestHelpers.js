@@ -59,3 +59,25 @@ export const getReviewsMeta = (id) => {
     }));
 };
 
+export const addToCart = (sku, count) => {
+  var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/cart';
+
+  return axios({
+    method: 'post',
+    url: url,
+    headers: {
+      'Authorization': TOKEN
+    },
+    data: {
+      'sku_id': sku,
+      'count': count
+    }
+  })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
