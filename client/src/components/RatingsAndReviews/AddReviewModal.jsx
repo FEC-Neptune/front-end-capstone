@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import StarRating from './StarRating.jsx';
 
-const AddReviewModal = ({ open, onClose, metaData, product }) => {
+const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta }) => {
   if (!open) {
     return null;
+  }
+
+  let array = [];
+  for (let keys in metaData.characteristics) {
+    array.push(keys);
   }
 
   return (
@@ -13,7 +18,7 @@ const AddReviewModal = ({ open, onClose, metaData, product }) => {
           <div id="modalHeading">
             <div id="writeReview">
               <h1>Write Your Review</h1>
-              <h2>About The {product.name}</h2>
+              <h2>About The {metaData.product_id}</h2>
             </div>
             <button id="closeModal" onClick={onClose}> X </button>
           </div>
@@ -34,7 +39,9 @@ const AddReviewModal = ({ open, onClose, metaData, product }) => {
           </div>
 
           <div id="reviewCharacteristics">
-
+            {array.map((char) => {
+              return <div>{char}</div>;
+            })}
           </div>
 
           <div id="reviewSummary">

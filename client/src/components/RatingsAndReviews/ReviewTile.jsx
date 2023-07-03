@@ -3,16 +3,14 @@ import { parseISO } from 'date-fns';
 import { FaStar } from 'react-icons/fa';
 
 
-const ReviewTile = ({ review }) => {
+const ReviewTile = ({ review, convertRatingToStars }) => {
   let readableDate = parseISO(review.date.slice(0, 10)).toString();
   const [isVerified, setIsVerified] = useState(false);
   return (
     <div className="reviewTile">
       <div className="reviewHeading">
         <div className="reviewRating">
-          {[...Array(review.rating)].map(() => {
-            return <FaStar size={16} />;
-          })}
+          {convertRatingToStars(review.rating)}
         </div>
         <div className="reviewName">{isVerified && '***'}
           {review.reviewer_name}, {`${readableDate.slice(4, 10)}, ${readableDate.slice(10, 15)}`}
