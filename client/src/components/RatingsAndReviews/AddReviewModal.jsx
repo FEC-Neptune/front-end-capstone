@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import StarRating from './StarRating.jsx';
 import PhotoForm from './PhotoForm.jsx';
+import { addReview } from '../../lib/requestHelpers.js';
 
 const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, productName }) => {
 
@@ -29,7 +30,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
     if (!rating) {
       array.push('Overall Rating');
     }
-    if (!recommend) {
+    if (recommend === null) {
       array.push('Recommend Yes or No');
     }
     if (body.length < 50) {
@@ -42,6 +43,31 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
       array.push('A valid email');
     }
     setErrorList(array);
+    if (errorList.length === 0) {
+      const requestBody = {
+        'product_id': product,
+        'rating': rating,
+        'summary': summary,
+        'body': body,
+        'recommend': recommend,
+        'name': nickname,
+        'email': email,
+        'photos': [],
+        'characteristics': {}
+      };
+      addReview(requestBody);
+      setDefaultStates();
+      onClose();
+    }
+  };
+
+  const setDefaultStates = () => {
+    setRating(0);
+    setRecommend(null);
+    setSummary('');
+    setBody('');
+    setNickname('');
+    setEmail('');
   };
 
   const validateEmail = (email) => {
@@ -70,9 +96,9 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
         <div id="recommendQuestion">
           <h2 className="reviewHeading">Do you recommend this product?</h2>
           <div id="recommendation">
-            <input onClick={() => setRecommend('Yes')} type="radio" id="recommendYes" name="recommendQuestion" ></input>
+            <input onClick={() => setRecommend(true)} type="radio" id="recommendYes" name="recommendQuestion" ></input>
             <label for="Four Star">Yes</label>
-            <input onClick={() => setRecommend('No')} type="radio" id="recommendNo" name="recommendQuestion" ></input>
+            <input onClick={() => setRecommend(false)} type="radio" id="recommendNo" name="recommendQuestion" ></input>
             <label for="Five Star">No</label>
           </div>
         </div>
@@ -85,7 +111,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
 
         <div id="reviewSummary">
           <h2 className="reviewHeading">Please submit a summary of your review</h2>
-          <textarea maxlength="60" placeholder="Example: Best Purchase Ever!" className="reviewInput" rows="1" cols="60"></textarea>
+          <textarea onChange={(e) => setSummary(e.target.value)} maxlength="60" placeholder="Example: Best Purchase Ever!" className="reviewInput" rows="1" cols="60"></textarea>
         </div>
 
         <div id="reviewBody">

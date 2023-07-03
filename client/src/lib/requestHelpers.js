@@ -59,3 +59,22 @@ export const getReviewsMeta = (id) => {
     }));
 };
 
+export const addReview = (requestBody) => {
+  var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/';
+
+  return axios({
+    method: 'post',
+    url: url,
+    headers: {
+      'Authorization': TOKEN
+    },
+    data: requestBody
+  })
+    .then((res) => {
+      return res;
+    })
+    .catch((err => {
+      throw (err);
+    }));
+};
+
