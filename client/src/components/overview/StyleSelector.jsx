@@ -9,7 +9,6 @@ const StyleSelector = ({ productStyles, style, setStyle }) => {
 
   useEffect(() => {
     if (!!productStyles) {
-      console.log(createSubarray(productStyles, 4));
       setProductStylesArray(createSubarray(productStyles, 4));
     }
   }, [productStyles]);
