@@ -24,20 +24,20 @@ const RelatedAndComparisons = React.memo(() => {
   }, []);
 
 
-  const scrollToCard = (cardIndex, buttonId) => {
+  const scrollToCard = (cardIndex, buttonClass) => {
     const cardWidth = 239.9;
-    buttonId.includes('related') ? setRelatedPosition(cardIndex * cardWidth) : setOutfitPosition(cardIndex * cardWidth);
+    buttonClass.includes('related') ? setRelatedPosition(cardIndex * cardWidth) : setOutfitPosition(cardIndex * cardWidth);
   };
 
   const handleLeftClick = () => {
-    const buttonId = event.target.id;
+    const buttonClass = event.target.className;
     const arrLength = prodArr.length;
 
-    if (buttonId.includes('related')) {
+    if (buttonClass.includes('related')) {
       if (-arrLength !== relatedIndex) {
         setRelatedIndex((prevIndex) => {
           const newIndex = prevIndex - 1;
-          scrollToCard(newIndex, buttonId);
+          scrollToCard(newIndex, buttonClass);
           return newIndex;
         });
       }
@@ -45,7 +45,7 @@ const RelatedAndComparisons = React.memo(() => {
       if (-arrLength !== outfitIndex + 1) {
         setOutfitIndex((prevIndex) => {
           const newIndex = prevIndex - 1;
-          scrollToCard(newIndex, buttonId);
+          scrollToCard(newIndex, buttonClass);
           return newIndex;
         });
       }
@@ -53,12 +53,12 @@ const RelatedAndComparisons = React.memo(() => {
   };
 
   const handleRightClick = () => {
-    const buttonId = event.target.id;
-    if (buttonId.includes('related')) {
+    const buttonClass = event.target.className;
+    if (buttonClass.includes('related')) {
       if (relatedIndex !== 0) {
         setRelatedIndex((prevIndex) => {
           const newIndex = prevIndex + 1;
-          scrollToCard(newIndex, buttonId);
+          scrollToCard(newIndex, buttonClass);
           return newIndex;
         });
       }
@@ -66,7 +66,7 @@ const RelatedAndComparisons = React.memo(() => {
       if (outfitIndex !== 0) {
         setOutfitIndex((prevIndex) => {
           const newIndex = prevIndex + 1;
-          scrollToCard(newIndex, buttonId);
+          scrollToCard(newIndex, buttonClass);
           return newIndex;
         });
       }
