@@ -96,7 +96,7 @@ const RatingsAndReviews = ({ product }) => {
               {reviewsMeta && !isOpen && <button className="reviewButton" onClick={() => {
                 setIsOpen(true);
               }}>ADD REVIEW +</button>}
-              <AddReviewModal productName={productName} metaData={reviewsMeta} open={isOpen} onClose={() => {
+              <AddReviewModal product={product} productName={productName} metaData={reviewsMeta} open={isOpen} onClose={() => {
                 setIsOpen(false);
               }} />
             </div>
