@@ -6,6 +6,7 @@
   "scripts": {
     "client-dev": "npx webpack --watch & npx live-server --open=./client/dist/index.html",
     "build": "npx webpack",
+    "server": "npx live-server --open=./client/dist/index.html",
     "test": "jest"
   },
   "repository": {
