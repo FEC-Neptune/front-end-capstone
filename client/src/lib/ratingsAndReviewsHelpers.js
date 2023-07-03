@@ -1,3 +1,5 @@
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
+
 export const getAverageRating = (ratingsObj, decimalPlace) => {
   let totalRatings = 0;
   let totalScore = 0;
@@ -35,4 +37,34 @@ export const getRecommendPercentage = (recommendObj) => {
   sum += recs;
   sum += parseInt(recommendObj.false);
   return Math.round((recs * 100) / sum);
+};
+
+export const convertRatingToStars = (rating) => {
+  let fullStars = Math.floor(rating);
+  let remainder = 5 - rating;
+  let emptyStars = Math.floor(remainder);
+  let partial = remainder - emptyStars;
+
+  const renderStar = (type) =>{
+    if (type === 'full') {
+      return <FaStar size={20}/>;
+    } else if (type === 'half') {
+      return <FaStarHalfAlt size={20}/>;
+    } else if (type === 'empty') {
+      return <FaRegStar size={20} />;
+    }
+  };
+
+  let stars = [];
+
+  for (let i = 0; i < fullStars; i ++) {
+    stars.push(renderStar('full'));
+  }
+  if (partial) {
+    stars.push(renderStar('half'));
+  }
+  for (let j = 0; j < emptyStars; j ++) {
+    stars.push(renderStar('empty'));
+  }
+  return stars;
 };

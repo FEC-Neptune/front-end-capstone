@@ -5,16 +5,16 @@ import NewReviewForm from './NewReviewForm.jsx';
 import AddReview from './AddReview.jsx';
 import Characteristics from './Characteristics.jsx';
 import AddReviewModal from './AddReviewModal.jsx';
-import { getReviews, getReviewsMeta } from '../../lib/requestHelpers.js';
+import { getReviews, getReviewsMeta, fetchProducts } from '../../lib/requestHelpers.js';
 
-
-const RatingsAndReviews = ({ product, setProduct }) => {
+const RatingsAndReviews = ({ product }) => {
 
   const [reviews, setReviews] = useState([]);
   const [reviewsMeta, setReviewsMeta] = useState('');
   const [visibleReviews, setVisibleReviews] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [activeStars, setActiveStars] = useState([]);
+  const [productName, setProductName] = useState('');
 
   useEffect(() => {
     getReviews(product)
@@ -26,6 +26,12 @@ const RatingsAndReviews = ({ product, setProduct }) => {
       })
       .then(({ data }) => {
         setReviewsMeta(data);
+      })
+      .then(() => {
+        return fetchProducts(product);
+      })
+      .then(({name}) => {
+        setProductName(name);
       })
       .catch((err) => {
         throw (err);
@@ -66,6 +72,8 @@ const RatingsAndReviews = ({ product, setProduct }) => {
     setVisibleReviews(reviews.slice(0, 2));
   };
 
+
+
   return (
     <>
       <div id="ratingsAndReviews">
@@ -85,10 +93,10 @@ const RatingsAndReviews = ({ product, setProduct }) => {
 
             <div id="bottomButtons">
               {reviews.length !== visibleReviews.length && <button className="reviewButton" onClick={addReviews}>MORE REVIEWS</button>}
-              {!isOpen && <button className="reviewButton" onClick={() => {
+              {reviewsMeta && !isOpen && <button className="reviewButton" onClick={() => {
                 setIsOpen(true);
               }}>ADD REVIEW +</button>}
-              <AddReviewModal reviewsMeta={reviewsMeta} open={isOpen} onClose={() => {
+              <AddReviewModal productName={productName} metaData={reviewsMeta} open={isOpen} onClose={() => {
                 setIsOpen(false);
               }} />
             </div>
