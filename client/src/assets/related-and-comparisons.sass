@@ -3,6 +3,10 @@
   flex-direction: column
   width: 100%
   background-image: url('https://images.rawpixel.com/image_1300/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcGQzNi0xLWdzZmNfMjAxNzEyMDhfYXJjaGl2ZV9lMDAwMTIwNi5qcGc.jpg')
+  background-attachment: fixed
+  background-position: center
+  background-repeat: no-repeat
+  background-size: cover
   margin-bottom: 10px
   overflow: hidden
 
@@ -95,11 +99,33 @@
 
     .card-container
       display: flex
-      flex-grow: 1
+      position: relative
+      min-width: 237.6px
+      max-width: 237.6px
+      flex-grow: 0
+      flex-shrink: 0
       justify-content: center
       border-left-style: solid
       border-width: 2px
+      background-color: #f9f8f8
       transition: transform 0.5s ease-in-out
+
+      .action-button
+        position: absolute
+        top: 1.5%
+        right: 2%
+        background: none
+        border: none
+        cursor: pointer
+        font-size: 24px
+        color: #ccc
+        transition: color 0.2s
+
+      #related-action-button:hover
+        color: #2c474f
+
+      #outfit-action-button:hover
+        color: #2c474f
 
       .card
         display: flex
@@ -107,7 +133,6 @@
         justify-content: space-between
         align-items: center
         padding-top: 10px
-
 
 
         .thumbnail-container
@@ -163,6 +188,20 @@
         #info-price-text
           font-size: 12px
           font-weight: bold
+
+    #add-outfit-button-card
+        display: flex
+        flex-direction: column
+        align-items: center
+
+    #add-outfit-button
+      flex-grow: 0
+      flex-shrink:0
+      background: none
+      border-style: none
+      font-size: 200px
+      color: #2c474f
+      cursor: pointer
 
 
 

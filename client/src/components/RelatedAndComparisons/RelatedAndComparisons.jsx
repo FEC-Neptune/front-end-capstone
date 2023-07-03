@@ -42,7 +42,7 @@ const RelatedAndComparisons = React.memo(() => {
         });
       }
     } else {
-      if (-arrLength !== outfitIndex) {
+      if (-arrLength !== outfitIndex + 1) {
         setOutfitIndex((prevIndex) => {
           const newIndex = prevIndex - 1;
           scrollToCard(newIndex, buttonId);
