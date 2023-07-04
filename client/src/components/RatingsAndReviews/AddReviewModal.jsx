@@ -108,9 +108,9 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
           <h2 className="reviewHeading">Do you recommend this product?</h2>
           <div id="recommendation">
             <input onClick={() => setRecommend(true)} type="radio" id="recommendYes" name="recommendQuestion" ></input>
-            <label for="Four Star">Yes</label>
+            <label for="recommendYes">Yes</label>
             <input onClick={() => setRecommend(false)} type="radio" id="recommendNo" name="recommendQuestion" ></input>
-            <label for="Five Star">No</label>
+            <label for="recommendNo">No</label>
           </div>
         </div>
 
@@ -123,7 +123,14 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
                   <div>{char}</div>
                   <div id="options">
                     {characteristicsKey[char].map((option) => {
-                      return <div>{option}</div>;
+                      return (
+                        <div id="option">
+                          <input type="radio" name={char} id={option} value={option}/>
+                          <label for={option} >{option}</label>
+                        </div>
+                      );
+
+
                     })}
                   </div>
                 </div>
