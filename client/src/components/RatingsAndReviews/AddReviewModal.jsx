@@ -16,12 +16,12 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
   const [email, setEmail] = useState('');
 
   const characteristicsKey = {
-    Size: ['A size too small', '1/2 size too small', 'Perfect', '1/2 size too big', 'A size too wide'],
-    Width: ['Too narrow', 'Slightly Narrow', 'Perfect', 'Slightly wide', 'Too wide'],
-    Comfort: ['Uncomfortable', 'Slightly comfortable', 'Ok', 'Comfortable', 'Perfect'],
-    Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
-    Length: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-    Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
+    Size: {id: 135232, options: ['A size too small', '1/2 size too small', 'Perfect', '1/2 size too big', 'A size too wide']},
+    Width: {id: 135233, options: ['Too narrow', 'Slightly Narrow', 'Perfect', 'Slightly wide', 'Too wide']},
+    Comfort: {id: 135221, options: ['Uncomfortable', 'Slightly comfortable', 'Ok', 'Comfortable', 'Perfect']},
+    Quality: {id: 135222, options: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect']},
+    Length: {id: 135220, options: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long']},
+    Fit: {id: 135219, options:['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']}
   };
 
 
@@ -29,9 +29,13 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
     return null;
   }
 
-  let array = [];
-  for (let keys in metaData.characteristics) {
-    array.push(keys);
+  const characteristics = {};
+
+  let characteristicsArray = [];
+
+  for (let key in metaData.characteristics) {
+    characteristics[key] = 0;
+    characteristicsArray.push(key);
   }
 
   const validateAndSubmit = () => {
@@ -52,6 +56,11 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
     if (!validateEmail(email)) {
       array.push('A valid email');
     }
+    for (let key in characteristics) {
+      if (!characteristics[key]) {
+        array.push(`An entry for ${key}`);
+      }
+    }
     setErrorList(array);
     if (errorList.length === 0) {
       const requestBody = {
@@ -63,7 +72,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
         'name': nickname,
         'email': email,
         'photos': [],
-        'characteristics': {}
+        'characteristics': characteristics
       };
       addReview(requestBody);
       setDefaultStates();
@@ -107,21 +116,44 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
           <h2 className="reviewHeading">Do you recommend this product?</h2>
           <div id="recommendation">
             <input onClick={() => setRecommend(true)} type="radio" id="recommendYes" name="recommendQuestion" ></input>
-            <label for="Four Star">Yes</label>
+            <label for="recommendYes">Yes</label>
             <input onClick={() => setRecommend(false)} type="radio" id="recommendNo" name="recommendQuestion" ></input>
-            <label for="Five Star">No</label>
+            <label for="recommendNo">No</label>
           </div>
         </div>
 
         <div id="reviewCharacteristics">
-          {array.map((char) => {
-            return <div>{char}</div>;
-          })}
+          <h2>Please describe your experience with the product</h2>
+          <div id="characteristics">
+            {characteristicsArray.map((char) => {
+              return (
+                <div>
+                  <div>{char}</div>
+                  <div id="options">
+                    {characteristicsKey[char].options.map((option, i) => {
+                      let index = i + 1;
+                      return (
+                        <div id="option">
+                          <input onClick={() => {
+                            characteristics[char] = index;
+                            console.log(characteristics);
+                          }}type="radio" name={char} id={index} value={option}/>
+                          <label for={option} >{option}</label>
+                        </div>
+                      );
+
+
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         <div id="reviewSummary">
           <h2 className="reviewHeading">Please submit a summary of your review</h2>
-          <textarea onChange={(e) => setSummary(e.target.value)} maxlength="60" placeholder="Example: Best Purchase Ever!" className="reviewInput" rows="1" cols="60"></textarea>
+          <textarea onChange={(e) => setSummary(e.target.value)} maxlength="60" placeholder="Example: Best purchase ever!" className="reviewInput" rows="1" cols="60"></textarea>
         </div>
 
         <div id="reviewBody">
