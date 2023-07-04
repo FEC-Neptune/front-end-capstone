@@ -31,7 +31,6 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
     }
   }, []);
 
-
   const scrollToCard = (cardIndex, buttonClass) => {
     const cardWidth = 239.9;
     buttonClass.includes('related') ? setRelatedPosition(cardIndex * cardWidth) : setOutfitPosition(cardIndex * cardWidth);
@@ -87,12 +86,12 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
         transform: `translateX(${-relatedPosition}px)`,
         transition: 'transform .5s ease-in-out',
       }}><div className='carousel-title'>Related Items</div></div>
-      <Related products={prodArr} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={relatedPosition}/>
+      <Related setCurrentProduct={setCurrentProduct} currentProduct={currentProduct} products={prodArr} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={relatedPosition}/>
       <div className='carousel-title-container' id='outfit-title-container' style={{
         transform: `translateX(${-outfitPosition}px)`,
         transition: 'transform .5s ease-in-out',
       }}><div className='carousel-title'>Your Outfit</div></div>
-      <Outfit outfitItems={prodArr} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={outfitPosition}/>
+      <Outfit setCurrentProduct={setCurrentProduct} currentProduct={currentProduct} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={outfitPosition}/>
     </div>
   );
 
