@@ -16,12 +16,12 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
   const [email, setEmail] = useState('');
 
   const characteristicsKey = {
-    Size: ['A size too small', '1/2 size too small', 'Perfect', '1/2 size too big', 'A size too wide'],
-    Width: ['Too narrow', 'Slightly Narrow', 'Perfect', 'Slightly wide', 'Too wide'],
-    Comfort: ['Uncomfortable', 'Slightly comfortable', 'Ok', 'Comfortable', 'Perfect'],
-    Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
-    Length: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-    Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
+    Size: {id: 135232, options: ['A size too small', '1/2 size too small', 'Perfect', '1/2 size too big', 'A size too wide']},
+    Width: {id: 135233, options: ['Too narrow', 'Slightly Narrow', 'Perfect', 'Slightly wide', 'Too wide']},
+    Comfort: {id: 135221, options: ['Uncomfortable', 'Slightly comfortable', 'Ok', 'Comfortable', 'Perfect']},
+    Quality: {id: 135222, options: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect']},
+    Length: {id: 135220, options: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long']},
+    Fit: {id: 135219, options:['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']}
   };
 
 
@@ -29,10 +29,13 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
     return null;
   }
 
+  const characteristics = {};
+
   let characteristicsArray = [];
 
-  for (let keys in metaData.characteristics) {
-    characteristicsArray.push(keys);
+  for (let key in metaData.characteristics) {
+    characteristics[key] = 0;
+    characteristicsArray.push(key);
   }
 
   const validateAndSubmit = () => {
@@ -53,6 +56,11 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
     if (!validateEmail(email)) {
       array.push('A valid email');
     }
+    for (let key in characteristics) {
+      if (!characteristics[key]) {
+        array.push(`An entry for ${key}`);
+      }
+    }
     setErrorList(array);
     if (errorList.length === 0) {
       const requestBody = {
@@ -64,7 +72,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
         'name': nickname,
         'email': email,
         'photos': [],
-        'characteristics': {}
+        'characteristics': characteristics
       };
       addReview(requestBody);
       setDefaultStates();
@@ -122,10 +130,14 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
                 <div>
                   <div>{char}</div>
                   <div id="options">
-                    {characteristicsKey[char].map((option) => {
+                    {characteristicsKey[char].options.map((option, i) => {
+                      let index = i + 1;
                       return (
                         <div id="option">
-                          <input type="radio" name={char} id={option} value={option}/>
+                          <input onClick={() => {
+                            characteristics[char] = index;
+                            console.log(characteristics);
+                          }}type="radio" name={char} id={index} value={option}/>
                           <label for={option} >{option}</label>
                         </div>
                       );
