@@ -43,7 +43,7 @@ const Overview = ({ productId }) => {
         setReviewsData(ratings);
       });
 
-  }, []);
+  }, [productId]);
 
   return (
     <section id="overview">
