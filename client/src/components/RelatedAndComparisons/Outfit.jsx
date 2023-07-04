@@ -41,8 +41,8 @@ const Outfit = ( {outfitClick, outfitItems, handleLeftClick, handleRightClick, s
             <button className='add-outfit-button' onClick={() => handleOutfitClick()}>+</button>
           </div>
           {outfits.map((product) =>
-            <div className='card-container outfit-card-container' key={product.id} >
-              <Card onClick={() => setCurrentProduct(product.id)} product={product} key={product.id}/>
+            <div onClick={() => setCurrentProduct(product.id)} className='card-container outfit-card-container' key={product.id} >
+              <Card product={product} key={product.id}/>
               <button className='action-button outfit-action-button' >X</button>
             </div>
           )}
