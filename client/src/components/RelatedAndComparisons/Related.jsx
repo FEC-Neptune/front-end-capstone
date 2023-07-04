@@ -12,7 +12,7 @@ const Related = ( { products, handleLeftClick, handleRightClick, scrollPosition,
           transition: 'transform 0.5s ease-in-out',
         }}>
           {products.map((product) =>
-            <div onClick={ () => { setCurrentProduct(product.id); console.log(currentProduct); } } className='card-container related-card-container' key={product.id}>
+            <div onClick={ () => setCurrentProduct(product.id) } className='card-container related-card-container' key={product.id}>
               <Card product={product} key={product.id} />
               <button className='action-button related-action-button' >&#9733;</button>
             </div>
