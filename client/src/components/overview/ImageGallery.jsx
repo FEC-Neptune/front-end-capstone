@@ -49,7 +49,7 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
   if (Array.isArray(photos) && photos.length) {
     if (expandedView === false) {
       return (
-        <section id="image-gallery" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}}>
+        <section className="image-gallery" id="image-gallery-default" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleExpandedView}>
           <div id="thumbnail-container">
             <div className="thumbnail-chevron-container">
               { thumbnailRange[0] > 0 ? (
@@ -101,16 +101,16 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
       );
     } else if (expandedView === true && zoomMode === false) {
       return (
-        <section id="image-gallery"></section>
+        <section className="image-gallery" id="image-gallery-expanded" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleExpandedView}></section>
       );
     } else if (expandedView === true && zoomMode === true) {
       return (
-        <section id="image-gallery"></section>
+        <section className="image-gallery" id="image-gallery-zoomed" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleExpandedView}></section>
       );
     }
   } else {
     return (
-      <section id="image-gallery"></section>
+      <section className="image-gallery"></section>
     );
   }
 };
