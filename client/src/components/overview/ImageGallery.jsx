@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown, faCircleChevronRight, faCircleChevronLeft, faExpand, faCircle, faSquare } from '@fortawesome/free-solid-svg-icons';
-// import '../../assets/magnify.css';
-// import InnerImageZoom from 'react-inner-image-zoom';
 
 const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedView, setExpandedView }) => {
 
@@ -45,12 +43,6 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
   const toggleZoomedView = () => {
     setZoomedMode(!zoomedMode);
   };
-
-  // Todo
-  //
-  // handleExpandedView click (sets expanded view to true)
-  // #image-gallery expands to fit parent element width
-  // thumbnails disappear and numbers take their place
 
   if (Array.isArray(photos) && photos.length) {
     if (expandedView === false) {
