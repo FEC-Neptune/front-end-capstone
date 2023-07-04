@@ -7,9 +7,7 @@ import Cookies from 'js-cookie';
 
 const Outfit = ( {outfitClick, outfitItems, handleLeftClick, handleRightClick, scrollPosition, currentProduct, setCurrentProduct} ) => {
   const [outfits, setOutfits] = useState([]);
-
-  const outfitIdArray = [];
-  const outfitArray = [];
+  const [outfitIDs, setOutfitIDs] = useState([]);
 
   useEffect(() => {
     if (Cookies.get('User_Outfit')) {
@@ -18,13 +16,13 @@ const Outfit = ( {outfitClick, outfitItems, handleLeftClick, handleRightClick, s
   }, []);
 
   const handleOutfitClick = () => {
-    if (outfitIdArray.indexOf(currentProduct === -1)) {
-      outfitIdArray.push(currentProduct);
+    if (outfitIDs.indexOf(currentProduct) === -1) {
+      console.log(outfitIDs);
+      setOutfitIDs(outfitIDs.concat(currentProduct));
       fetchProducts(currentProduct)
         .then(res => {
-          outfitArray.push(res);
-          setOutfits(outfitArray);
-          Cookies.set('User_Outfit', JSON.stringify(outfitArray));
+          setOutfits(outfits.concat(res));
+          Cookies.set('User_Outfit', JSON.stringify(outfits));
         })
         .catch(err => console.log(err));
     }
