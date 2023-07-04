@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown, faCircleChevronRight, faCircleChevronLeft, faExpand } from '@fortawesome/free-solid-svg-icons';
-import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
-import InnerImageZoom from 'react-inner-image-zoom';
+// import '../../assets/magnify.css';
+// import InnerImageZoom from 'react-inner-image-zoom';
 
 const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedView, setExpandedView }) => {
 
   const [photos, setPhotos] = useState([]);
   const [thumbnailRange, setThumbnailRange] = useState([0, 7]);
-  const [zoomedMode, setZoomedMode] = useState(true);
+  const [zoomedMode, setZoomedMode] = useState(false);
 
   useEffect(() => {
     if (!!style.photos) {
@@ -113,14 +113,15 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
     } else if (expandedView === true && zoomedMode === true) {
       return (
         <section className="image-gallery" id="image-gallery-zoomed">
-          <InnerImageZoom
+          {/* <InnerImageZoom
             className="zoom-mode-container"
             src={photos[activeImageIndex].url}
             zoomScale={2.5}
             zoomType="hover"
             hideCloseButton={true}
             hideHint={true}
-          />
+            zoomPreload={true}
+          /> */}
         </section>
       );
     }
