@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import Card from './Card.jsx';
 
-const Related = ( { products, handleLeftClick, handleRightClick, scrollPosition } ) => {
+const Related = ( { products, handleLeftClick, handleRightClick, scrollPosition, setCurrentProduct, currentProduct } ) => {
 
   return (
     <div>
@@ -12,7 +12,7 @@ const Related = ( { products, handleLeftClick, handleRightClick, scrollPosition 
           transition: 'transform 0.5s ease-in-out',
         }}>
           {products.map((product) =>
-            <div className='card-container related-card-container' key={product.id}>
+            <div onClick={ () => setCurrentProduct(product.id) } className='card-container related-card-container' key={product.id}>
               <Card product={product} key={product.id} />
               <button className='action-button related-action-button' >&#9733;</button>
             </div>
