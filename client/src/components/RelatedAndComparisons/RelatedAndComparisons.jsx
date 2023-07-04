@@ -15,21 +15,21 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
 
   useEffect(() => {
     let relArr = [];
-    if (prodArr.length === 0) {
-      fetchProducts(currentProduct, 'related')
-        .then(res => {
-          const promise = res.map(product => fetchProducts(product));
-          return Promise.all(promise);
-        })
-        .then(products => {
-          const relArr = [...new Set(products.map(JSON.stringify))].map(JSON.parse);
-          setProdArr(relArr);
-        })
-        .catch(err => {
-          throw err;
-        });
-    }
-  }, []);
+    setRelatedPosition(0);
+    setRelatedIndex(0);
+    fetchProducts(currentProduct, 'related')
+      .then(res => {
+        const promise = res.map(product => fetchProducts(product));
+        return Promise.all(promise);
+      })
+      .then(products => {
+        const relArr = [...new Set(products.map(JSON.stringify))].map(JSON.parse);
+        setProdArr(relArr);
+      })
+      .catch(err => {
+        throw err;
+      });
+  }, [currentProduct]);
 
   const scrollToCard = (cardIndex, buttonClass) => {
     const cardWidth = 239.9;
