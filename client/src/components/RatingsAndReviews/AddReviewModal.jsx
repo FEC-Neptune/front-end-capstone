@@ -29,9 +29,10 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
     return null;
   }
 
-  let array = [];
+  let characteristicsArray = [];
+
   for (let keys in metaData.characteristics) {
-    array.push(keys);
+    characteristicsArray.push(keys);
   }
 
   const validateAndSubmit = () => {
@@ -114,14 +115,26 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
         </div>
 
         <div id="reviewCharacteristics">
-          {array.map((char) => {
-            return <div>{char}</div>;
-          })}
+          <h2>Please describe your experience with the product</h2>
+          <div id="characteristics">
+            {characteristicsArray.map((char) => {
+              return (
+                <div>
+                  <div>{char}</div>
+                  <div id="options">
+                    {characteristicsKey[char].map((option) => {
+                      return <div>{option}</div>;
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         <div id="reviewSummary">
           <h2 className="reviewHeading">Please submit a summary of your review</h2>
-          <textarea onChange={(e) => setSummary(e.target.value)} maxlength="60" placeholder="Example: Best Purchase Ever!" className="reviewInput" rows="1" cols="60"></textarea>
+          <textarea onChange={(e) => setSummary(e.target.value)} maxlength="60" placeholder="Example: Best purchase ever!" className="reviewInput" rows="1" cols="60"></textarea>
         </div>
 
         <div id="reviewBody">
