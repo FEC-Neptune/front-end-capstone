@@ -38,8 +38,7 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
     }
   };
 
-  const toggleExpandedView = (e, element) => {
-    console.log(element);
+  const toggleExpandedView = (e) => {
     setExpandedView(!expandedView);
   };
 
@@ -60,7 +59,10 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
           <div id="thumbnail-container">
             <div className="thumbnail-chevron-container">
               { thumbnailRange[0] > 0 ? (
-                <FontAwesomeIcon icon={faChevronUp} className="ig-nav" size="lg" fixedWidth onClick={() => scrollThumbnails(-1)} />
+                <FontAwesomeIcon icon={faChevronUp} className="ig-nav" size="lg" fixedWidth onClick={(e) => {
+                  e.stopPropagation();
+                  scrollThumbnails(-1);
+                }} />
               ) : (
                 <></>
               )}
@@ -69,18 +71,18 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
               if (i >= thumbnailRange[0] && i < thumbnailRange[1]) {
                 if (i === activeImageIndex) {
                   return (
-                    <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`, filter: 'drop-shadow(0 0 1px rgba(255, 255, 255, 0.1)) brightness(1.1)'}} className="ig-thumbnail" onClick={() => selectThumbnail(i)}></div>
+                    <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`, filter: 'drop-shadow(0 0 1px rgba(255, 255, 255, 0.1)) brightness(1.1)'}} className="ig-thumbnail" onClick={(e) => { e.stopPropagation(); selectThumbnail(i); }}></div>
                   );
                 } else {
                   return (
-                    <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`}} className="ig-thumbnail" onClick={() => setActiveImageIndex(i)}></div>
+                    <div key={i} style={{backgroundImage: `url(${photo.thumbnail_url})`}} className="ig-thumbnail" onClick={(e) => { e.stopPropagation(); selectThumbnail(i); }}></div>
                   );
                 }
               }
             })}
             <div className="thumbnail-chevron-container">
               { photos.length > thumbnailRange[1] ? (
-                <FontAwesomeIcon icon={faChevronDown} className="ig-nav" size="lg" fixedWidth onClick={() => scrollThumbnails(1)} />
+                <FontAwesomeIcon icon={faChevronDown} className="ig-nav" size="lg" fixedWidth onClick={(e) => { e.stopPropagation(); scrollThumbnails(1); }} />
               ) : (
                 <></>
               )}
@@ -92,14 +94,14 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
             </div>
             <div id="image-nav-chevron-container">
               { activeImageIndex > 0 ? (
-                <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg" fixedWidth onClick={() => updateActivePhotoIndex(-1)}/>
+                <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg" fixedWidth onClick={(e) => { e.stopPropagation(); updateActivePhotoIndex(-1); }}/>
               ) : (
                 <span></span>
               )}
               { activeImageIndex === photos.length - 1 ? (
                 <></>
               ) : (
-                <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg" fixedWidth onClick={() => updateActivePhotoIndex(1)}/>
+                <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg" fixedWidth onClick={(e) => { e.stopPropagation(); updateActivePhotoIndex(1); }}/>
               )}
             </div>
             <div></div>
