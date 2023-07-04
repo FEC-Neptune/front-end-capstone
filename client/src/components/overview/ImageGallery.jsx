@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronUp, faChevronDown, faCircleChevronRight, faCircleChevronLeft, faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faChevronUp, faChevronDown, faCircleChevronRight, faCircleChevronLeft, faExpand, faCircle, faSquare } from '@fortawesome/free-solid-svg-icons';
 // import '../../assets/magnify.css';
 // import InnerImageZoom from 'react-inner-image-zoom';
 
@@ -108,30 +108,51 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
           </div>
         </section>
       );
-    } else if (expandedView === true && zoomedMode === false) {
+    } else if (expandedView === true) {
       return (
-        <section className="image-gallery" id="image-gallery-expanded" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleExpandedView}></section>
-      );
-    } else if (expandedView === true && zoomedMode === true) {
-      return (
-        <section className="image-gallery" id="image-gallery-zoomed">
-          {/* <InnerImageZoom
-            className="zoom-mode-container"
-            src={photos[activeImageIndex].url}
-            zoomScale={2.5}
-            zoomType="hover"
-            hideCloseButton={true}
-            hideHint={true}
-            zoomPreload={true}
-          /> */}
+        <section className="image-gallery" id="image-gallery-expanded" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleExpandedView}>
+          <div id="expanded-image-icon-container">
+            {photos.map((photo, i) => {
+              if (i === activeImageIndex) {
+                return (
+                  <FontAwesomeIcon icon={faSquare} className="ig-icons" size="xs" style={{color: 'rgba(255, 255, 255, 0.9)'}} fixedWidth onClick={(e) => {
+                    e.stopPropagation();
+                  }}/>
+                );
+              } else {
+                return (
+                  <FontAwesomeIcon icon={faSquare} className="ig-icons" size="xs" fixedWidth onClick={(e) => {
+                    e.stopPropagation();
+                    selectThumbnail(i);
+                  }}/>
+                );
+              }
+            })}
+          </div>
+          <div id="expanded-nav-container">
+            <div id="expanded-nav-minimize-container">
+              <FontAwesomeIcon icon={faExpand} className="ig-nav" size="lg" fixedWidth />
+            </div>
+            <div id="expanded-nav-chevron-container">
+              { activeImageIndex > 0 ? (
+                <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg" fixedWidth onClick={(e) => { e.stopPropagation(); updateActivePhotoIndex(-1); }}/>
+              ) : (
+                <span></span>
+              )}
+              { activeImageIndex === photos.length - 1 ? (
+                <></>
+              ) : (
+                <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg" fixedWidth onClick={(e) => { e.stopPropagation(); updateActivePhotoIndex(1); }}/>
+              )}
+            </div>
+            <div></div>
+          </div>
         </section>
       );
     }
   } else {
     return (
-      <section className="image-gallery">
-
-      </section>
+      <section className="image-gallery"></section>
     );
   }
 };

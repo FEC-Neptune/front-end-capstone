@@ -195,7 +195,6 @@
       display: flex
       flex-direction: row-reverse
     #image-nav-chevron-container
-      width: 100%
       display: flex
       justify-content: space-between
       align-items: center
@@ -203,7 +202,6 @@
 // Nav Icons
 .ig-nav
   color: rgba(255, 255, 255, 0.5)
-  filter: drop-shadow(0 0 1px #000)
   cursor: pointer
   &:hover
     color: rgba(255, 255, 255, 0.6)
@@ -214,6 +212,37 @@
 #image-gallery-expanded
   width: 100%
   cursor: url('crosshair.png') 10 10, crosshair
+  #expanded-image-icon-container
+    display: flex
+    flex-direction: column
+    align-content: center
+    justify-content: center
+    padding-left: 10px
+  .ig-icons
+    color: rgba(255, 255, 255, 0.5)
+    cursor: pointer
+    margin: 5px
+    &:hover
+      color: rgba(255, 255, 255, 0.7)
+    &:active
+      color: rgba(255, 255, 255, 0.6)
+  #expanded-nav-container
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
+    padding: 10px
+    div
+      display: flex
+      height: 33%
+      width: 100%
+    #expanded-nav-minimize-container
+      flex-direction: row-reverse
+    #expanded-nav-chevron-container
+      justify-content: space-between
+      align-items: center
+
+
 
 
 #image-gallery-zoomed
