@@ -16,7 +16,7 @@ const Overview = ({ productId }) => {
   const [productStyles, setProductStyles] = useState([]);
   const [reviewsData, setReviewsData] = useState({});
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [expandedView, setExpandedView] = useState(false);
+  const [expandedView, setExpandedView] = useState(true);
 
   useEffect(() => {
     fetchProducts(productId)

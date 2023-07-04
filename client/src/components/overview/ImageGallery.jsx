@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown, faCircleChevronRight, faCircleChevronLeft, faExpand } from '@fortawesome/free-solid-svg-icons';
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
+import InnerImageZoom from 'react-inner-image-zoom';
 
 const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedView, setExpandedView }) => {
 
   const [photos, setPhotos] = useState([]);
   const [thumbnailRange, setThumbnailRange] = useState([0, 7]);
-  const [zoomMode, setZoomMode] = useState(false);
+  const [zoomedMode, setZoomedMode] = useState(true);
 
   useEffect(() => {
     if (!!style.photos) {
@@ -36,8 +38,13 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
     }
   };
 
-  const toggleExpandedView = () => {
+  const toggleExpandedView = (e, element) => {
+    console.log(element);
     setExpandedView(!expandedView);
+  };
+
+  const toggleZoomedView = () => {
+    setZoomedMode(!zoomedMode);
   };
 
   // Todo
@@ -49,7 +56,7 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
   if (Array.isArray(photos) && photos.length) {
     if (expandedView === false) {
       return (
-        <section className="image-gallery" id="image-gallery-default" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleExpandedView}>
+        <section className="image-gallery" id="image-gallery-default" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={(e) => toggleExpandedView(e, this)}>
           <div id="thumbnail-container">
             <div className="thumbnail-chevron-container">
               { thumbnailRange[0] > 0 ? (
@@ -99,18 +106,29 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
           </div>
         </section>
       );
-    } else if (expandedView === true && zoomMode === false) {
+    } else if (expandedView === true && zoomedMode === false) {
       return (
         <section className="image-gallery" id="image-gallery-expanded" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleExpandedView}></section>
       );
-    } else if (expandedView === true && zoomMode === true) {
+    } else if (expandedView === true && zoomedMode === true) {
       return (
-        <section className="image-gallery" id="image-gallery-zoomed" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleExpandedView}></section>
+        <section className="image-gallery" id="image-gallery-zoomed">
+          <InnerImageZoom
+            className="zoom-mode-container"
+            src={photos[activeImageIndex].url}
+            zoomScale={2.5}
+            zoomType="hover"
+            hideCloseButton={true}
+            hideHint={true}
+          />
+        </section>
       );
     }
   } else {
     return (
-      <section className="image-gallery"></section>
+      <section className="image-gallery">
+
+      </section>
     );
   }
 };

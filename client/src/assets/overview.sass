@@ -150,10 +150,11 @@
   background-position: center
   background-repeat: no-repeat
   background-size: cover
+  overflow: hidden
 
 #image-gallery-default
   min-width: 780px
-  cursor: zoom-in
+  cursor: url('magnifying-glass.png') 10 10, zoom-in
   #thumbnail-container
     display: flex
     flex-direction: column
@@ -212,4 +213,9 @@
 // Expanded View
 #image-gallery-expanded
   width: 100%
-  cursor: crosshair
+  cursor: url('crosshair.png') 10 10, crosshair
+
+
+#image-gallery-zoomed
+  width: 100%
+  cursor: url('minimize.png') 10 10, zoom-out
