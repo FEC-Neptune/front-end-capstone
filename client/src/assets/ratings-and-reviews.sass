@@ -142,7 +142,7 @@
           #modalContainer
             display: flex
             flex-direction: column
-            position: fixed
+            position: absolute
             top: 50%
             left: 50%
             transform: translate(-50%, -50%)
@@ -212,13 +212,18 @@
                 font-weight: bold
 
                 #options
-                  margin-top: 10px
-                  margin-bottom: 10px
+                  margin-top: 12px
+                  margin-bottom: 12px
                   font-weight: normal
                   font-size: 16px
-                  display: flex
-                  flex-direction: row
-                  justify-content: space-around
+                  display: grid
+                  grid-template-columns: repeat(5, 20%)
+
+                  #option
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    text-align: center
 
 
             .reviewInput
