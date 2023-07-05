@@ -47,20 +47,24 @@ const RatingsAndReviews = ({ product }) => {
   const sortReviews = (newStar) => {
     let resultArray = [];
     let newStarIndex = activeStars.indexOf(newStar);
+
     if ((newStarIndex !== -1) && activeStars[0] === newStar) {
       setActiveStars([]);
       setVisibleReviews(reviews.slice(0, 2));
       return;
+
     } else if (newStarIndex !== -1) {
       let array = activeStars;
       array.splice(newStarIndex, 1);
       setActiveStars(array);
+
     } else {
       let array = activeStars;
       array.push(newStar);
       setActiveStars(array);
     }
-    reviews.forEach((review) => {
+
+    visibleReviews.forEach((review) => {
       if (activeStars.includes(review.rating)) {
         resultArray.push(review);
       }
