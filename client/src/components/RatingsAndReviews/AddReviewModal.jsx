@@ -25,7 +25,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
   let characteristicsArray = [];
 
   for (let key in metaData.characteristics) {
-    characteristics[key] = 0;
+    characteristics[characteristicsKey[key].id] = 0;
     characteristicsArray.push(key);
   }
 
@@ -51,8 +51,9 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
         array.push(`An entry for ${key}`);
       }
     }
+    console.log(array);
     setErrorList(array);
-    console.log('ERRORS', errorList)
+    console.log('ERRORS', errorList);
     if (errorList.length === 0) {
       const requestBody = {
         'product_id': product,
@@ -65,6 +66,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
         'photos': [],
         'characteristics': characteristics
       };
+      console.log('REQUEST BODY', requestBody);
       addReview(requestBody);
       setDefaultStates();
       onClose();
@@ -126,7 +128,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
                       return (
                         <div id="option" key={i}>
                           <input onClick={() => {
-                            characteristics[char] = index;
+                            characteristics[characteristicsKey[char].id] = index;
                             console.log(characteristics);
                           }}type="radio" name={char} id={index} value={option}/>
                           <label htmlFor={option} >{option}</label>
