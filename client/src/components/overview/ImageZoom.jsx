@@ -15,6 +15,8 @@ const ImageZoom = ({ photoURL, toggleZoomedView, bounds, setZoomedMode }) => {
   const zoomScale = 1.5;
 
   const handleLoad = (e) => {
+    console.log('loaded');
+
     const scaledDimensions = getScaledDimensions(e.target, zoomScale);
 
     zoomImg.current = e.target;
@@ -102,7 +104,6 @@ const ImageZoom = ({ photoURL, toggleZoomedView, bounds, setZoomedMode }) => {
         }}
         onLoad={(e) => handleLoad(e)}
         onMouseMove={(e) => handleMouseMove(e)}
-        onMouseLeave={() => setZoomedMode(false)}
       />
     </figure>
   );
