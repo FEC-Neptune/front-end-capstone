@@ -108,7 +108,7 @@
   display: flex
   flex-direction: column
   min-height: 100px
-  #cart-flash-container
+  #size-warning-container
     min-height: 10px
   #cart-form-container
     width: 100%
@@ -140,18 +140,21 @@
           background-color: #004c99
 
 // Image Gallery
-#image-gallery
+.image-gallery
   display: flex
   flex-direction: row
   justify-content: flex-start
-  min-width: 780px
   max-width: 100%
-  width: 100%
   height: 680px
   background-image: url(https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg)
   background-position: center
   background-repeat: no-repeat
   background-size: cover
+  overflow: hidden
+
+#image-gallery-default
+  min-width: 780px
+  cursor: url('magnifying-glass.png') 10 10, zoom-in
   #thumbnail-container
     display: flex
     flex-direction: column
@@ -172,7 +175,7 @@
       background-size: cover
       background-position: 50% 50%
       // border: 1px solid rgba(0,0,0,0)
-      filter: drop-shadow(0 0 3px rgba(1, 1, 1, 0.5)) brightness(0.7)
+      filter: drop-shadow(0 0 3px rgba(1, 1, 1, 0.5)) brightness(0.8)
       border-radius: 4px
       cursor: pointer
       &:hover
@@ -192,7 +195,6 @@
       display: flex
       flex-direction: row-reverse
     #image-nav-chevron-container
-      width: 100%
       display: flex
       justify-content: space-between
       align-items: center
@@ -200,11 +202,49 @@
 // Nav Icons
 .ig-nav
   color: rgba(255, 255, 255, 0.5)
-  transition: 0.2s
   cursor: pointer
   &:hover
     color: rgba(255, 255, 255, 0.6)
-    transition: 0.2s
   &:active
     color: rgba(255, 255, 255, 0.5)
-    transition: 0
+
+// Expanded View
+#image-gallery-expanded
+  width: 100%
+  cursor: url('crosshair.png') 10 10, crosshair
+  #expanded-image-icon-container
+    display: flex
+    flex-direction: column
+    align-content: center
+    justify-content: center
+    padding-left: 10px
+  .ig-icons
+    color: rgba(255, 255, 255, 0.5)
+    cursor: pointer
+    margin: 5px
+    &:hover
+      color: rgba(255, 255, 255, 0.7)
+    &:active
+      color: rgba(255, 255, 255, 0.6)
+  #expanded-nav-container
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
+    padding: 10px
+    div
+      display: flex
+      height: 33%
+      width: 100%
+    #expanded-nav-minimize-container
+      flex-direction: row-reverse
+    #expanded-nav-chevron-container
+      justify-content: space-between
+      align-items: center
+
+
+
+
+#image-gallery-zoomed
+  width: 100%
+  cursor: url('minimize.png') 10 10, zoom-out
