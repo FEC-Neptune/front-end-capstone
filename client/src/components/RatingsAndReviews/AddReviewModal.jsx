@@ -111,10 +111,14 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
           <div id="recommendQuestion">
             <h2 className="reviewHeading">Do you recommend this product?</h2>
             <div id="recommendation">
-              <input onClick={() => setRecommend(true)} type="radio" id="recommendYes" name="recommendQuestion" ></input>
-              <label htmlFor="recommendYes">Yes</label>
-              <input onClick={() => setRecommend(false)} type="radio" id="recommendNo" name="recommendQuestion" ></input>
-              <label htmlFor="recommendNo">No</label>
+              <div className="wrapper-recommend">
+                <input onClick={() => setRecommend(true)} type="radio" id="recommendYes" name="recommendQuestion" ></input>
+                <label className="recommend-label" htmlFor="recommendYes">Yes</label>
+              </div>
+              <div className="wrapper-recommend">
+                <input onClick={() => setRecommend(false)} type="radio" id="recommendNo" name="recommendQuestion" ></input>
+                <label className="recommend-label" htmlFor="recommendNo">No</label>
+              </div>
             </div>
           </div>
 
