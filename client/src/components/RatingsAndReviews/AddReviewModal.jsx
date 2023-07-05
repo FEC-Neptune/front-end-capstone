@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import StarRating from './StarRating.jsx';
 import PhotoForm from './PhotoForm.jsx';
 import { addReview } from '../../lib/requestHelpers.js';
-import { characteristicsKey } from '../../lib/ratingsAndReviewsHelpers.js';
+import { characteristicsKey, validateEmail } from '../../lib/ratingsAndReviewsHelpers.js';
 
 const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, productName }) => {
 
@@ -27,15 +27,29 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
     characteristicsArray.push(key);
   }
 
-  const validateAndSubmit = () => {
-    event.preventDefault();
+  const createErrorArray = () => {
     let array = [];
+
     if (!rating) {
       array.push('Overall Rating');
     }
     if (recommend === null) {
       array.push('Recommend Yes or No');
     }
+
+    var objArray = [];
+    for (let key in characteristics) {
+      objArray.push(key);
+    }
+    if (objArray.length !== characteristicsArray.length) {
+      characteristicsArray.forEach((charName) => {
+        let id = characteristicsKey[charName].id.toString();
+        if (objArray.indexOf(id) === -1) {
+          array.push(`An entry for ${charName}`);
+        }
+      });
+    }
+
     if (body.length < 50) {
       array.push('A review of at least 50 characters');
     }
@@ -46,32 +60,42 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
       array.push('A valid email');
     }
 
-    // characteristicsArray.forEach((char) => {
-    //   if (characteristics.keys().indexOf(char) === -1) {
-    //     array.push(`An entry for ${char}`);
-    //   }
-    // });
+    return array;
+  };
 
-    setErrorList(array);
-    console.log(array);
-    console.log('ERRORS', errorList);
-    // if (errorList.length === 0) {
-    //   const requestBody = {
-    //     'product_id': product,
-    //     'rating': rating,
-    //     'summary': summary,
-    //     'body': body,
-    //     'recommend': recommend,
-    //     'name': nickname,
-    //     'email': email,
-    //     'photos': [],
-    //     'characteristics': characteristics
-    //   };
-    //   console.log('REQUEST BODY', requestBody);
-    //   addReview(requestBody);
-    //   setDefaultStates();
-    //   onClose();
-    // }
+  const validateAndSubmit = () => {
+    event.preventDefault();
+    let array = createErrorArray();
+    setErrorListAsync(array)
+      .then((array) => {
+        checkSubmit(array);
+      });
+  };
+
+  const setErrorListAsync = (array) => {
+    return new Promise((resolve) => {
+      setErrorList(array);
+      resolve(array);
+    });
+  };
+
+  const checkSubmit = (array) => {
+    if (array.length === 0) {
+      const requestBody = {
+        'product_id': product,
+        'rating': rating,
+        'summary': summary,
+        'body': body,
+        'recommend': recommend,
+        'name': nickname,
+        'email': email,
+        'photos': [],
+        'characteristics': characteristics
+      };
+      addReview(requestBody);
+      setDefaultStates();
+      onClose();
+    }
   };
 
   const setDefaultStates = () => {
@@ -81,11 +105,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
     setBody('');
     setNickname('');
     setEmail('');
-  };
-
-  const validateEmail = (email) => {
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailPattern.test(email);
+    setCharacteristics({});
   };
 
   return (
@@ -138,7 +158,6 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
                               const obj = characteristics;
                               obj[characteristicsKey[char].id] = index;
                               setCharacteristics(obj);
-                              console.log(characteristics);
                             }} type="radio" name={char} id={index} value={option} />
                             <label htmlFor={option} >{option}</label>
                           </div>

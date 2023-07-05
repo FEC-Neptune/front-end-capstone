@@ -79,3 +79,8 @@ export const characteristicsKey = {
   Length: {id: 135220, options: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long']},
   Fit: {id: 135219, options: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']}
 };
+
+export const validateEmail = (email) => {
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailPattern.test(email);
+};
