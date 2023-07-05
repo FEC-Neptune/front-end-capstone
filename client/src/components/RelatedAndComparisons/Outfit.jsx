@@ -18,7 +18,6 @@ const Outfit = ( {outfitClick, outfitItems, handleLeftClick, handleRightClick, s
 
   const handleOutfitClick = () => {
     if (outfitIDs.indexOf(currentProduct) === -1) {
-      console.log(outfitIDs);
       setOutfitIDs(outfitIDs.concat(currentProduct));
       Cookies.set('Outfit_IDs', JSON.stringify(outfitIDs));
       fetchProducts(currentProduct)

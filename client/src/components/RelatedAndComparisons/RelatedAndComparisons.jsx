@@ -42,8 +42,6 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
 
     if (buttonClass.includes('related')) {
       if (relatedIndex >= -4 && -arrLength <= relatedIndex) {
-        console.log('arrLength', -arrLength);
-        console.log(relatedIndex);
         setRelatedIndex((prevIndex) => {
           const newIndex = prevIndex - 1;
           scrollToCard(newIndex, buttonClass);
