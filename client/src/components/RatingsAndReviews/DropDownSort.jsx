@@ -8,8 +8,8 @@ const DropDownSort = ({open}) => {
 
   return (
     <div className="drop-down">
-      <div className="drop-down-option">helpfulness</div>
-      <div className="drop-down-option">recent</div>
+      <div className="sort-word">helpfulness</div>
+      <div className="sort-word">recent</div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import Characteristics from './Characteristics.jsx';
 import AddReviewModal from './AddReviewModal.jsx';
 import { getReviews, getReviewsMeta, fetchProducts } from '../../lib/requestHelpers.js';
 import {FaChevronDown} from 'react-icons/fa';
+import DropDownSort from './DropDownSort.jsx';
 
 const RatingsAndReviews = ({ product }) => {
 
@@ -16,6 +17,7 @@ const RatingsAndReviews = ({ product }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeStars, setActiveStars] = useState([]);
   const [productName, setProductName] = useState('');
+  const [dropDownOpen, setDropDownOpen] = useState(false);
 
   useEffect(() => {
     getReviews(product)
@@ -93,7 +95,10 @@ const RatingsAndReviews = ({ product }) => {
             </div>}
 
           <div id="reviewsListAndButtons">
-            <div id="listSortHeading">{reviews.length} reviews, sorted by <span className="sort-word">relevance ∨</span></div>
+            <div id="listSortHeading">{reviews.length} reviews, sorted by <span className="sort-word" onClick={() => {
+              setDropDownOpen(true);
+            }}>relevance ∨</span></div>
+            <DropDownSort open={dropDownOpen} />
             {reviews.length > 0 && <ReviewsList visibleReviews={visibleReviews} setVisibleReviews={setVisibleReviews} reviews={reviews} />}
 
             <div id="bottomButtons">
