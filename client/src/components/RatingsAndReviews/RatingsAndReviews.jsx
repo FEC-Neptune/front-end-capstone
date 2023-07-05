@@ -6,6 +6,7 @@ import AddReview from './AddReview.jsx';
 import Characteristics from './Characteristics.jsx';
 import AddReviewModal from './AddReviewModal.jsx';
 import { getReviews, getReviewsMeta, fetchProducts } from '../../lib/requestHelpers.js';
+import {FaChevronDown} from 'react-icons/fa';
 
 const RatingsAndReviews = ({ product }) => {
 
@@ -46,20 +47,24 @@ const RatingsAndReviews = ({ product }) => {
   const sortReviews = (newStar) => {
     let resultArray = [];
     let newStarIndex = activeStars.indexOf(newStar);
+
     if ((newStarIndex !== -1) && activeStars[0] === newStar) {
       setActiveStars([]);
       setVisibleReviews(reviews.slice(0, 2));
       return;
+
     } else if (newStarIndex !== -1) {
       let array = activeStars;
       array.splice(newStarIndex, 1);
       setActiveStars(array);
+
     } else {
       let array = activeStars;
       array.push(newStar);
       setActiveStars(array);
     }
-    reviews.forEach((review) => {
+
+    visibleReviews.forEach((review) => {
       if (activeStars.includes(review.rating)) {
         resultArray.push(review);
       }
@@ -88,7 +93,7 @@ const RatingsAndReviews = ({ product }) => {
             </div>}
 
           <div id="reviewsListAndButtons">
-            <div id="listSortHeading">{reviews.length} reviews, sorted by relevance</div>
+            <div id="listSortHeading">{reviews.length} reviews, sorted by <span className="sort-word">relevance ∨</span></div>
             {reviews.length > 0 && <ReviewsList visibleReviews={visibleReviews} setVisibleReviews={setVisibleReviews} reviews={reviews} />}
 
             <div id="bottomButtons">

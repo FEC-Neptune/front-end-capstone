@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import StarRating from './StarRating.jsx';
 import PhotoForm from './PhotoForm.jsx';
 import { addReview } from '../../lib/requestHelpers.js';
+import { characteristicsKey, validateEmail } from '../../lib/ratingsAndReviewsHelpers.js';
 
 const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, productName }) => {
 
@@ -14,39 +15,41 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
-
-  const characteristicsKey = {
-    Size: {id: 135232, options: ['A size too small', '1/2 size too small', 'Perfect', '1/2 size too big', 'A size too wide']},
-    Width: {id: 135233, options: ['Too narrow', 'Slightly Narrow', 'Perfect', 'Slightly wide', 'Too wide']},
-    Comfort: {id: 135221, options: ['Uncomfortable', 'Slightly comfortable', 'Ok', 'Comfortable', 'Perfect']},
-    Quality: {id: 135222, options: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect']},
-    Length: {id: 135220, options: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long']},
-    Fit: {id: 135219, options:['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']}
-  };
-
+  const [characteristics, setCharacteristics] = useState({});
 
   if (!open) {
     return null;
   }
 
-  const characteristics = {};
-
   let characteristicsArray = [];
 
   for (let key in metaData.characteristics) {
-    characteristics[key] = 0;
     characteristicsArray.push(key);
   }
 
-  const validateAndSubmit = () => {
-    event.preventDefault();
+  const createErrorArray = () => {
     let array = [];
+
     if (!rating) {
       array.push('Overall Rating');
     }
     if (recommend === null) {
       array.push('Recommend Yes or No');
     }
+
+    var objArray = [];
+    for (let key in characteristics) {
+      objArray.push(key);
+    }
+    if (objArray.length !== characteristicsArray.length) {
+      characteristicsArray.forEach((charName) => {
+        let id = characteristicsKey[charName].id.toString();
+        if (objArray.indexOf(id) === -1) {
+          array.push(`An entry for ${charName}`);
+        }
+      });
+    }
+
     if (body.length < 50) {
       array.push('A review of at least 50 characters');
     }
@@ -56,13 +59,28 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
     if (!validateEmail(email)) {
       array.push('A valid email');
     }
-    for (let key in characteristics) {
-      if (!characteristics[key]) {
-        array.push(`An entry for ${key}`);
-      }
-    }
-    setErrorList(array);
-    if (errorList.length === 0) {
+
+    return array;
+  };
+
+  const validateAndSubmit = () => {
+    event.preventDefault();
+    let array = createErrorArray();
+    setErrorListAsync(array)
+      .then((array) => {
+        checkSubmit(array);
+      });
+  };
+
+  const setErrorListAsync = (array) => {
+    return new Promise((resolve) => {
+      setErrorList(array);
+      resolve(array);
+    });
+  };
+
+  const checkSubmit = (array) => {
+    if (array.length === 0) {
       const requestBody = {
         'product_id': product,
         'rating': rating,
@@ -87,11 +105,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
     setBody('');
     setNickname('');
     setEmail('');
-  };
-
-  const validateEmail = (email) => {
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailPattern.test(email);
+    setCharacteristics({});
   };
 
   return (
@@ -99,105 +113,113 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
       <div onClick={(e) => {
         e.stopPropagation();
       }} id="modalContainer">
-        <div id="modalHeading">
-          <div id="writeReview">
-            <h1>Write Your Review</h1>
-            <h2>About The {productName}</h2>
+        <form>
+
+          <div id="modalHeading">
+            <div id="writeReview">
+              <h1>Write Your Review</h1>
+              <h2>About The {productName}</h2>
+            </div>
+            <button id="closeModal" onClick={onClose}> X </button>
           </div>
-          <button id="closeModal" onClick={onClose}> X </button>
-        </div>
 
-        <div id="overallRating">
-          <h2 className="reviewHeading">Overall Rating</h2>
-          <StarRating rating={rating} setRating={setRating} />
-        </div>
-
-        <div id="recommendQuestion">
-          <h2 className="reviewHeading">Do you recommend this product?</h2>
-          <div id="recommendation">
-            <input onClick={() => setRecommend(true)} type="radio" id="recommendYes" name="recommendQuestion" ></input>
-            <label for="recommendYes">Yes</label>
-            <input onClick={() => setRecommend(false)} type="radio" id="recommendNo" name="recommendQuestion" ></input>
-            <label for="recommendNo">No</label>
+          <div id="overallRating">
+            <h2 className="reviewHeading">Overall Rating</h2>
+            <StarRating rating={rating} setRating={setRating} />
           </div>
-        </div>
 
-        <div id="reviewCharacteristics">
-          <h2>Please describe your experience with the product</h2>
-          <div id="characteristics">
-            {characteristicsArray.map((char) => {
-              return (
-                <div>
-                  <div>{char}</div>
-                  <div id="options">
-                    {characteristicsKey[char].options.map((option, i) => {
-                      let index = i + 1;
-                      return (
-                        <div id="option">
-                          <input onClick={() => {
-                            characteristics[char] = index;
-                            console.log(characteristics);
-                          }}type="radio" name={char} id={index} value={option}/>
-                          <label for={option} >{option}</label>
-                        </div>
-                      );
-
-
-                    })}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div id="reviewSummary">
-          <h2 className="reviewHeading">Please submit a summary of your review</h2>
-          <textarea onChange={(e) => setSummary(e.target.value)} maxlength="60" placeholder="Example: Best purchase ever!" className="reviewInput" rows="1" cols="60"></textarea>
-        </div>
-
-        <div id="reviewBody">
-          <h2 className="reviewHeading">Please submit a detailed review</h2>
-          <textarea onChange={(e) => setBody(e.target.value)} maxlength="1000" className="reviewInput" rows="4" cols="50"></textarea>
-          <div id="bodyCount" >Minimum {body.length < 50 ? 'required characters left: ' + (50 - body.length) : 'reached'} </div>
-        </div>
-
-        <div id="reviewPhotos">
-          <div id="photos">
-            {photos.map((photo) => {
-              return <img className="thumbnail" src={photo.url} width="50" height="50" key={photo.url}></img>;
-            })}
-          </div>
-          <button id="addPhoto" onClick={() => setPhotoFormOpen(true)} id="addPhoto">Add photo</button>
-          <PhotoForm open={photoFormOpen} />
-        </div>
-
-        <div id="nickname">
-          <h2 className="reviewHeading">Please submit a nickname</h2>
-          <input onChange={(e) => setNickname(e.target.value)} maxlength="60" className="reviewInput" placeholder="Example: jackson11!" ></input>
-          <h4>For privacy reasons, do not user your full name or email address</h4>
-        </div>
-
-        <div id="email">
-          <h2 className="reviewHeading">Please enter your email</h2>
-          <input onChange={(e) => setEmail(e.target.value)} placeholder="jackson11@gmail.com" maxlength="60" className="reviewInput"></input>
-          <h4>For authentication reasons, you will not be emailed</h4>
-        </div>
-
-        <div id="errors">
-          {errorList.length > 0 &&
-            <div>
-              <div id="errorMessage">You must enter the following:</div>
-              <div id="errorList">
-                {errorList.map((error) => {
-                  return <div>*{error}*</div>;
-                })}
+          <div id="recommendQuestion">
+            <h2 className="reviewHeading">Do you recommend this product?</h2>
+            <div id="recommendation">
+              <div className="wrapper-recommend">
+                <input onClick={() => setRecommend(true)} type="radio" id="recommendYes" name="recommendQuestion" ></input>
+                <label className="recommend-label" htmlFor="recommendYes">Yes</label>
+              </div>
+              <div className="wrapper-recommend">
+                <input onClick={() => setRecommend(false)} type="radio" id="recommendNo" name="recommendQuestion" ></input>
+                <label className="recommend-label" htmlFor="recommendNo">No</label>
               </div>
             </div>
-          }
-        </div>
+          </div>
 
-        <button onClick={validateAndSubmit} id="submitButton" type="submit" >Submit</button>
+          <div id="reviewCharacteristics">
+            <h2>Please describe your experience with the product</h2>
+            <div id="characteristics">
+              {characteristicsArray.map((char, i) => {
+                return (
+                  <div key={i}>
+                    <div>{char}</div>
+                    <div id="options">
+                      {characteristicsKey[char].options.map((option, i) => {
+                        let index = i + 1;
+                        return (
+                          <div id="option" key={i}>
+                            <input onClick={() => {
+                              const obj = characteristics;
+                              obj[characteristicsKey[char].id] = index;
+                              setCharacteristics(obj);
+                            }} type="radio" name={char} id={index} value={option} />
+                            <label htmlFor={option} >{option}</label>
+                          </div>
+                        );
+
+
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div id="reviewSummary">
+            <h2 className="reviewHeading">Please submit a summary of your review</h2>
+            <textarea onChange={(e) => setSummary(e.target.value)} maxLength="60" placeholder="Example: Best purchase ever!" className="reviewInput" rows="1" cols="60"></textarea>
+          </div>
+
+          <div id="reviewBody">
+            <h2 className="reviewHeading">Please submit a detailed review</h2>
+            <textarea onChange={(e) => setBody(e.target.value)} maxLength="1000" className="reviewInput" rows="4" cols="50"></textarea>
+            <div id="bodyCount" >Minimum {body.length < 50 ? 'required characters left: ' + (50 - body.length) : 'reached'} </div>
+          </div>
+
+          <div id="reviewPhotos">
+            <div id="photos">
+              {photos.map((photo) => {
+                return <img className="thumbnail" src={photo.url} width="50" height="50" key={photo.url}></img>;
+              })}
+            </div>
+            <button id="addPhoto" onClick={() => setPhotoFormOpen(true)} id="addPhoto">Add photo</button>
+            <PhotoForm open={photoFormOpen} />
+          </div>
+
+          <div id="nickname">
+            <h2 className="reviewHeading">Please submit a nickname</h2>
+            <input onChange={(e) => setNickname(e.target.value)} maxLength="60" className="reviewInput" placeholder="Example: jackson11!" ></input>
+            <h4>For privacy reasons, do not user your full name or email address</h4>
+          </div>
+
+          <div id="email">
+            <h2 className="reviewHeading">Please enter your email</h2>
+            <input onChange={(e) => setEmail(e.target.value)} placeholder="jackson11@gmail.com" maxLength="60" className="reviewInput"></input>
+            <h4>For authentication reasons, you will not be emailed</h4>
+          </div>
+
+          <div id="errors">
+            {errorList.length > 0 &&
+              <div>
+                <div id="errorMessage">You must enter the following:</div>
+                <div id="errorList">
+                  {errorList.map((error, i) => {
+                    return <div key={i}>*{error}*</div>;
+                  })}
+                </div>
+              </div>
+            }
+          </div>
+
+          <button onClick={validateAndSubmit} id="submitButton" type="submit">Submit</button>
+        </form>
       </div>
     </div>
   );

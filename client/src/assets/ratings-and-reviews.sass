@@ -62,7 +62,15 @@
         font-weight: bold
         margin-bottom: 24px
 
+        .sort-word
+          text-decoration: underline
+          cursor: pointer
+
       #reviewsList
+        min-width: 922px
+        max-width: 922px
+        max-height: 1236px
+        overflow: scroll
         display: flex
         flex-direction: column
         justify-content: center
@@ -140,9 +148,11 @@
           zIndex: 1000
 
           #modalContainer
+            max-height: 1000px
             display: flex
             flex-direction: column
-            position: absolute
+            position: fixed
+            overflow: auto
             top: 50%
             left: 50%
             transform: translate(-50%, -50%)
@@ -195,12 +205,26 @@
 
               .radio
                 height: 20px
-                width: 20px
+                width: 20p
 
-              #recommendation
+            #recommendation
+              display: flex
+              flex-direction: column
+              justify-content: flex-start
+
+              .wrapper-recommend
                 display: flex
-                flex-direction: column
-                justify-content: flex-start
+                flex-direction: row
+
+                #recommendYes
+                  max-width: 20px
+
+                #recommendNo
+                  max-width: 20px
+
+                .recommend-label
+                  margin-top: 1.5px
+
 
             #reviewCharacteristics
               display: flex
