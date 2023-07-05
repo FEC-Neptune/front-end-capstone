@@ -41,8 +41,8 @@ const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews, activeSta
       <div className="recommendPercentage">{recommendPercentage}% of reviews recommend this product</div>
 
       {activeStars.length ? <div id="filterDisplay">
-        {activeStars.map((star) => {
-          return <div>Showing {star} star reviews</div>;
+        {activeStars.map((star, i) => {
+          return <div key={i}>Showing {star} star reviews</div>;
         })}
         <button onClick={removeAllFilters}>Remove all filters</button>
       </div> : null}
