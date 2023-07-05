@@ -6,6 +6,7 @@ import AddReview from './AddReview.jsx';
 import Characteristics from './Characteristics.jsx';
 import AddReviewModal from './AddReviewModal.jsx';
 import { getReviews, getReviewsMeta, fetchProducts } from '../../lib/requestHelpers.js';
+import {FaChevronDown} from 'react-icons/fa';
 
 const RatingsAndReviews = ({ product }) => {
 
@@ -88,7 +89,7 @@ const RatingsAndReviews = ({ product }) => {
             </div>}
 
           <div id="reviewsListAndButtons">
-            <div id="listSortHeading">{reviews.length} reviews, sorted by relevance</div>
+            <div id="listSortHeading">{reviews.length} reviews, sorted by <span className="sort-word">relevance ∨</span></div>
             {reviews.length > 0 && <ReviewsList visibleReviews={visibleReviews} setVisibleReviews={setVisibleReviews} reviews={reviews} />}
 
             <div id="bottomButtons">

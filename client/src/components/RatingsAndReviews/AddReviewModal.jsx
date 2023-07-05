@@ -21,7 +21,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
     Comfort: {id: 135221, options: ['Uncomfortable', 'Slightly comfortable', 'Ok', 'Comfortable', 'Perfect']},
     Quality: {id: 135222, options: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect']},
     Length: {id: 135220, options: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long']},
-    Fit: {id: 135219, options:['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']}
+    Fit: {id: 135219, options: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']}
   };
 
 

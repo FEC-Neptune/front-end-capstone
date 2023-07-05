@@ -45,26 +45,28 @@ export const convertRatingToStars = (rating) => {
   let emptyStars = Math.floor(remainder);
   let partial = remainder - emptyStars;
 
-  const renderStar = (type) =>{
+  const renderStar = (type, index) =>{
     if (type === 'full') {
-      return <FaStar size={20}/>;
+      return <FaStar size={20} key={index}/>;
     } else if (type === 'half') {
-      return <FaStarHalfAlt size={20}/>;
+      return <FaStarHalfAlt size={20} key={index}/>;
     } else if (type === 'empty') {
-      return <FaRegStar size={20} />;
+      return <FaRegStar size={20} key={index}/>;
     }
   };
 
   let stars = [];
 
   for (let i = 0; i < fullStars; i ++) {
-    stars.push(renderStar('full'));
+    let index = i;
+    stars.push(renderStar('full', index));
   }
   if (partial) {
-    stars.push(renderStar('half'));
+    stars.push(renderStar('half', 10));
   }
   for (let j = 0; j < emptyStars; j ++) {
-    stars.push(renderStar('empty'));
+    let index = j + 5;
+    stars.push(renderStar('empty', index));
   }
   return stars;
 };

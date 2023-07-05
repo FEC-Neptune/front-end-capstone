@@ -22,8 +22,8 @@ export const fetchProducts = function (id, category) {
     }));
 };
 
-export const getReviews = (id) => {
-  var url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?page=1&count=100&sort=relevant&product_id=' + id;
+export const getReviews = (id, sortMethod = 'relevant') => {
+  var url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?page=1&count=100&sort=${sortMethod}&product_id=${id}`;
 
   return axios({
     method: 'get',
