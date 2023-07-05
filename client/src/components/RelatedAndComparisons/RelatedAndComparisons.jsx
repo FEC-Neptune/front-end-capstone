@@ -13,7 +13,25 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
   const [relatedPosition, setRelatedPosition] = useState();
   const [outfitPosition, setOutfitPosition] = useState();
 
+  const visArrows = (arrowClass) => {
+    arrowClass.forEach(arrow => {
+      arrow.style.visibility = 'visible';
+      arrow.style.transition = 'opacity 500ms ease-in, visibility 0ms ease-in 0ms';
+      arrow.style.opacity = 1;
+    });
+  };
+
+  const disArrows = (arrowClass) => {
+    arrowClass.forEach(arrow => {
+      arrow.style.visibility = 'hidden';
+      arrow.style.transition = 'opacity 500ms ease-in, visibility 0ms ease-in 250ms';
+      arrow.style.opacity = 0;
+    });
+  };
+
   useEffect(() => {
+    const rightArrows = document.querySelectorAll('.right-arrow-button');
+    disArrows(rightArrows);
     let relArr = [];
     setRelatedPosition(0);
     setRelatedIndex(0);
@@ -37,10 +55,13 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
   };
 
   const handleLeftClick = () => {
+    const rightArrowsRel = document.querySelectorAll('.right-arrow-related');
+    const rightArrowsOut = document.querySelectorAll('.right-arrow-outfit');
     const buttonClass = event.target.className;
     const arrLength = prodArr.length;
 
     if (buttonClass.includes('related')) {
+      visArrows(rightArrowsRel);
       if (relatedIndex >= -4 && -arrLength <= relatedIndex) {
         setRelatedIndex((prevIndex) => {
           const newIndex = prevIndex - 1;
@@ -49,6 +70,7 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
         });
       }
     } else {
+      visArrows(rightArrowsOut);
       if (-arrLength <= outfitIndex + 1) {
         setOutfitIndex((prevIndex) => {
           const newIndex = prevIndex - 1;
@@ -57,11 +79,20 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
         });
       }
     }
+    if ((-arrLength >= relatedIndex - 1) && (relatedIndex <= -4) || (-arrLength === outfitIndex - 1) && (outfitIndex <= -4)) {
+      event.target.style.visibility = 'hidden';
+      event.target.style.transition = 'opacity 500ms ease-in, visibility 0ms ease-in 500ms';
+      event.target.style.opacity = 0;
+    }
   };
 
   const handleRightClick = () => {
+    const leftArrowsRel = document.querySelectorAll('.left-arrow-related');
+    const leftArrowsOut = document.querySelectorAll('.left-arrow-outfit');
     const buttonClass = event.target.className;
+
     if (buttonClass.includes('related')) {
+      visArrows(leftArrowsRel);
       if (relatedIndex !== 0) {
         setRelatedIndex((prevIndex) => {
           const newIndex = prevIndex + 1;
@@ -71,12 +102,18 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
       }
     } else {
       if (outfitIndex !== 0) {
+        visArrows(leftArrowsOut);
         setOutfitIndex((prevIndex) => {
           const newIndex = prevIndex + 1;
           scrollToCard(newIndex, buttonClass);
           return newIndex;
         });
       }
+    }
+    if ((outfitIndex === -1 && buttonClass.includes('outfit')) || (relatedIndex === -1 && buttonClass.includes('related'))) {
+      event.target.style.visibility = 'hidden';
+      event.target.style.transition = 'opacity 500ms ease-in, visibility 0ms ease-in 500ms';
+      event.target.style.opacity = 0;
     }
   };
 
