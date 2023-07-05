@@ -41,7 +41,9 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
     const arrLength = prodArr.length;
 
     if (buttonClass.includes('related')) {
-      if (-arrLength !== relatedIndex) {
+      if (relatedIndex >= -4 && -arrLength <= relatedIndex) {
+        console.log('arrLength', -arrLength);
+        console.log(relatedIndex);
         setRelatedIndex((prevIndex) => {
           const newIndex = prevIndex - 1;
           scrollToCard(newIndex, buttonClass);
@@ -49,7 +51,7 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
         });
       }
     } else {
-      if (-arrLength !== outfitIndex + 1) {
+      if (-arrLength <= outfitIndex + 1) {
         setOutfitIndex((prevIndex) => {
           const newIndex = prevIndex - 1;
           scrollToCard(newIndex, buttonClass);

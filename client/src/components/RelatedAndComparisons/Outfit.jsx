@@ -12,6 +12,7 @@ const Outfit = ( {outfitClick, outfitItems, handleLeftClick, handleRightClick, s
   useEffect(() => {
     if (Cookies.get('User_Outfit')) {
       setOutfits(JSON.parse(Cookies.get('User_Outfit')));
+      setOutfitIDs(JSON.parse(Cookies.get('Outfit_IDs')));
     }
   }, []);
 
@@ -19,10 +20,11 @@ const Outfit = ( {outfitClick, outfitItems, handleLeftClick, handleRightClick, s
     if (outfitIDs.indexOf(currentProduct) === -1) {
       console.log(outfitIDs);
       setOutfitIDs(outfitIDs.concat(currentProduct));
+      Cookies.set('Outfit_IDs', JSON.stringify(outfitIDs));
       fetchProducts(currentProduct)
         .then(res => {
-          setOutfits(outfits.concat(res));
-          Cookies.set('User_Outfit', JSON.stringify(outfits));
+          setOutfits(prevOutfits => prevOutfits.concat(res));
+          Cookies.set('User_Outfit', JSON.stringify(outfits.concat(res)));
         })
         .catch(err => console.log(err));
     }
