@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ImageZoom from './ImageZoom.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown, faCircleChevronRight, faCircleChevronLeft, faExpand, faCircle, faSquare } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,12 +8,20 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
   const [photos, setPhotos] = useState([]);
   const [thumbnailRange, setThumbnailRange] = useState([0, 7]);
   const [zoomedMode, setZoomedMode] = useState(false);
+  const [currentPhotoURL, setCurrentPhotoURL] = useState('');
+  const [bounds, setBounds] = useState({});
 
   useEffect(() => {
     if (!!style.photos) {
       setPhotos(style.photos);
     }
   }, [style]);
+
+  useEffect(() => {
+    if (!!style.photos) {
+      setCurrentPhotoURL(style.photos[activeImageIndex].url);
+    }
+  }, [activeImageIndex]);
 
   const scrollThumbnails = (incrementValue) => {
     var newRange = [thumbnailRange[0] + incrementValue, thumbnailRange[1] + incrementValue];
@@ -43,6 +52,11 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
   const toggleZoomedView = () => {
     setZoomedMode(!zoomedMode);
   };
+
+  const getBounds = (e) => {
+    return e.currentTarget.getBoundingClientRect();
+  };
+
 
   if (Array.isArray(photos) && photos.length) {
     if (expandedView === false) {
@@ -102,43 +116,49 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
       );
     } else if (expandedView === true) {
       return (
-        <section className="image-gallery" id="image-gallery-expanded" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleExpandedView}>
-          <div id="expanded-image-icon-container">
-            {photos.map((photo, i) => {
-              if (i === activeImageIndex) {
-                return (
-                  <FontAwesomeIcon icon={faSquare} className="ig-icons" size="xs" style={{color: 'rgba(255, 255, 255, 0.9)'}} fixedWidth onClick={(e) => {
-                    e.stopPropagation();
-                  }}/>
-                );
-              } else {
-                return (
-                  <FontAwesomeIcon icon={faSquare} className="ig-icons" size="xs" fixedWidth onClick={(e) => {
-                    e.stopPropagation();
-                    selectThumbnail(i);
-                  }}/>
-                );
-              }
-            })}
-          </div>
-          <div id="expanded-nav-container">
-            <div id="expanded-nav-minimize-container">
-              <FontAwesomeIcon icon={faExpand} className="ig-nav" size="lg" fixedWidth />
-            </div>
-            <div id="expanded-nav-chevron-container">
-              { activeImageIndex > 0 ? (
-                <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg" fixedWidth onClick={(e) => { e.stopPropagation(); updateActivePhotoIndex(-1); }}/>
-              ) : (
-                <span></span>
-              )}
-              { activeImageIndex === photos.length - 1 ? (
-                <></>
-              ) : (
-                <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg" fixedWidth onClick={(e) => { e.stopPropagation(); updateActivePhotoIndex(1); }}/>
-              )}
-            </div>
-            <div></div>
-          </div>
+        <section className="image-gallery" id="image-gallery-expanded" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleZoomedView} onLoad={(e) => setBounds(getBounds(e))}>
+          { zoomedMode ? (
+            <ImageZoom photoURL={currentPhotoURL} toggleZoomedView={toggleZoomedView} bounds={bounds} />
+          ) : (
+            <>
+              <div id="expanded-image-icon-container">
+                {photos.map((photo, i) => {
+                  if (i === activeImageIndex) {
+                    return (
+                      <FontAwesomeIcon key={i} icon={faSquare} className="ig-icons" size="xs" style={{color: 'rgba(255, 255, 255, 0.9)'}} fixedWidth onClick={(e) => {
+                        e.stopPropagation();
+                      }}/>
+                    );
+                  } else {
+                    return (
+                      <FontAwesomeIcon key={i} icon={faSquare} className="ig-icons" size="xs" fixedWidth onClick={(e) => {
+                        e.stopPropagation();
+                        selectThumbnail(i);
+                      }}/>
+                    );
+                  }
+                })}
+              </div>
+              <div id="expanded-nav-container">
+                <div id="expanded-nav-minimize-container">
+                  <FontAwesomeIcon icon={faExpand} className="ig-nav" size="lg" fixedWidth />
+                </div>
+                <div id="expanded-nav-chevron-container">
+                  { activeImageIndex > 0 ? (
+                    <FontAwesomeIcon icon={faCircleChevronLeft} className="ig-nav" size="lg" fixedWidth onClick={(e) => { e.stopPropagation(); updateActivePhotoIndex(-1); }}/>
+                  ) : (
+                    <span></span>
+                  )}
+                  { activeImageIndex === photos.length - 1 ? (
+                    <></>
+                  ) : (
+                    <FontAwesomeIcon icon={faCircleChevronRight} className="ig-nav" size="lg" fixedWidth onClick={(e) => { e.stopPropagation(); updateActivePhotoIndex(1); }}/>
+                  )}
+                </div>
+                <div></div>
+              </div>
+            </>
+          )}
         </section>
       );
     }
