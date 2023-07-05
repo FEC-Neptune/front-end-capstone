@@ -70,3 +70,12 @@ export const convertRatingToStars = (rating) => {
   }
   return stars;
 };
+
+export const characteristicsKey = {
+  Size: {id: 135232, options: ['A size too small', '1/2 size too small', 'Perfect', '1/2 size too big', 'A size too wide']},
+  Width: {id: 135233, options: ['Too narrow', 'Slightly Narrow', 'Perfect', 'Slightly wide', 'Too wide']},
+  Comfort: {id: 135221, options: ['Uncomfortable', 'Slightly comfortable', 'Ok', 'Comfortable', 'Perfect']},
+  Quality: {id: 135222, options: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect']},
+  Length: {id: 135220, options: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long']},
+  Fit: {id: 135219, options: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']}
+};

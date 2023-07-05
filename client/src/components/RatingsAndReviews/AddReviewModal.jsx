@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import StarRating from './StarRating.jsx';
 import PhotoForm from './PhotoForm.jsx';
 import { addReview } from '../../lib/requestHelpers.js';
+import { characteristicsKey } from '../../lib/ratingsAndReviewsHelpers.js';
 
 const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, productName }) => {
 
@@ -14,16 +15,6 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
-
-  const characteristicsKey = {
-    Size: {id: 135232, options: ['A size too small', '1/2 size too small', 'Perfect', '1/2 size too big', 'A size too wide']},
-    Width: {id: 135233, options: ['Too narrow', 'Slightly Narrow', 'Perfect', 'Slightly wide', 'Too wide']},
-    Comfort: {id: 135221, options: ['Uncomfortable', 'Slightly comfortable', 'Ok', 'Comfortable', 'Perfect']},
-    Quality: {id: 135222, options: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect']},
-    Length: {id: 135220, options: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long']},
-    Fit: {id: 135219, options: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']}
-  };
-
 
   if (!open) {
     return null;
@@ -39,7 +30,6 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
   }
 
   const validateAndSubmit = () => {
-    event.preventDefault();
     let array = [];
     if (!rating) {
       array.push('Overall Rating');
@@ -62,6 +52,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
       }
     }
     setErrorList(array);
+    console.log('ERRORS', errorList)
     if (errorList.length === 0) {
       const requestBody = {
         'product_id': product,
@@ -116,29 +107,29 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
           <h2 className="reviewHeading">Do you recommend this product?</h2>
           <div id="recommendation">
             <input onClick={() => setRecommend(true)} type="radio" id="recommendYes" name="recommendQuestion" ></input>
-            <label for="recommendYes">Yes</label>
+            <label htmlFor="recommendYes">Yes</label>
             <input onClick={() => setRecommend(false)} type="radio" id="recommendNo" name="recommendQuestion" ></input>
-            <label for="recommendNo">No</label>
+            <label htmlFor="recommendNo">No</label>
           </div>
         </div>
 
         <div id="reviewCharacteristics">
           <h2>Please describe your experience with the product</h2>
           <div id="characteristics">
-            {characteristicsArray.map((char) => {
+            {characteristicsArray.map((char, i) => {
               return (
-                <div>
+                <div key={i}>
                   <div>{char}</div>
                   <div id="options">
                     {characteristicsKey[char].options.map((option, i) => {
                       let index = i + 1;
                       return (
-                        <div id="option">
+                        <div id="option" key={i}>
                           <input onClick={() => {
                             characteristics[char] = index;
                             console.log(characteristics);
                           }}type="radio" name={char} id={index} value={option}/>
-                          <label for={option} >{option}</label>
+                          <label htmlFor={option} >{option}</label>
                         </div>
                       );
 
@@ -153,12 +144,12 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
 
         <div id="reviewSummary">
           <h2 className="reviewHeading">Please submit a summary of your review</h2>
-          <textarea onChange={(e) => setSummary(e.target.value)} maxlength="60" placeholder="Example: Best purchase ever!" className="reviewInput" rows="1" cols="60"></textarea>
+          <textarea onChange={(e) => setSummary(e.target.value)} maxLength="60" placeholder="Example: Best purchase ever!" className="reviewInput" rows="1" cols="60"></textarea>
         </div>
 
         <div id="reviewBody">
           <h2 className="reviewHeading">Please submit a detailed review</h2>
-          <textarea onChange={(e) => setBody(e.target.value)} maxlength="1000" className="reviewInput" rows="4" cols="50"></textarea>
+          <textarea onChange={(e) => setBody(e.target.value)} maxLength="1000" className="reviewInput" rows="4" cols="50"></textarea>
           <div id="bodyCount" >Minimum {body.length < 50 ? 'required characters left: ' + (50 - body.length) : 'reached'} </div>
         </div>
 
@@ -174,13 +165,13 @@ const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, p
 
         <div id="nickname">
           <h2 className="reviewHeading">Please submit a nickname</h2>
-          <input onChange={(e) => setNickname(e.target.value)} maxlength="60" className="reviewInput" placeholder="Example: jackson11!" ></input>
+          <input onChange={(e) => setNickname(e.target.value)} maxLength="60" className="reviewInput" placeholder="Example: jackson11!" ></input>
           <h4>For privacy reasons, do not user your full name or email address</h4>
         </div>
 
         <div id="email">
           <h2 className="reviewHeading">Please enter your email</h2>
-          <input onChange={(e) => setEmail(e.target.value)} placeholder="jackson11@gmail.com" maxlength="60" className="reviewInput"></input>
+          <input onChange={(e) => setEmail(e.target.value)} placeholder="jackson11@gmail.com" maxLength="60" className="reviewInput"></input>
           <h4>For authentication reasons, you will not be emailed</h4>
         </div>
 

@@ -31,7 +31,7 @@ const StarRating = ({rating, setRating}) => {
             }}
             onMouseLeave={() => setHover(rating)}
           >
-            <span className="star">{<FaStar size={26} />}</span>
+            <span className="star">{<FaStar size={26} key={index}/>}</span>
           </button>
         );
       })}
