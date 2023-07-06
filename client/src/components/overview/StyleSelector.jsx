@@ -29,18 +29,35 @@ const StyleSelector = ({ productStyles, style, setStyle }) => {
               <div key={i} className="styles-row">
                 { array.map((productStyle, k) => {
                   if (style.style_id === productStyle.style_id) {
-                    return (
-                      <div key={k} style={{backgroundImage: `url(${productStyle.photos[0].thumbnail_url})`}}className="style-thumbnail">
-                        <span className="fa-layers fa-fw">
-                          <FontAwesomeIcon icon={faCircle} fixedWidth color="LightGray" />
-                          <FontAwesomeIcon icon={faCheck} fixedWidth color="#2b2d42" size="2xs" />
-                        </span>
-                      </div>
-                    );
+                    if (!!productStyle.photos[0].thumbnail_url) {
+                      return (
+                        <div key={k} style={{backgroundImage: `url(${productStyle.photos[0].thumbnail_url})`}} className="style-thumbnail">
+                          <span className="fa-layers fa-fw">
+                            <FontAwesomeIcon icon={faCircle} fixedWidth color="LightGray" />
+                            <FontAwesomeIcon icon={faCheck} fixedWidth color="#2b2d42" size="2xs" />
+                          </span>
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <div key={k} className="style-thumbnail">
+                          <span className="fa-layers fa-fw">
+                            <FontAwesomeIcon icon={faCircle} fixedWidth color="LightGray" />
+                            <FontAwesomeIcon icon={faCheck} fixedWidth color="#2b2d42" size="2xs" />
+                          </span>
+                        </div>
+                      );
+                    }
                   } else {
-                    return (
-                      <div key={k} style={{backgroundImage: `url(${productStyle.photos[0].thumbnail_url})`}}className="style-thumbnail" onClick={() => handleClick(productStyle)}/>
-                    );
+                    if (!!productStyle.photos[0].thumbnail_url) {
+                      return (
+                        <div key={k} style={{backgroundImage: `url(${productStyle.photos[0].thumbnail_url})`}} className="style-thumbnail" onClick={() => handleClick(productStyle)}/>
+                      );
+                    } else {
+                      return (
+                        <div key={k} className="style-thumbnail" onClick={() => handleClick(productStyle)}/>
+                      );
+                    }
                   }
                 })}
               </div>
