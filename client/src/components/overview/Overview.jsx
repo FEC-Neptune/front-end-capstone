@@ -43,7 +43,20 @@ const Overview = ({ productId }) => {
         setReviewsData(ratings);
       });
 
+    setActiveImageIndex(0);
+
   }, [productId]);
+
+  useEffect(() => {
+
+    if (activeImageIndex !== 0) {
+      if (style.photos.length >= activeImageIndex) {
+        setActiveImageIndex(0);
+      }
+
+    }
+
+  }, [style]);
 
   return (
     <section id="overview">

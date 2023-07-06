@@ -12,8 +12,6 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
   const [bounds, setBounds] = useState({});
 
   useEffect(() => {
-    setCurrentPhotoURL('https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg');
-
     if (!!style.photos) {
       setPhotos(style.photos);
     }
@@ -22,12 +20,22 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
   useEffect(() => {
     setZoomedMode(false);
     setExpandedView(false);
+    setThumbnailRange([0, 7]);
   }, [product]);
 
   useEffect(() => {
-    if (!!style.photos && style.photos[activeImageIndex].url !== undefined) {
-      setCurrentPhotoURL(style.photos[activeImageIndex].url);
+
+
+    if (!!style.photos) {
+      if (!!style.photos[activeImageIndex] && style.photos[activeImageIndex].url !== null) {
+        setCurrentPhotoURL(style.photos[activeImageIndex].url);
+      } else {
+        setCurrentPhotoURL('https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg');
+      }
+    } else {
+      setCurrentPhotoURL('https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg');
     }
+
   }, [style, product, activeImageIndex]);
 
   const scrollThumbnails = (incrementValue) => {
