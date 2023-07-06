@@ -47,7 +47,7 @@ const Overview = ({ productId }) => {
 
   return (
     <section id="overview">
-      <ImageGallery style={style} activeImageIndex={activeImageIndex} setActiveImageIndex={setActiveImageIndex} expandedView={expandedView} setExpandedView={setExpandedView} />
+      <ImageGallery product={productId} style={style} activeImageIndex={activeImageIndex} setActiveImageIndex={setActiveImageIndex} expandedView={expandedView} setExpandedView={setExpandedView} />
       { !expandedView ? (
         <aside>
           <div>
