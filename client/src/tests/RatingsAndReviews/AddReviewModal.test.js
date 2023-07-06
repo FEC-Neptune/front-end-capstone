@@ -16,5 +16,8 @@ describe('AddReviewModal', () => {
     };
     render(<Wrapper />);
   });
+  it('should create an array', () => {
+    // createErrorArray();
+  });
 });
 
