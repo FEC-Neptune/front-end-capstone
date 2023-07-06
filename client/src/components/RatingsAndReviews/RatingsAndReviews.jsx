@@ -18,6 +18,9 @@ const RatingsAndReviews = ({ product }) => {
   const [activeStars, setActiveStars] = useState([]);
   const [productName, setProductName] = useState('');
   const [dropDownOpen, setDropDownOpen] = useState(false);
+  const [currentSort, setCurrentSort] = useState('relevance');
+
+  const sortOptions = ['relevance', 'helpfulness', 'newest'];
 
   useEffect(() => {
     getReviews(product)
@@ -96,9 +99,9 @@ const RatingsAndReviews = ({ product }) => {
 
           <div id="reviewsListAndButtons">
             <div id="listSortHeading">{reviews.length} reviews, sorted by <span className="sort-word" onClick={() => {
-              setDropDownOpen(true);
-            }}>relevance ∨</span></div>
-            <DropDownSort open={dropDownOpen} />
+              setDropDownOpen(!dropDownOpen);
+            }}>{currentSort} ∨</span></div>
+            <DropDownSort setCurrentSort={setCurrentSort} onClose={setDropDownOpen} currentSort={currentSort} sortOptions={sortOptions} open={dropDownOpen} />
             {reviews.length > 0 && <ReviewsList visibleReviews={visibleReviews} setVisibleReviews={setVisibleReviews} reviews={reviews} />}
 
             <div id="bottomButtons">
