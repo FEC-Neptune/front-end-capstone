@@ -2,7 +2,7 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import ImageGallery from '../../components/overview/ImageGalery.jsx';
+import ImageGallery from '../../components/overview/ImageGallery.jsx';
 
 // Tests to Add
 // 1) Renders image
