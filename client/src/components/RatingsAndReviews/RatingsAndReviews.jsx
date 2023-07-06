@@ -4,43 +4,82 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import Characteristics from './Characteristics.jsx';
 import AddReviewModal from './AddReviewModal.jsx';
 import { getReviews, getReviewsMeta, fetchProducts } from '../../lib/requestHelpers.js';
-import {FaChevronDown} from 'react-icons/fa';
+import { FaChevronDown } from 'react-icons/fa';
 import DropDownSort from './DropDownSort.jsx';
+import star from '../../assets/stars/star.png';
 
 const RatingsAndReviews = ({ product }) => {
 
+  const [currentSort, setCurrentSort] = useState('relevance');
   const [reviews, setReviews] = useState([]);
-  const [reviewsMeta, setReviewsMeta] = useState('');
   const [visibleReviews, setVisibleReviews] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [metaData, setMetaData] = useState(null);
   const [activeStars, setActiveStars] = useState([]);
+
+  const [ratings, setRatings] = useState(null);
   const [productName, setProductName] = useState('');
   const [dropDownOpen, setDropDownOpen] = useState(false);
-  const [currentSort, setCurrentSort] = useState('relevance');
+  const [isOpen, setIsOpen] = useState(false);
 
   const sortOptions = ['relevance', 'helpfulness', 'newest'];
 
   useEffect(() => {
-    getReviews(product)
+    getReviews(product, currentSort)
       .then((reviews) => {
         setReviews(reviews);
+        return reviews;
+      })
+      .then((reviews) => {
+        let array = reviews.slice(0, 2);
+        setVisibleReviews(array);
       })
       .then(() => {
         return getReviewsMeta(product);
       })
       .then(({ data }) => {
-        setReviewsMeta(data);
+        setMetaData(data);
+        return data;
+      })
+      .then((data) => {
+        setRatings(data.ratings);
       })
       .then(() => {
-        return fetchProducts(product);
+        fetchProducts(product);
       })
-      .then(({name}) => {
+      .then((name) => {
         setProductName(name);
       })
       .catch((err) => {
-        throw (err);
+        console.log(err);
       });
   }, []);
+
+  // useEffect(() => {
+  //   return getReviews(product)
+  //     .then((reviews) => {
+  //       setReviews(reviews);
+  //     })
+  //     .then(() =>{
+  //       let array = reviews.slice(0, 2);
+  //       setVisibleReviews(array);
+  //     })
+  //     .then(() => {
+  //       console.log('VISIBLE', visibleReviews);
+  //       return getReviewsMeta(product);
+  //     })
+  //     .then(({ data }) => {
+  //       setReviewsMeta(data);
+  //     })
+  //     .then(() => {
+  //       return fetchProducts(product);
+  //     })
+  //     .then(({name}) => {
+  //       setProductName(name);
+  //     })
+  //     .catch((err) => {
+  //       throw (err);
+  //     });
+  // }, []);
 
   const addReviews = () => {
     var index = visibleReviews.length;
@@ -84,18 +123,17 @@ const RatingsAndReviews = ({ product }) => {
 
   return (
     <>
-      <div id="ratingsAndReviews">
+      <div id="ratings-and-reviews">
 
-        <div id="mainTitle">RATINGS AND REVIEWS </div>
+        <div id="main-title">RATINGS AND REVIEWS</div>
 
-        <section id="breakdownAndReviews">
-          {reviews.length > 0 &&
-            <div id="breakdownAndCharacteristics">
-              {reviewsMeta && <RatingBreakdown sortReviews={sortReviews} metaData={reviewsMeta} reviews={reviews} setReviews={setReviews} activeStars={activeStars} removeAllFilters={removeAllFilters}/>}
-              {reviewsMeta && <Characteristics metaData={reviewsMeta} />}
-            </div>}
+        <section className="breakdown-and-reviews">
+          <div className="breakdown-and-characteristics">
+            <RatingBreakdown ratings={ratings} sortReviews={sortReviews} metaData={metaData} setReviews={setReviews} activeStars={activeStars} removeAllFilters={removeAllFilters} />
+            <Characteristics metaData={metaData} />
+          </div>
 
-          <div id="reviewsListAndButtons">
+          {/* <div id="reviewsListAndButtons">
             <div id="listSortHeading">{reviews.length} reviews, sorted by <span className="sort-word" onClick={() => {
               setDropDownOpen(!dropDownOpen);
             }}>{currentSort} ∨</span></div>
@@ -112,7 +150,7 @@ const RatingsAndReviews = ({ product }) => {
               }} />
             </div>
 
-          </div>
+          </div> */}
         </section>
 
       </div>
