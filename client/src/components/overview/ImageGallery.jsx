@@ -12,6 +12,8 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
   const [bounds, setBounds] = useState({});
 
   useEffect(() => {
+    setCurrentPhotoURL('https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg');
+
     if (!!style.photos) {
       setPhotos(style.photos);
     }
@@ -23,7 +25,7 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
   }, [product]);
 
   useEffect(() => {
-    if (!!style.photos) {
+    if (!!style.photos && style.photos[activeImageIndex].url !== undefined) {
       setCurrentPhotoURL(style.photos[activeImageIndex].url);
     }
   }, [style, product, activeImageIndex]);
@@ -66,7 +68,7 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
   if (Array.isArray(photos) && photos.length) {
     if (expandedView === false) {
       return (
-        <section className="image-gallery" id="image-gallery-default" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={(e) => toggleExpandedView(e)}>
+        <section className="image-gallery" id="image-gallery-default" style={{backgroundImage: `url(${currentPhotoURL})`}} onClick={(e) => toggleExpandedView(e)}>
           <div id="thumbnail-container">
             <div className="thumbnail-chevron-container">
               { thumbnailRange[0] > 0 ? (
