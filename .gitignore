@@ -5,3 +5,4 @@ bundle.js
 bundle.js.map
 config.js
 coverage/
+jest.config.js
