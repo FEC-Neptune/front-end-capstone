@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import AddReview from './AddReview.jsx';
 import ReviewTile from './ReviewTile.jsx';
 
 const ReviewsList = ({reviews, visibleReviews, setVisibleReviews }) => {

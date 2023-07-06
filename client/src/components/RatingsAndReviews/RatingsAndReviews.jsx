@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReviewsList from './ReviewsList.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
-import AddReview from './AddReview.jsx';
 import Characteristics from './Characteristics.jsx';
 import AddReviewModal from './AddReviewModal.jsx';
 import { getReviews, getReviewsMeta, fetchProducts } from '../../lib/requestHelpers.js';
@@ -87,7 +86,7 @@ const RatingsAndReviews = ({ product }) => {
     <>
       <div id="ratingsAndReviews">
 
-        <div id="mainTitle">RATINGS AND REVIEWS</div>
+        <div id="mainTitle">RATINGS AND REVIEWS </div>
 
         <section id="breakdownAndReviews">
           {reviews.length > 0 &&
