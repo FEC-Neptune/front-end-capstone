@@ -4,7 +4,7 @@ import PhotoForm from './PhotoForm.jsx';
 import { addReview } from '../../lib/requestHelpers.js';
 import { characteristicsKey, validateEmail } from '../../lib/ratingsAndReviewsHelpers.js';
 
-const AddReviewModal = ({ open, onClose, metaData, product, returnReviewsMeta, productName }) => {
+const AddReviewModal = ({ open, onClose, metaData, product, productName }) => {
 
   const [photos, setPhotos] = useState([]);
   const [errorList, setErrorList] = useState([]);
