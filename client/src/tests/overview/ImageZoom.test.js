@@ -1,6 +1,7 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { productId, currentProduct, style, reviewsData, productStyles } from './overviewData.js';
 
 import ImageZoom from '../../components/overview/ImageZoom.jsx';
 
@@ -11,6 +12,6 @@ import ImageZoom from '../../components/overview/ImageZoom.jsx';
 describe('ImageZoom', function() {
 
   it('should render the ImageZoom component', function() {
-    render(<ImageZoom />);
+    render(<ImageZoom photoURL={'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'} />);
   });
 });
