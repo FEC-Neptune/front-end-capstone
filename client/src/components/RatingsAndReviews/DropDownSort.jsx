@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const DropDownSort = ({open}) => {
+const DropDownSort = ({ open, sortOptions, setCurrentSort, currentSort, onClose }) => {
 
   if (!open) {
     return null;
@@ -8,8 +8,16 @@ const DropDownSort = ({open}) => {
 
   return (
     <div className="drop-down">
-      <div className="drop-down-option">helpfulness</div>
-      <div className="drop-down-option">recent</div>
+      {sortOptions.map((word) => {
+        if (word === currentSort) {
+          return null;
+        }
+        return <div onClick={() => {
+          setCurrentSort(word);
+          onClose(false);
+        }} key={word} className="sort-word">{word}</div>;
+      })}
+
     </div>
   );
 };
