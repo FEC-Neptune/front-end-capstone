@@ -38,6 +38,13 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
 
   }, [style, product, activeImageIndex]);
 
+  useEffect(() => {
+    if (currentPhotoURL === 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg') {
+      setExpandedView(false);
+      setZoomedMode(false);
+    }
+  }, [currentPhotoURL]);
+
   const scrollThumbnails = (incrementValue) => {
     var newRange = [thumbnailRange[0] + incrementValue, thumbnailRange[1] + incrementValue];
     setThumbnailRange(newRange);
@@ -61,7 +68,11 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
   };
 
   const toggleExpandedView = (e) => {
-    setExpandedView(!expandedView);
+    if (currentPhotoURL === 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg') {
+      setExpandedView(false);
+    } else {
+      setExpandedView(!expandedView);
+    }
   };
 
   const toggleZoomedView = () => {
@@ -76,7 +87,7 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
   if (Array.isArray(photos) && photos.length) {
     if (expandedView === false) {
       return (
-        <section className="image-gallery" id="image-gallery-default" style={{backgroundImage: `url(${currentPhotoURL})`}} onClick={(e) => toggleExpandedView(e)}>
+        <section className="image-gallery" id="image-gallery-default" style={currentPhotoURL === 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg' ? {backgroundImage: `url(${currentPhotoURL})`, cursor: 'default'} : {backgroundImage: `url(${currentPhotoURL})`}} onClick={(e) => toggleExpandedView(e)}>
           <div id="thumbnail-container">
             <div className="thumbnail-chevron-container">
               { thumbnailRange[0] > 0 ? (
