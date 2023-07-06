@@ -3,7 +3,7 @@ import ImageZoom from './ImageZoom.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown, faCircleChevronRight, faCircleChevronLeft, faExpand, faCircle, faSquare } from '@fortawesome/free-solid-svg-icons';
 
-const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedView, setExpandedView }) => {
+const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, expandedView, setExpandedView }) => {
 
   const [photos, setPhotos] = useState([]);
   const [thumbnailRange, setThumbnailRange] = useState([0, 7]);
@@ -18,10 +18,15 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
   }, [style]);
 
   useEffect(() => {
+    setZoomedMode(false);
+    setExpandedView(false);
+  }, [product]);
+
+  useEffect(() => {
     if (!!style.photos) {
       setCurrentPhotoURL(style.photos[activeImageIndex].url);
     }
-  }, [activeImageIndex]);
+  }, [style, product, activeImageIndex]);
 
   const scrollThumbnails = (incrementValue) => {
     var newRange = [thumbnailRange[0] + incrementValue, thumbnailRange[1] + incrementValue];
@@ -61,7 +66,7 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
   if (Array.isArray(photos) && photos.length) {
     if (expandedView === false) {
       return (
-        <section className="image-gallery" id="image-gallery-default" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={(e) => toggleExpandedView(e, this)}>
+        <section className="image-gallery" id="image-gallery-default" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={(e) => toggleExpandedView(e)}>
           <div id="thumbnail-container">
             <div className="thumbnail-chevron-container">
               { thumbnailRange[0] > 0 ? (
@@ -118,7 +123,7 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
       return (
         <section className="image-gallery" id="image-gallery-expanded" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleZoomedView} onLoad={(e) => setBounds(getBounds(e))}>
           { zoomedMode ? (
-            <ImageZoom photoURL={currentPhotoURL} toggleZoomedView={toggleZoomedView} bounds={bounds} />
+            <ImageZoom photoURL={currentPhotoURL} setPhotoURL={setCurrentPhotoURL} toggleZoomedView={toggleZoomedView} bounds={bounds} />
           ) : (
             <>
               <div id="expanded-image-icon-container">
@@ -141,7 +146,10 @@ const ImageGallery = ({ style, activeImageIndex, setActiveImageIndex, expandedVi
               </div>
               <div id="expanded-nav-container">
                 <div id="expanded-nav-minimize-container">
-                  <FontAwesomeIcon icon={faExpand} className="ig-nav" size="lg" fixedWidth />
+                  <FontAwesomeIcon icon={faExpand} className="ig-nav" size="lg" fixedWidth onClick={(e) => {
+                    e.stopPropagation();
+                    toggleExpandedView();
+                  }} />
                 </div>
                 <div id="expanded-nav-chevron-container">
                   { activeImageIndex > 0 ? (

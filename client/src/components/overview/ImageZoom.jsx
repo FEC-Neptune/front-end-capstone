@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const ImageZoom = ({ photoURL, toggleZoomedView, bounds, setZoomedMode }) => {
+const ImageZoom = ({ photoURL, setPhotoURL, toggleZoomedView, bounds, setZoomedMode }) => {
 
   const zoomImg = useRef({});
   const imgProps = useRef({});
@@ -10,24 +10,22 @@ const ImageZoom = ({ photoURL, toggleZoomedView, bounds, setZoomedMode }) => {
   useEffect(() => {
     imgProps.current = getDefaults();
     imgProps.current.bounds = bounds;
+    setPhotoURL(photoURL);
   }, []);
 
-  const zoomScale = 1.5;
+  useEffect(() => {
 
-  const handleLoad = (e) => {
-    console.log('loaded');
+    const scaledDimensions = getScaledDimensions(zoomImg.current, zoomScale);
 
-    const scaledDimensions = getScaledDimensions(e.target, zoomScale);
-
-    zoomImg.current = e.target;
     zoomImg.current.setAttribute('width', scaledDimensions.width);
     zoomImg.current.setAttribute('height', scaledDimensions.height);
 
     imgProps.current.scaledDimensions = scaledDimensions;
     imgProps.current.ratios = getRatios(imgProps.current.bounds, scaledDimensions);
 
-    initialMove(e.pageX, e.pageY);
-  };
+  }, [zoomImg.current]);
+
+  const zoomScale = 2.5;
 
   const handleMouseMove = (e) => {
     let left = e.pageX - imgProps.current.offsets.x;
@@ -40,14 +38,14 @@ const ImageZoom = ({ photoURL, toggleZoomedView, bounds, setZoomedMode }) => {
       setLeft(0.5);
       setTop(0.5);
     } else {
-      console.log('left:', left * -imgProps.current.ratios.x, 'top:', top * -imgProps.current.ratios.y);
+      // console.log('left:', left * -imgProps.current.ratios.x, 'top:', top * -imgProps.current.ratios.y);
       setLeft(left * -imgProps.current.ratios.x);
       setTop(top * -imgProps.current.ratios.y);
     }
   };
 
   const initialMove = (pageX, pageY) => {
-    console.log('mouse entered!');
+    // console.log('mouse entered!');
     imgProps.current.offsets = getOffsets(
       window.pageXOffset,
       window.pageYOffset,
@@ -102,8 +100,10 @@ const ImageZoom = ({ photoURL, toggleZoomedView, bounds, setZoomedMode }) => {
           top: top,
           left: left
         }}
-        onLoad={(e) => handleLoad(e)}
+        ref={zoomImg}
+        onLoad={(e) => initialMove(e.pageX, e.pageY)}
         onMouseMove={(e) => handleMouseMove(e)}
+        onMouseEnter={(e) => initialMove(e.pageX, e.pageY)}
       />
     </figure>
   );
