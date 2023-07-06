@@ -36,10 +36,20 @@ describe('Add to Cart', function() {
     expect(document.getElementsByTagName('form')).toBeTruthy();
   });
 
-  it('should populat the form properly', function() {
+  it('should populate the form properly', function() {
     expect(screen.getByText('7.5')).toBeInTheDocument();
     expect(screen.getByText('Add To Cart')).toBeInTheDocument();
     expect(screen.getByText('Select a size')).toBeInTheDocument();
+  });
+
+  it('should submit successfully', function() {
+    const form = document.getElementsByTagName('form')[0];
+    const size = document.getElementById('size-select');
+    const qty = document.getElementById('qty-select');
+    size.value = '8';
+    qty.value = 1;
+    fireEvent.click(document.getElementById('add-to-cart-button'));
+    expect(document.getElementById('cart-flash-text')).toBeInTheDocument();
   });
 
 });
