@@ -33,6 +33,7 @@ const Outfit = ( {outfitClick, outfitItems, handleLeftClick, handleRightClick, s
     let shallowOutfits = outfits.filter(outfit => outfit.id !== productID);
     let shallowOutfitIDs = outfitIDs.filter(outfit => outfit !== productID);
     setOutfits(shallowOutfits);
+    setOutfitIDs(shallowOutfitIDs);
     shallowOutfits.length > 0 ? Cookies.set('User_Outfit', JSON.stringify(shallowOutfits)) : Cookies.set('User_Outfit', []);
     shallowOutfitIDs.length > 0 ? Cookies.set('Outfit_IDs', JSON.stringify(shallowOutfitIDs)) : Cookies.set('Outfit_IDs', []);
   };
