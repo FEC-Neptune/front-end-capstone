@@ -16,7 +16,7 @@ const Stars = ({ productID }) => {
       axios
         .get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta?product_id=${productID}`, options)
         .then(res => {
-          const rating = convertRatingToStars(getAverageRating(res.data.ratings, 1));
+          const rating = convertRatingToStars(getAverageRating(res.data.ratings, 2));
           setStars(rating);
         })
         .catch(err => console.log(err));
