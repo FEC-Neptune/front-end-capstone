@@ -66,7 +66,7 @@ const RatingsAndReviews = ({ product }) => {
 
     } else {
       let count = 0;
-      for (var i = searchIndex; count < 2; i++) {
+      for (var i = searchIndex; (count < 2 || i === reviews.length); i++) {
         if (activeStars.includes(reviews[i].rating)) {
           resultArray.push(reviews[i]);
           lastIndex = i;
@@ -154,7 +154,7 @@ const RatingsAndReviews = ({ product }) => {
           </div>
 
           <div className="reviews-list-and-buttons">
-            <div id="listSortHeading">{reviews.length} reviews, sorted by <span className="sort-word" onClick={(e) => {
+            <div className="list-sort-heading">{reviews.length} reviews, sorted by <span className="sort-word" onClick={(e) => {
               e.stopPropagation();
               setDropDownOpen(!dropDownOpen);
             }}> {currentSort} ∨</span></div>
@@ -162,7 +162,7 @@ const RatingsAndReviews = ({ product }) => {
             <ReviewsList visibleReviews={visibleReviews} />
 
             <div id="bottomButtons">
-              {reviews.length === 0 ? null : <button className="reviewButton" onClick={addReviews}>MORE REVIEWS</button>}
+              {((reviews.length === 0) || searchIndex === reviews.length - 1) ? null : <button className="reviewButton" onClick={addReviews}>MORE REVIEWS</button>}
 
               <button className="reviewButton" onClick={() => {
                 setModalOpen(true);

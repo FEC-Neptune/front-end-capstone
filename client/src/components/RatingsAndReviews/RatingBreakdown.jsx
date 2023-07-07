@@ -18,7 +18,7 @@ const RatingBreakdown = ({ ratings, metaData, setReviews, sortReviews, activeSta
 
 
   return (
-    <div className="breakdown">
+    <div className="rating-breakdown">
       <div className="average-rating-heading">
         <div className="average-rating-number">{averageRating}</div>
         <div className="average-rating-stars">
@@ -27,28 +27,62 @@ const RatingBreakdown = ({ ratings, metaData, setReviews, sortReviews, activeSta
       </div>
       <div onClick={() => {
         sortReviews(5);
-      }}><span className="starPercentage" >5 Stars: {percentage['5']}%</span></div>
+      }}>
+        <span className="starPercentage" >
+          5 stars
+          <div className="progress-bar">
+            <div className="filler" style={{ width: `${percentage['5']}%` }}></div>
+          </div>
+          {ratings['5']}
+        </span>
+      </div>
       <div onClick={() => {
         sortReviews(4);
-      }}><span className="starPercentage" >4 Stars: {percentage['4']}%</span></div>
+      }}><span className="starPercentage" >
+          4 stars
+          <div className="progress-bar">
+            <div className="filler" style={{ width: `${percentage['4']}%` }}></div>
+          </div>
+          {ratings['4']}
+        </span>
+      </div>
       <div onClick={() => {
         sortReviews(3);
-      }}><span className="starPercentage">3 Stars: {percentage['3']}%</span></div>
+      }}><span className="starPercentage" >
+          3 stars
+          <div className="progress-bar">
+            <div className="filler" style={{ width: `${percentage['3']}%` }}></div>
+          </div>
+          {ratings['3']}
+        </span>
+      </div>
       <div onClick={() => {
         sortReviews(2);
-      }}><span className="starPercentage">2 Stars: {percentage['2']}%</span></div>
+      }}><span className="starPercentage" >
+          2 stars
+          <div className="progress-bar">
+            <div className="filler" style={{ width: `${percentage['2']}%` }}></div>
+          </div>
+          {ratings['2']}
+        </span>
+      </div>
       <div onClick={() => {
         sortReviews(1);
-      }}><span className="starPercentage">1 Stars: {percentage['1']}%</span></div>
-      <div className="recommendPercentage">{recommendPercentage}% of reviews recommend this product</div>
-
-      {activeStars.length ? <div id="filterDisplay">
+      }}><span className="starPercentage" >
+          1 stars
+          <div className="progress-bar">
+            <div className="filler" style={{ width: `${percentage['1']}%` }}></div>
+          </div>
+          {ratings['1']}
+        </span>
+      </div>
+      <div className="recommend-percentage">{recommendPercentage}% of reviews recommend this product</div>
+      {activeStars.length > 0 && <div className="filter-display">
         {activeStars.map((star, i) => {
-          return <div key={i}>Showing {star} star reviews</div>;
+          return <div className="filter-message" key={i}>Showing {star} star reviews</div>;
         })}
-        <button onClick={removeAllFilters}>Remove all filters</button>
-      </div> : null}
-
+        <button className="remove-filter-button" onClick={removeAllFilters}>Remove all filters</button>
+      </div>}
     </div>
   );
 };
