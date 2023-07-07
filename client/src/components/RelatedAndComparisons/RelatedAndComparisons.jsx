@@ -38,10 +38,15 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
 
   useEffect(() => {
     const rightArrows = document.querySelectorAll('.right-arrow-button');
+    const leftArrows = document.querySelectorAll('.left-arrow-button');
     disArrows(rightArrows);
+    visArrows(leftArrows);
+
     let relArr = [];
     setRelatedPosition(0);
     setRelatedIndex(0);
+    setOutfitIndex(0);
+    setOutfitPosition(0);
     fetchProducts(currentProduct, 'related')
       .then(res => {
         const promise = res.map(product => fetchProducts(product));
