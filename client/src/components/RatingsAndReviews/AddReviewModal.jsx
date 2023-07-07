@@ -16,6 +16,7 @@ const AddReviewModal = ({ open, closeModal, metaData, product, productName }) =>
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [characteristics, setCharacteristics] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
 
   if (!open) {
     return null;
@@ -105,116 +106,135 @@ const AddReviewModal = ({ open, closeModal, metaData, product, productName }) =>
     setPhotos([]);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let photosArray = photos;
+    photosArray.push(selectedFile);
+    setPhotos(photosArray);
+    setPhotoFormOpen(false);
+  };
+
+  const handleFileChange = (event) => {
+    event.preventDefault();
+    let file = event.target.files[0];
+    let nextFile = URL.createObjectURL(file);
+    setSelectedFile(nextFile);
+  };
+
   return (
     <div onClick={closeModal} id="modalBackground">
       <div onClick={(e) => {
         e.stopPropagation();
       }} id="modalContainer">
-        <form>
 
-          <div id="modalHeading">
-            <div id="writeReview">
-              <h1>Write Your Review</h1>
-              <h2>About The {productName}</h2>
+
+        <div id="modalHeading">
+          <div id="writeReview">
+            <h1>Write Your Review</h1>
+            <h2>About The {productName}</h2>
+          </div>
+          <button id="closeModal" onClick={closeModal}> X </button>
+        </div>
+
+        <div id="overallRating">
+          <h2 className="reviewHeading">Overall Rating</h2>
+          <StarRating rating={rating} setRating={setRating} />
+        </div>
+
+        <div id="recommendQuestion">
+          <h2 className="reviewHeading">Do you recommend this product?</h2>
+          <div id="recommendation">
+            <div className="wrapper-recommend">
+              <input onClick={() => setRecommend(true)} type="radio" id="recommendYes" name="recommendQuestion" ></input>
+              <label className="recommend-label" htmlFor="recommendYes">Yes</label>
             </div>
-            <button id="closeModal" onClick={closeModal}> X </button>
-          </div>
-
-          <div id="overallRating">
-            <h2 className="reviewHeading">Overall Rating</h2>
-            <StarRating rating={rating} setRating={setRating} />
-          </div>
-
-          <div id="recommendQuestion">
-            <h2 className="reviewHeading">Do you recommend this product?</h2>
-            <div id="recommendation">
-              <div className="wrapper-recommend">
-                <input onClick={() => setRecommend(true)} type="radio" id="recommendYes" name="recommendQuestion" ></input>
-                <label className="recommend-label" htmlFor="recommendYes">Yes</label>
-              </div>
-              <div className="wrapper-recommend">
-                <input onClick={() => setRecommend(false)} type="radio" id="recommendNo" name="recommendQuestion" ></input>
-                <label className="recommend-label" htmlFor="recommendNo">No</label>
-              </div>
+            <div className="wrapper-recommend">
+              <input onClick={() => setRecommend(false)} type="radio" id="recommendNo" name="recommendQuestion" ></input>
+              <label className="recommend-label" htmlFor="recommendNo">No</label>
             </div>
           </div>
+        </div>
 
-          <div id="reviewCharacteristics">
-            <h2>Please describe your experience with the product</h2>
-            <div id="characteristics">
-              {characteristicsArray.map((char, i) => {
-                return (
-                  <div key={i}>
-                    <div>{char}</div>
-                    <div id="options">
-                      {characteristicsKey[char].options.map((option, i) => {
-                        let index = i + 1;
-                        return (
-                          <div id="option" key={i}>
-                            <input onClick={() => {
-                              const obj = characteristics;
-                              obj[characteristicsKey[char].id] = index;
-                              setCharacteristics(obj);
-                            }} type="radio" name={char} id={index} value={option} />
-                            <label htmlFor={option} >{option}</label>
-                          </div>
-                        );
-                      })}
-                    </div>
+        <div id="reviewCharacteristics">
+          <h2>Please describe your experience with the product</h2>
+          <div id="characteristics">
+            {characteristicsArray.map((char, i) => {
+              return (
+                <div key={i}>
+                  <div>{char}</div>
+                  <div id="options">
+                    {characteristicsKey[char].options.map((option, i) => {
+                      let index = i + 1;
+                      return (
+                        <div id="option" key={i}>
+                          <input onClick={() => {
+                            const obj = characteristics;
+                            obj[characteristicsKey[char].id] = index;
+                            setCharacteristics(obj);
+                          }} type="radio" name={char} id={index} value={option} />
+                          <label htmlFor={option} >{option}</label>
+                        </div>
+                      );
+                    })}
                   </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div id="reviewSummary">
-            <h2 className="reviewHeading">Please submit a summary of your review</h2>
-            <textarea onChange={(e) => setSummary(e.target.value)} maxLength="60" placeholder="Example: Best purchase ever!" className="reviewInput" rows="1" cols="60"></textarea>
-          </div>
-
-          <div id="reviewBody">
-            <h2 className="reviewHeading">Please submit a detailed review</h2>
-            <textarea onChange={(e) => setBody(e.target.value)} maxLength="1000" className="reviewInput" rows="4" cols="50"></textarea>
-            <div id="bodyCount" >Minimum {body.length < 50 ? 'required characters left: ' + (50 - body.length) : 'reached'} </div>
-          </div>
-
-          <div id="reviewPhotos">
-            <div id="photos">
-              {photos.map((photo) => {
-                return <img className="thumbnail" src={photo.url} width="50" height="50" key={photo.url}></img>;
-              })}
-            </div>
-            <button id="addPhoto" onClick={() => setPhotoFormOpen(true)} id="addPhoto">Add photo</button>
-            <PhotoForm open={photoFormOpen} />
-          </div>
-
-          <div id="nickname">
-            <h2 className="reviewHeading">Please submit a nickname</h2>
-            <input onChange={(e) => setNickname(e.target.value)} maxLength="60" className="reviewInput" placeholder="Example: jackson11!" ></input>
-            <h4>For privacy reasons, do not user your full name or email address</h4>
-          </div>
-
-          <div id="email">
-            <h2 className="reviewHeading">Please enter your email</h2>
-            <input onChange={(e) => setEmail(e.target.value)} placeholder="jackson11@gmail.com" maxLength="60" className="reviewInput"></input>
-            <h4>For authentication reasons, you will not be emailed</h4>
-          </div>
-
-          <div id="errors">
-            {errorList.length > 0 &&
-              <div>
-                <div id="errorMessage">You must enter the following:</div>
-                <div id="errorList">
-                  {errorList.map((error, i) => {
-                    return <div key={i}>*{error}*</div>;
-                  })}
                 </div>
-              </div>
-            }
+              );
+            })}
           </div>
+        </div>
 
-          <button onClick={validateAndSubmit} id="submitButton" type="submit">Submit</button>
-        </form>
+        <div id="reviewSummary">
+          <h2 className="reviewHeading">Please submit a summary of your review</h2>
+          <textarea onChange={(e) => setSummary(e.target.value)} maxLength="60" placeholder="Example: Best purchase ever!" className="reviewInput" rows="1" cols="60"></textarea>
+        </div>
+
+        <div id="reviewBody">
+          <h2 className="reviewHeading">Please submit a detailed review</h2>
+          <textarea onChange={(e) => setBody(e.target.value)} maxLength="1000" className="reviewInput" rows="4" cols="50"></textarea>
+          <div id="bodyCount" >Minimum {body.length < 50 ? 'required characters left: ' + (50 - body.length) : 'reached'} </div>
+        </div>
+
+        <div className="review-photos">
+          <div className="thumbnails">
+
+            {photos.map((photo) => {
+              return <img className="thumbnail" src={photo} width="50" height="50" key={photo}></img>;
+            })}
+          </div>
+          {photos.length < 5 && <button className="add-photo" onClick={() => {
+            event.preventDefault();
+            setPhotoFormOpen(true);
+          }}>Add photo</button>}
+          <PhotoForm handleFileChange={handleFileChange} handleSubmit={handleSubmit} open={photoFormOpen} />
+        </div>
+
+        <div id="nickname">
+          <h2 className="reviewHeading">Please submit a nickname</h2>
+          <input onChange={(e) => setNickname(e.target.value)} maxLength="60" className="reviewInput" placeholder="Example: jackson11!" ></input>
+          <h4>For privacy reasons, do not user your full name or email address</h4>
+        </div>
+
+        <div id="email">
+          <h2 className="reviewHeading">Please enter your email</h2>
+          <input onChange={(e) => setEmail(e.target.value)} placeholder="jackson11@gmail.com" maxLength="60" className="reviewInput"></input>
+          <h4>For authentication reasons, you will not be emailed</h4>
+        </div>
+
+        <div id="errors">
+          {errorList.length > 0 &&
+            <div>
+              <div id="errorMessage">You must enter the following:</div>
+              <div id="errorList">
+                {errorList.map((error, i) => {
+                  return <div key={i}>*{error}*</div>;
+                })}
+              </div>
+            </div>
+          }
+        </div>
+
+        <button onClick={validateAndSubmit} id="submitButton" type="submit">Submit</button>
+
       </div>
     </div>
   );

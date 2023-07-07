@@ -45,15 +45,15 @@ const RatingsAndReviews = ({ product }) => {
         setRatings(data.ratings);
       })
       .then(() => {
-        fetchProducts(product);
+        return fetchProducts(product);
       })
-      .then((name) => {
+      .then(({name}) => {
         setProductName(name);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [product]);
 
   const addReviews = () => {
     var index = visibleReviews.length;
