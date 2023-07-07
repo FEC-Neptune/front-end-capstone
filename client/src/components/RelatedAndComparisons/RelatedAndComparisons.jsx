@@ -74,22 +74,18 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
 
     if (buttonClass.includes('related')) {
       visArrows(rightArrowsRel);
-      if (relatedIndex >= -4 && -arrLength <= relatedIndex + 1) {
-        setRelatedIndex((prevIndex) => {
-          const newIndex = prevIndex - 1;
-          scrollToCard(newIndex, buttonClass);
-          return newIndex;
-        });
-      }
+      setRelatedIndex((prevIndex) => {
+        const newIndex = prevIndex - 1;
+        scrollToCard(newIndex, buttonClass);
+        return newIndex;
+      });
     } else {
       visArrows(rightArrowsOut);
-      if (-arrLength <= outfitIndex + 1) {
-        setOutfitIndex((prevIndex) => {
-          const newIndex = prevIndex - 1;
-          scrollToCard(newIndex, buttonClass);
-          return newIndex;
-        });
-      }
+      setOutfitIndex((prevIndex) => {
+        const newIndex = prevIndex - 1;
+        scrollToCard(newIndex, buttonClass);
+        return newIndex;
+      });
     }
     if (buttonClass.includes('related') && (-arrLength >= relatedIndex - 1) && (relatedIndex <= -4) || (-arrLength === outfitIndex - 1) && (outfitIndex <= -4)) {
       event.target.style.visibility = 'hidden';
@@ -105,13 +101,11 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
 
     if (buttonClass.includes('related')) {
       visArrows(leftArrowsRel);
-      if (relatedIndex !== 0) {
-        setRelatedIndex((prevIndex) => {
-          const newIndex = prevIndex + 1;
-          scrollToCard(newIndex, buttonClass);
-          return newIndex;
-        });
-      }
+      setRelatedIndex((prevIndex) => {
+        const newIndex = prevIndex + 1;
+        scrollToCard(newIndex, buttonClass);
+        return newIndex;
+      });
     } else {
       if (outfitIndex !== 0) {
         visArrows(leftArrowsOut);
