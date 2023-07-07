@@ -162,9 +162,9 @@ const RatingsAndReviews = ({ product }) => {
             <ReviewsList visibleReviews={visibleReviews} />
 
             <div id="bottomButtons">
-              {((reviews.length !== 0) && searchIndex !== reviews.length - 1) && <button className="reviewButton" onClick={addReviews}>MORE REVIEWS</button>}
+              {((reviews.length !== 0) && searchIndex !== reviews.length - 1) && <button className="review-button" onClick={addReviews}>MORE REVIEWS</button>}
 
-              <button className="reviewButton" onClick={() => {
+              <button className="review-button" onClick={() => {
                 setModalOpen(true);
               }}>ADD REVIEW +</button>
               <AddReviewModal product={product} productName={productName} metaData={metaData} open={modalOpen} closeModal={() => {
