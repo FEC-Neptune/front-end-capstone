@@ -154,7 +154,7 @@ const RatingsAndReviews = ({ product }) => {
           </div>
 
           <div className="reviews-list-and-buttons">
-            <div id="listSortHeading">{reviews.length} reviews, sorted by <span className="sort-word" onClick={(e) => {
+            <div className="list-sort-heading">{reviews.length} reviews, sorted by <span className="sort-word" onClick={(e) => {
               e.stopPropagation();
               setDropDownOpen(!dropDownOpen);
             }}> {currentSort} ∨</span></div>

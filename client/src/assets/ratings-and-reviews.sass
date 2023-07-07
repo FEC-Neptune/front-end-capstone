@@ -110,14 +110,13 @@
               z-index: 100
               transform: translate(-50%, -50%)
 
-
   .reviews-list-and-buttons
     max-width: 800px
     display: flex
     flex-direction: column
     position: relative
 
-    #listSortHeading
+    .list-sort-heading
       font-size: 20px
       font-weight: bold
       margin-bottom: 3px
@@ -127,23 +126,23 @@
         text-decoration: underline
         cursor: pointer
 
-      .drop-down
-        position: absolute
-        display: flex
-        flex-direction: column
-        justify-content: space-around
-        min-height: 50px
-        text-decoration: underline
-        cursor: pointer
-        font-size: 20px
-        font-weight: bold
-        top: 20px
-        left: 207px
-        z-index: 9999
-        border-bottom: 1px solid grey
-        border-left: 1px solid grey
-        border-right: 1px solid grey
-        max-width: 110px
+    .drop-down
+      position: absolute
+      display: flex
+      flex-direction: column
+      justify-content: space-around
+      min-height: 50px
+      text-decoration: underline
+      cursor: pointer
+      font-size: 20px
+      font-weight: bold
+      top: 20px
+      left: 207px
+      z-index: 9999
+      border-bottom: 1px solid grey
+      border-left: 1px solid grey
+      border-right: 1px solid grey
+      max-width: 110px
 
     #reviewsList
       min-width: 922px
