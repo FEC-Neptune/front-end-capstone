@@ -11,12 +11,16 @@ const App = () => {
   const [product, setProduct] = useState(40348);
 
   return (
-    <section id="container">
-      <p>Hello Neptune</p>
-      <Overview productId={product} />
-      <RelatedAndComparisons currentProduct={product} setCurrentProduct={setProduct}/>
-      <RatingsAndReviews product={product}/>
-    </section>
+    <div id="body-container">
+      <nav>
+        <h1><span>galax-e-</span>commerce</h1>
+      </nav>
+      <section id="container">
+        <Overview productId={product} />
+        <RelatedAndComparisons currentProduct={product} setCurrentProduct={setProduct}/>
+        <RatingsAndReviews product={product}/>
+      </section>
+    </div>
   );
 };
 
