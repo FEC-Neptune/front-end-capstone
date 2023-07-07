@@ -81,8 +81,6 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
         return newIndex;
       });
     } else {
-      console.log('OUTFIT LENGTH: ', -outfits.length);
-      console.log('OUTFIT INDEX: ', outfitIndex);
       visArrows(rightArrowsOut);
       setOutfitIndex((prevIndex) => {
         const newIndex = prevIndex - 1;
@@ -90,7 +88,7 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
         return newIndex;
       });
     }
-    if (buttonClass.includes('related') && (-arrLength >= relatedIndex - 1) && (relatedIndex <= -4) || (-outfits.length === outfitIndex) && (outfitIndex <= -4)) {
+    if (buttonClass.includes('related') && (-arrLength >= relatedIndex - 1) && (relatedIndex <= -4) || (buttonClass.includes('outfit')) && (-outfits.length >= outfitIndex) && (outfitIndex <= -4) || (buttonClass.includes('outfit')) && !outfits.length && (outfitIndex === -4)) {
       event.target.style.visibility = 'hidden';
       event.target.style.transition = 'opacity 500ms ease-in, visibility 0ms ease-in 500ms';
       event.target.style.opacity = 0;
