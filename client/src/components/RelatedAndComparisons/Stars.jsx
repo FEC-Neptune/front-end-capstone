@@ -25,7 +25,7 @@ const Stars = ({ productID }) => {
     fetchRating();
   }, [productID]);
 
-  return <div>{stars ? stars : 'Loading...'}</div>;
+  return <div className='star-rating'>{stars ? stars : 'Loading...'}</div>;
 };
 
 export default Stars;

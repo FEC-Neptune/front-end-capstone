@@ -12,7 +12,7 @@ const ProductInfo = ( { product, setCurrentProduct, hoverToggle} ) => {
       <div className='info-name-container'><div className='info info-name-text' style={ hoverToggle ? {color: '#809791'} : {color: '#2c474f'} } onClick={ () => setCurrentProduct(product.id)} >{product.name}</div></div>
       <div className='info-category-container'><div className='info info-category-text'>{product.category}</div></div>
       <div className='info info-price-text' >{product.default_price}</div>
-      <div className='info rating' ><Stars productID={product.id}/></div>
+      <div className='info-rating' ><Stars productID={product.id}/></div>
     </div>
   );
 };
