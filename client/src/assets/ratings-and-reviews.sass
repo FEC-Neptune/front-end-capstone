@@ -89,6 +89,7 @@
         .characteristic
           display: flex
           flex-direction: column
+          margin-bottom: 26px
 
           .characteristic-name
             left: 50%
@@ -109,6 +110,14 @@
               top: 44%
               z-index: 100
               transform: translate(-50%, -50%)
+
+          .characteristic-meanings
+            display: flex
+            justify-content: space-between
+            margin-top: 10px
+            margin-bottom: 4px
+            position: relative
+            font-size: 16px
 
   .reviews-list-and-buttons
     max-width: 800px
@@ -207,192 +216,165 @@
             cursor: pointer
             text-decoration: underline
 
-    #bottomButtons
-      display: flex
-      flex-direction: row
-      padding: 8px
+  #bottomButtons
+    display: flex
+    flex-direction: row
+    padding: 8px
 
-      .reviewButton
-        margin-top: 45px
-        margin-right: 22px
-        height: 80px
-        width: 200px
-        font-weight: bold
-        border: 1px solid black
-        border-radius: 1px
-        font-size: 18px
+    .review-button
+      margin-top: 45px
+      margin-right: 22px
+      height: 80px
+      width: 200px
+      font-weight: bold
+      border: 1px solid black
+      border-radius: 1px
+      font-size: 18px
+      background-color: white
+
+    #modalBackground
+      position: fixed
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      background-color: rgba(0, 0, 0, .7)
+      zIndex: 1000
+
+      #modalContainer
+        max-height: 1000px
+        display: flex
+        flex-direction: column
+        position: fixed
+        overflow: auto
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
         background-color: white
+        padding: 40px
+        zIndex: 1000
 
-        #modalBackground
-          position: fixed
-          top: 0
-          left: 0
-          right: 0
-          bottom: 0
-          background-color: rgba(0, 0, 0, .7)
-          zIndex: 1000
+        #modalHeading
+          display: flex
+          flex-direction: row
+          justify-content: space-between
 
-          #modalContainer
-            max-height: 1000px
+          #writeReview
             display: flex
             flex-direction: column
-            position: fixed
-            overflow: auto
-            top: 50%
-            left: 50%
-            transform: translate(-50%, -50%)
-            background-color: white
-            padding: 40px
-            zIndex: 1000
 
-            #modalHeading
-              display: flex
-              flex-direction: row
-              justify-content: space-between
+          #closeModal
+            position: sticky
+            font-size: 36px
+            height: 36px
+            color: grey
+            background-color: transparent
+            cursor: pointer
+            border: none
 
-              #writeReview
-                display: flex
-                flex-direction: column
+        #overallRating
+          display: flex
+          flex-direction: column
 
-              #closeModal
-                position: relative
-                font-size: 36px
-                height: 36px
-                color: grey
-                background-color: transparent
-                cursor: pointer
-                border: none
+          .star-rating
+            display: flex
+            flex-direction: row
 
-            #overallRating
-              display: flex
-              flex-direction: column
+            button
+              background-color: transparent
+              border: none
+              outline: none
+              cursor: pointer
 
-              .star-rating
-                display: flex
-                flex-direction: row
-
-              button
-                background-color: transparent
-                border: none
-                outline: none
-                cursor: pointer
-
-              .on
+            .on
                 color: #000
 
-              .off
-                color: #ccc
+            .off
+              color: #ccc
 
-              .ratingText
-                font-size: 20px
-                position: relative
-                top: 6px
+            .ratingText
+              font-size: 20px
+              position: relative
+              top: 6px
 
-              .radio
-                height: 20px
-                width: 20p
+            .radio
+              height: 20px
+              width: 20p
 
-            #recommendation
-              display: flex
-              flex-direction: column
-              justify-content: flex-start
+        #recommendation
+          display: flex
+          flex-direction: column
+          justify-content: flex-start
 
-              .wrapper-recommend
-                display: flex
-                flex-direction: row
+        .wrapper-recommend
+          display: flex
+          flex-direction: row
 
-                #recommendYes
-                  max-width: 20px
+          #recommendYes
+            max-width: 20px
 
-                #recommendNo
-                  max-width: 20px
+          #recommendNo
+            max-width: 20px
 
-                .recommend-label
-                  margin-top: 1.5px
+          .recommend-label
+            margin-top: 3px
 
+        #reviewCharacteristics
+          display: flex
+          flex-direction: column
+          justify-content: space-around
 
-            #reviewCharacteristics
-              display: flex
-              flex-direction: column
-              justify-content: space-around
+          #characteristics
+            font-size: 18px
+            font-weight: bold
 
-              #characteristics
-                font-size: 18px
-                font-weight: bold
-
-                #options
-                  margin-top: 12px
-                  margin-bottom: 12px
-                  font-weight: normal
-                  font-size: 16px
-                  display: grid
-                  grid-template-columns: repeat(5, 20%)
-
-                  #option
-                    display: flex
-                    flex-direction: column
-                    align-items: center
-                    text-align: center
-
-            .reviewInput
-              text-align: left
-
-            #reviewPhotos
-              margin-top: 15px
-              margin-bottom: 15px
-
-            .thumbnails
-              padding: 8px
-              display: flex
-              flex-direction: row
-
-              .thumbnail
-                margin-right: 10px
-
-            .add-photo
-              margin-top: 10px
-              margin-bottom: 10px
-
-            #email
-              margin-bottom: 15px
-
-            #errors
-              margin-bottom: 15px
-
-              #errorList
-                color: red
-
-              #errorMessage
-                font-weight: bold
-                margin-bottom: 10px
-
-            #submitButton
-              height: 36px
-              width: 68px
+            #options
+              margin-top: 12px
+              margin-bottom: 12px
+              font-weight: normal
               font-size: 16px
+              display: grid
+              grid-template-columns: repeat(5, 20%)
 
+              #option
+                display: flex
+                flex-direction: column
+                align-items: center
+                text-align: center
 
+          .reviewInput
+            text-align: left
 
+        .review-photos
+          margin-top: 15px
+          margin-bottom: 15px
 
+          .thumbnails
+            padding: 8px
+            display: flex
+            flex-direction: row
 
+            .thumbnail
+              margin-right: 10px
 
+          .add-photo
+            margin-top: 10px
+            margin-bottom: 10px
 
+        #email
+          margin-bottom: 15px
 
+        #errors
+          margin-bottom: 15px
 
+          #errorList
+            color: red
 
+          #errorMessage
+            font-weight: bold
+            margin-bottom: 10px
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        #submitButton
+          height: 36px
+          width: 68px
+          font-size: 16px

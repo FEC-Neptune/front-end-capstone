@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaCaretDown } from 'react-icons/fa';
+import { characteristicsKey } from '../../lib/ratingsAndReviewsHelpers.js';
 
 const Characteristics = ({ metaData }) => {
 
@@ -25,10 +26,18 @@ const Characteristics = ({ metaData }) => {
 
   return (
     <div className="characteristics">{charsArray.map((pair) => {
-      return <div key={pair[0]} className="characteristic">
-        <div className="characteristic-name">{pair[0]}{}</div>
-        <div className="characteristic-rating"><FaCaretDown size={28} style={{ left: `${ratingKey[pair[1]]}%` }} className="caret"/></div>
-      </div>;
+      return (
+        <div key={pair[0]} className="characteristic">
+          <div className="characteristic-name">{pair[0]}{ }</div>
+          <div className="characteristic-rating"><FaCaretDown size={28} style={{ left: `${ratingKey[pair[1]]}%` }} className="caret" />
+            <div className="characteristic-meanings">
+              {characteristicsKey[pair[0]].meanings.map((meaning, i) => {
+                return <div key={i} className="meaning">{meaning}</div>;
+              })}
+            </div>
+          </div>
+        </div>
+      );
     })}
     </div>
   );
