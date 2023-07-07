@@ -13,6 +13,16 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
   const boundsRef = useRef(null);
 
   useEffect(() => {
+    const handleEscPress = (e) => {
+      if (e.key === 'Escape' || e.keyCode === 27) {
+        setExpandedView(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscPress);
+  }, []);
+
+  useEffect(() => {
     if (!!style.photos) {
       setPhotos(style.photos);
     }
