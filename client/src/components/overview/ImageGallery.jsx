@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ImageZoom from './ImageZoom.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown, faCircleChevronRight, faCircleChevronLeft, faExpand, faCircle, faSquare } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +10,7 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
   const [zoomedMode, setZoomedMode] = useState(false);
   const [currentPhotoURL, setCurrentPhotoURL] = useState('');
   const [bounds, setBounds] = useState({});
+  const boundsRef = useRef(null);
 
   useEffect(() => {
     if (!!style.photos) {
@@ -24,8 +25,6 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
   }, [product]);
 
   useEffect(() => {
-
-
     if (!!style.photos) {
       if (!!style.photos[activeImageIndex] && style.photos[activeImageIndex].url !== null) {
         setCurrentPhotoURL(style.photos[activeImageIndex].url);
@@ -37,6 +36,25 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
     }
 
   }, [style, product, activeImageIndex]);
+
+  useEffect(() => {
+    const handleWindowEvent = () => {
+      if (!!boundsRef.current) {
+        setBounds(boundsRef.current.getBoundingClientRect());
+      }
+    };
+
+    window.addEventListener('resize', handleWindowEvent);
+    window.addEventListener('scroll', handleWindowEvent);
+  }, []);
+
+  useEffect(() => {
+
+    if (!!boundsRef.current) {
+      setBounds(boundsRef.current.getBoundingClientRect());
+    }
+
+  }, [expandedView, zoomedMode]);
 
   useEffect(() => {
     if (currentPhotoURL === 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg') {
@@ -142,7 +160,7 @@ const ImageGallery = ({ product, style, activeImageIndex, setActiveImageIndex, e
       );
     } else if (expandedView === true) {
       return (
-        <section className="image-gallery" id="image-gallery-expanded" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleZoomedView} onLoad={(e) => setBounds(getBounds(e))}>
+        <section className="image-gallery" id="image-gallery-expanded" style={{backgroundImage: `url(${photos[activeImageIndex].url})`}} onClick={toggleZoomedView} ref={boundsRef} onLoad={(e) => setBounds(getBounds(e))}>
           { zoomedMode ? (
             <ImageZoom photoURL={currentPhotoURL} setPhotoURL={setCurrentPhotoURL} toggleZoomedView={toggleZoomedView} bounds={bounds} />
           ) : (
