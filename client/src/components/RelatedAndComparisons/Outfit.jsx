@@ -5,8 +5,7 @@ import Card from './Card.jsx';
 import { fetchProducts } from '../../lib/requestHelpers.js';
 import Cookies from 'js-cookie';
 
-const Outfit = ( {outfitClick, outfitItems, handleLeftClick, handleRightClick, scrollPosition, currentProduct, setCurrentProduct} ) => {
-  const [outfits, setOutfits] = useState([]);
+const Outfit = ( {outfitClick, outfitItems, handleLeftClick, handleRightClick, scrollPosition, currentProduct, setCurrentProduct, outfits, setOutfits} ) => {
   const [outfitIDs, setOutfitIDs] = useState([]);
 
   useEffect(() => {

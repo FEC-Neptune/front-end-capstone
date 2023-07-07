@@ -16,6 +16,7 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
   const [compareProduct, setCompareProduct] = useState('');
   const [mainCompareProduct, setMainCompareProduct] = useState('');
   const [modalToggle, setModalToggle] = useState(false);
+  const [outfits, setOutfits] = useState([]);
 
   const openModal = () => setModalToggle(true);
   const closeModal = () => setModalToggle(false);
@@ -80,6 +81,8 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
         return newIndex;
       });
     } else {
+      console.log('OUTFIT LENGTH: ', -outfits.length);
+      console.log('OUTFIT INDEX: ', outfitIndex);
       visArrows(rightArrowsOut);
       setOutfitIndex((prevIndex) => {
         const newIndex = prevIndex - 1;
@@ -87,7 +90,7 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
         return newIndex;
       });
     }
-    if (buttonClass.includes('related') && (-arrLength >= relatedIndex - 1) && (relatedIndex <= -4) || (-arrLength === outfitIndex - 1) && (outfitIndex <= -4)) {
+    if (buttonClass.includes('related') && (-arrLength >= relatedIndex - 1) && (relatedIndex <= -4) || (-outfits.length === outfitIndex) && (outfitIndex <= -4)) {
       event.target.style.visibility = 'hidden';
       event.target.style.transition = 'opacity 500ms ease-in, visibility 0ms ease-in 500ms';
       event.target.style.opacity = 0;
@@ -134,7 +137,7 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
         transform: `translateX(${-outfitPosition}px)`,
         transition: 'transform .5s ease-in-out',
       }}><div className='carousel-title'>Your Outfit</div></div>
-      <Outfit setCurrentProduct={setCurrentProduct} currentProduct={currentProduct} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={outfitPosition}/>
+      <Outfit setOutfits={setOutfits} outfits={outfits} setCurrentProduct={setCurrentProduct} currentProduct={currentProduct} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={outfitPosition}/>
       <ComparisonsModal isOpen={modalToggle} closeModal={closeModal} currentProduct={currentProduct} compareProduct={compareProduct}/>
     </div>
   );
