@@ -4,7 +4,7 @@ import PhotoForm from './PhotoForm.jsx';
 import { addReview } from '../../lib/requestHelpers.js';
 import { characteristicsKey, validateEmail } from '../../lib/ratingsAndReviewsHelpers.js';
 
-const AddReviewModal = ({ open, onClose, metaData, product, productName }) => {
+const AddReviewModal = ({ open, closeModal, metaData, product, productName }) => {
 
   const [photos, setPhotos] = useState([]);
   const [errorList, setErrorList] = useState([]);
@@ -94,7 +94,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, productName }) => {
       };
       addReview(requestBody);
       setDefaultStates();
-      onClose();
+      closeModal();
     }
   };
 
@@ -109,7 +109,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, productName }) => {
   };
 
   return (
-    <div onClick={onClose} id="modalBackground">
+    <div onClick={closeModal} id="modalBackground">
       <div onClick={(e) => {
         e.stopPropagation();
       }} id="modalContainer">
@@ -120,7 +120,7 @@ const AddReviewModal = ({ open, onClose, metaData, product, productName }) => {
               <h1>Write Your Review</h1>
               <h2>About The {productName}</h2>
             </div>
-            <button id="closeModal" onClick={onClose}> X </button>
+            <button id="closeModal" onClick={closeModal}> X </button>
           </div>
 
           <div id="overallRating">

@@ -12,14 +12,14 @@ const RatingsAndReviews = ({ product }) => {
 
   const [currentSort, setCurrentSort] = useState('relevance');
   const [reviews, setReviews] = useState([]);
-  const [visibleReviews, setVisibleReviews] = useState([]);
+  const [visibleReviews, setVisibleReviews] = useState(null);
   const [metaData, setMetaData] = useState(null);
   const [activeStars, setActiveStars] = useState([]);
-
+  const [searchIndex, setSearchIndex] = useState(3);
   const [ratings, setRatings] = useState(null);
   const [productName, setProductName] = useState('');
   const [dropDownOpen, setDropDownOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const sortOptions = ['relevance', 'helpfulness', 'newest'];
 
@@ -31,6 +31,10 @@ const RatingsAndReviews = ({ product }) => {
       })
       .then((reviews) => {
         let array = reviews.slice(0, 2);
+        setVisibleReviews(array);
+        return array;
+      })
+      .then((array) => {
         setVisibleReviews(array);
       })
       .then(() => {
@@ -54,72 +58,70 @@ const RatingsAndReviews = ({ product }) => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   return getReviews(product)
-  //     .then((reviews) => {
-  //       setReviews(reviews);
-  //     })
-  //     .then(() =>{
-  //       let array = reviews.slice(0, 2);
-  //       setVisibleReviews(array);
-  //     })
-  //     .then(() => {
-  //       console.log('VISIBLE', visibleReviews);
-  //       return getReviewsMeta(product);
-  //     })
-  //     .then(({ data }) => {
-  //       setReviewsMeta(data);
-  //     })
-  //     .then(() => {
-  //       return fetchProducts(product);
-  //     })
-  //     .then(({name}) => {
-  //       setProductName(name);
-  //     })
-  //     .catch((err) => {
-  //       throw (err);
-  //     });
-  // }, []);
-
   const addReviews = () => {
     var index = visibleReviews.length;
-    setVisibleReviews(reviews.slice(0, index + 2));
+    let resultArray = [];
+    let lastIndex = 0;
+    if (activeStars.length === 0) {
+      let reviewsArray = reviews;
+      resultArray = reviewsArray.slice(0, index + 2);
+      setVisibleReviews(resultArray);
+
+    } else {
+      let count = 0;
+      for (var i = searchIndex; count < 2; i++) {
+        if (activeStars.includes(reviews[i].rating)) {
+          resultArray.push(reviews[i]);
+          lastIndex = i;
+          count ++;
+        }
+      }
+      setSearchIndex(lastIndex + 1);
+      let array = visibleReviews;
+      let newArray = array.concat(resultArray);
+      setVisibleReviews(newArray);
+    }
   };
 
   const sortReviews = (newStar) => {
     let resultArray = [];
     let newStarIndex = activeStars.indexOf(newStar);
+    let starArray = activeStars;
+    let lastIndex = 0;
 
     if ((newStarIndex !== -1) && activeStars[0] === newStar) {
       setActiveStars([]);
-      setVisibleReviews(reviews.slice(0, 2));
-      return;
-
+      let reviewsArray = reviews;
+      resultArray = reviewsArray.slice(0, 2);
+      lastIndex = 3;
     } else if (newStarIndex !== -1) {
-      let array = activeStars;
-      array.splice(newStarIndex, 1);
-      setActiveStars(array);
-
-    } else {
-      let array = activeStars;
-      array.push(newStar);
-      setActiveStars(array);
-    }
-
-    visibleReviews.forEach((review) => {
-      if (activeStars.includes(review.rating)) {
-        resultArray.push(review);
+      starArray.splice(newStarIndex, 1);
+      setActiveStars(starArray);
+      for (let i = 0; resultArray.length < 2; i++) {
+        if (activeStars.includes(reviews[i].rating)) {
+          resultArray.push(reviews[i]);
+          lastIndex = i;
+        }
       }
-    });
+    } else {
+      starArray.push(newStar);
+      setActiveStars(starArray);
+      for (let j = 0; resultArray.length < 2; j++) {
+        if (activeStars.includes(reviews[j].rating)) {
+          resultArray.push(reviews[j]);
+          lastIndex = j;
+        }
+      }
+    }
+    setSearchIndex(lastIndex + 1);
     setVisibleReviews(resultArray);
   };
 
   const removeAllFilters = () => {
     setActiveStars([]);
-    setVisibleReviews(reviews.slice(0, 2));
+    let array = reviews;
+    setVisibleReviews(array.slice(0, 2));
   };
-
-
 
   return (
     <>
@@ -133,24 +135,26 @@ const RatingsAndReviews = ({ product }) => {
             <Characteristics metaData={metaData} />
           </div>
 
-          {/* <div id="reviewsListAndButtons">
+          <div id="reviewsListAndButtons">
             <div id="listSortHeading">{reviews.length} reviews, sorted by <span className="sort-word" onClick={() => {
               setDropDownOpen(!dropDownOpen);
             }}>{currentSort} ∨</span></div>
             <DropDownSort setCurrentSort={setCurrentSort} onClose={setDropDownOpen} currentSort={currentSort} sortOptions={sortOptions} open={dropDownOpen} />
-            {reviews.length > 0 && <ReviewsList visibleReviews={visibleReviews} setVisibleReviews={setVisibleReviews} reviews={reviews} />}
+            <ReviewsList visibleReviews={visibleReviews} />
 
             <div id="bottomButtons">
-              {reviews.length !== visibleReviews.length && <button className="reviewButton" onClick={addReviews}>MORE REVIEWS</button>}
-              {reviewsMeta && !isOpen && <button className="reviewButton" onClick={() => {
-                setIsOpen(true);
-              }}>ADD REVIEW +</button>}
-              <AddReviewModal product={product} productName={productName} metaData={reviewsMeta} open={isOpen} onClose={() => {
-                setIsOpen(false);
+
+              {reviews.length === 0 ? null : <button className="reviewButton" onClick={addReviews}>MORE REVIEWS</button>}
+
+              <button className="reviewButton" onClick={() => {
+                setModalOpen(true);
+              }}>ADD REVIEW +</button>
+              <AddReviewModal product={product} productName={productName} metaData={metaData} open={modalOpen} closeModal={() => {
+                setModalOpen(false);
               }} />
             </div>
 
-          </div> */}
+          </div>
         </section>
 
       </div>
