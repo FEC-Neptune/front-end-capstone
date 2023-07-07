@@ -89,6 +89,7 @@
         .characteristic
           display: flex
           flex-direction: column
+          margin-bottom: 26px
 
           .characteristic-name
             left: 50%
@@ -109,6 +110,14 @@
               top: 44%
               z-index: 100
               transform: translate(-50%, -50%)
+
+          .characteristic-meanings
+            display: flex
+            justify-content: space-between
+            margin-top: 10px
+            margin-bottom: 4px
+            position: relative
+            font-size: 16px
 
   .reviews-list-and-buttons
     max-width: 800px
@@ -255,7 +264,7 @@
                 flex-direction: column
 
               #closeModal
-                position: relative
+                position: sticky
                 font-size: 36px
                 height: 36px
                 color: grey

@@ -3,8 +3,6 @@ import StarRating from './StarRating.jsx';
 import { getAverageRating, calculateTotalReviews, calculateRatingsPercentage, getRecommendPercentage, convertRatingToStars } from '../../lib/ratingsAndReviewsHelpers.js';
 import { getReviewsMeta } from '../../lib/requestHelpers.js';
 
-
-
 const RatingBreakdown = ({ ratings, metaData, setReviews, sortReviews, activeStars, removeAllFilters }) => {
 
   if (metaData === null) {
@@ -12,17 +10,17 @@ const RatingBreakdown = ({ ratings, metaData, setReviews, sortReviews, activeSta
   }
 
   let totalReviews = calculateTotalReviews(ratings);
-  let averageRating = getAverageRating(ratings, 1);
+  let averageRatingNumber = getAverageRating(ratings, 1);
+  let averageRatingStar = getAverageRating(ratings, 2);
   let percentage = calculateRatingsPercentage(ratings, totalReviews);
   let recommendPercentage = getRecommendPercentage(metaData.recommended);
-
 
   return (
     <div className="rating-breakdown">
       <div className="average-rating-heading">
-        <div className="average-rating-number">{averageRating}</div>
+        <div className="average-rating-number">{averageRatingNumber}</div>
         <div className="average-rating-stars">
-          {convertRatingToStars(averageRating)}
+          {convertRatingToStars(averageRatingStar)}
         </div>
       </div>
       <div onClick={() => {
