@@ -3,6 +3,7 @@
   flex-direction: column
   margin-bottom: 30px
   padding: 7px
+  min-height: 600px
 
   #main-title
     font-weight: thick
@@ -47,27 +48,46 @@
             transition: color 200ms
 
         .starPercentage
+          margin-top: 10px
+          margin-bottom: 10px
           text-decoration: underline
           cursor: pointer
+          display: flex
+          flex-direction: row
 
-        #recommendPercentage
+        .progress-bar
+          width: 65%
+          background-color: #e0e0e0
+          height: 7.5px
+          margin-top: 7px
+          margin-left: 6px
+          margin-right: 6px
+
+          .filler
+            height: 100%
+            background-color: #007bff
+            transition: width 0.2s ease-in
+
+        .recommend-percentage
+          margin-top: 14px
+          margin-bottom: 16px
           font-size: 14px
 
-    .reviews-list-and-buttons
-      min-width: 800px
-      display: flex
-      flex-direction: column
+  .reviews-list-and-buttons
+    max-width: 800px
+    display: flex
+    flex-direction: column
+    position: relative
+
+    #listSortHeading
+      font-size: 20px
+      font-weight: bold
+      margin-bottom: 3px
       position: relative
 
-      #listSortHeading
-        font-size: 20px
-        font-weight: bold
-        margin-bottom: 3px
-        position: relative
-
-        .sort-word
-          text-decoration: underline
-          cursor: pointer
+      .sort-word
+        text-decoration: underline
+        cursor: pointer
 
       .drop-down
         position: absolute
@@ -87,80 +107,83 @@
         border-right: 1px solid grey
         max-width: 110px
 
-      #reviewsList
-        min-width: 922px
-        max-width: 922px
-        max-height: 1236px
-        overflow: scroll
+    #reviewsList
+      min-width: 922px
+      max-width: 922px
+      max-height: 1236px
+      overflow: scroll
+      display: flex
+      flex-direction: column
+      justify-content: center
+      z-index: 0
+
+      .reviewTile
+        margin-bottom: 10px
+        position: relative
+        z-index: 0
+        border-bottom: 1px solid grey
         display: flex
         flex-direction: column
-        justify-content: center
-        z-index: 0
-
-        .reviewTile
-          position: relative
-          z-index: 0
-          border-bottom: 1px solid grey
-          display: flex
-          flex-direction: column
-          padding: 8px
-
-          .reviewHeading
-            display: flex
-            flex-direction: row
-            justify-content: space-between
-            margin-top: 5px
-            margin-bottom: 5px
-
-            .reviewRating
-              font-weight: bold
-              font-size: 14px
-              margin-bottom: 5px
-
-            .reviewName
-              font-size: 14px
-              margin-bottom: 5px
-
-          .reviewSummary
-            font-weight: bold
-            margin-bottom: 5px
-
-          .thumbnail
-            cursor: pointer
-            margin-bottom: 5px
-
-          .recommend
-            display: flex
-            flex-direction: row
-            margin-bottom: 5px
-
-            .check
-              margin-right: 8px
-
-          .helpful
-            display: flex
-            flex-direction: row
-
-            .helpfulButton
-              margin-right: 2px
-              cursor: pointer
-              text-decoration: underline
-
-      #bottomButtons
-        display: flex
-        flex-direction: row
         padding: 8px
 
-        .reviewButton
-          margin-top: 45px
-          margin-right: 22px
-          height: 80px
-          width: 200px
+        .reviewHeading
+          display: flex
+          flex-direction: row
+          justify-content: space-between
+          margin-top: 5px
+          margin-bottom: 12px
+
+          .reviewRating
+            font-weight: bold
+            font-size: 14px
+
+          .reviewName
+            font-size: 14px
+
+        .reviewSummary
           font-weight: bold
-          border: 1px solid black
-          border-radius: 1px
-          font-size: 18px
-          background-color: white
+          margin-bottom: 12px
+
+        .reviewBody
+          margin-bottom: 12px
+
+        .thumbnail
+          cursor: pointer
+          margin-bottom: 12px
+
+        .recommend
+          display: flex
+          flex-direction: row
+          margin-bottom: 12px
+
+          .check
+            margin-right: 8px
+
+        .helpful
+          display: flex
+          flex-direction: row
+          .helpfulButton
+            margin-right: 6px
+            margin-left: 6px
+            margin-bottom: 12px
+            cursor: pointer
+            text-decoration: underline
+
+    #bottomButtons
+      display: flex
+      flex-direction: row
+      padding: 8px
+
+      .reviewButton
+        margin-top: 45px
+        margin-right: 22px
+        height: 80px
+        width: 200px
+        font-weight: bold
+        border: 1px solid black
+        border-radius: 1px
+        font-size: 18px
+        background-color: white
 
         #modalBackground
           position: fixed

@@ -25,22 +25,56 @@ const RatingBreakdown = ({ ratings, metaData, setReviews, sortReviews, activeSta
           {convertRatingToStars(averageRating)}
         </div>
       </div>
+
+
       <div onClick={() => {
         sortReviews(5);
-      }}><span className="starPercentage" >5 Stars: {percentage['5']}%</span></div>
+      }}>
+        <span className="starPercentage" >
+          5 stars
+          <div className="progress-bar">
+            <div className="filler" style={{ width: `${percentage['5']}%` }}></div>
+          </div>
+        </span>
+      </div>
       <div onClick={() => {
         sortReviews(4);
-      }}><span className="starPercentage" >4 Stars: {percentage['4']}%</span></div>
+      }}><span className="starPercentage" >
+          4 stars
+          <div className="progress-bar">
+            <div className="filler" style={{ width: `${percentage['4']}%` }}></div>
+          </div>
+        </span>
+      </div>
       <div onClick={() => {
         sortReviews(3);
-      }}><span className="starPercentage">3 Stars: {percentage['3']}%</span></div>
+      }}><span className="starPercentage" >
+          3 stars
+          <div className="progress-bar">
+            <div className="filler" style={{ width: `${percentage['3']}%` }}></div>
+          </div>
+        </span>
+      </div>
       <div onClick={() => {
         sortReviews(2);
-      }}><span className="starPercentage">2 Stars: {percentage['2']}%</span></div>
+      }}><span className="starPercentage" >
+          2 stars
+          <div className="progress-bar">
+            <div className="filler" style={{ width: `${percentage['2']}%` }}></div>
+          </div>
+        </span>
+      </div>
       <div onClick={() => {
         sortReviews(1);
-      }}><span className="starPercentage">1 Stars: {percentage['1']}%</span></div>
-      <div className="recommendPercentage">{recommendPercentage}% of reviews recommend this product</div>
+      }}><span className="starPercentage" >
+          1 stars
+          <div className="progress-bar">
+            <div className="filler" style={{ width: `${percentage['1']}%` }}></div>
+          </div>
+        </span>
+      </div>
+
+      <div className="recommend-percentage">{recommendPercentage}% of reviews recommend this product</div>
 
       {activeStars.length ? <div id="filterDisplay">
         {activeStars.map((star, i) => {
