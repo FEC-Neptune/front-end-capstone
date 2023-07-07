@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const DropDownSort = ({ open, sortOptions, setCurrentSort, currentSort, onClose }) => {
+const DropDownSort = ({ resetReviews, open, sortOptions, setCurrentSort, currentSort, onClose }) => {
 
   if (!open) {
     return null;
@@ -14,6 +14,7 @@ const DropDownSort = ({ open, sortOptions, setCurrentSort, currentSort, onClose 
         }
         return <div onClick={() => {
           setCurrentSort(word);
+          resetReviews(word);
           onClose(false);
         }} key={word} className="sort-word">{word}</div>;
       })}

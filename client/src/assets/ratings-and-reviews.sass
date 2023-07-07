@@ -21,6 +21,7 @@
 
       .breakdown
         display: flex
+        position: relative
         flex-direction: column
         font-size: 18px
 
@@ -52,39 +53,39 @@
         #recommendPercentage
           font-size: 14px
 
-    #reviewsListAndButtons
+    .reviews-list-and-buttons
       min-width: 800px
       display: flex
       flex-direction: column
+      position: relative
 
       #listSortHeading
         font-size: 20px
         font-weight: bold
         margin-bottom: 3px
+        position: relative
 
         .sort-word
           text-decoration: underline
           cursor: pointer
 
       .drop-down
+        position: absolute
         display: flex
         flex-direction: column
         justify-content: space-around
         min-height: 50px
         text-decoration: underline
         cursor: pointer
-        position: relative
         font-size: 20px
         font-weight: bold
-        top: 0%
+        top: 20px
         left: 207px
-        z-index: 1000
+        z-index: 9999
         border-bottom: 1px solid grey
         border-left: 1px solid grey
         border-right: 1px solid grey
         max-width: 110px
-
-
 
       #reviewsList
         min-width: 922px
@@ -94,8 +95,11 @@
         display: flex
         flex-direction: column
         justify-content: center
+        z-index: 0
 
         .reviewTile
+          position: relative
+          z-index: 0
           border-bottom: 1px solid grey
           display: flex
           flex-direction: column

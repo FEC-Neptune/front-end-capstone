@@ -23,6 +23,8 @@ const RatingsAndReviews = ({ product }) => {
 
   const sortOptions = ['relevance', 'helpfulness', 'newest'];
 
+
+
   useEffect(() => {
     getReviews(product, currentSort)
       .then((reviews) => {
@@ -33,9 +35,6 @@ const RatingsAndReviews = ({ product }) => {
         let array = reviews.slice(0, 2);
         setVisibleReviews(array);
         return array;
-      })
-      .then((array) => {
-        setVisibleReviews(array);
       })
       .then(() => {
         return getReviewsMeta(product);
@@ -73,7 +72,7 @@ const RatingsAndReviews = ({ product }) => {
         if (activeStars.includes(reviews[i].rating)) {
           resultArray.push(reviews[i]);
           lastIndex = i;
-          count ++;
+          count++;
         }
       }
       setSearchIndex(lastIndex + 1);
@@ -123,6 +122,24 @@ const RatingsAndReviews = ({ product }) => {
     setVisibleReviews(array.slice(0, 2));
   };
 
+  const resetReviews = (currentSort) => {
+    getReviews(product, currentSort)
+      .then((reviews) => {
+        setReviews(reviews);
+        return reviews;
+      })
+      .then((reviews) => {
+        let array = reviews.slice(0, 2);
+        setVisibleReviews(array);
+      })
+      .then(() => {
+        setActiveStars([]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <div id="ratings-and-reviews">
@@ -135,11 +152,11 @@ const RatingsAndReviews = ({ product }) => {
             <Characteristics metaData={metaData} />
           </div>
 
-          <div id="reviewsListAndButtons">
+          <div className="reviews-list-and-buttons">
             <div id="listSortHeading">{reviews.length} reviews, sorted by <span className="sort-word" onClick={() => {
               setDropDownOpen(!dropDownOpen);
-            }}>{currentSort} ∨</span></div>
-            <DropDownSort setCurrentSort={setCurrentSort} onClose={setDropDownOpen} currentSort={currentSort} sortOptions={sortOptions} open={dropDownOpen} />
+            }}> {currentSort} ∨</span></div>
+            <DropDownSort resetReviews={resetReviews} setCurrentSort={setCurrentSort} onClose={setDropDownOpen} currentSort={currentSort} sortOptions={sortOptions} open={dropDownOpen} />
             <ReviewsList visibleReviews={visibleReviews} />
 
             <div id="bottomButtons">

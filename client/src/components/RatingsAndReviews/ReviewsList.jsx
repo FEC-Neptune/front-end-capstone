@@ -6,9 +6,7 @@ const ReviewsList = ({visibleReviews}) => {
   if (visibleReviews === null) {
     return null;
   }
-  // useEffect(() => {
-  //   setVisibleReviews(reviews.slice(0, 2));
-  // }, []);
+
   return (
     <div id="reviewsList">
       {visibleReviews.map((review, i) =>

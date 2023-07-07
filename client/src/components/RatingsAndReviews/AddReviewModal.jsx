@@ -29,14 +29,12 @@ const AddReviewModal = ({ open, closeModal, metaData, product, productName }) =>
 
   const createErrorArray = () => {
     let array = [];
-
     if (!rating) {
       array.push('Overall Rating');
     }
     if (recommend === null) {
       array.push('Recommend Yes or No');
     }
-
     var objArray = [];
     for (let key in characteristics) {
       objArray.push(key);
@@ -49,7 +47,6 @@ const AddReviewModal = ({ open, closeModal, metaData, product, productName }) =>
         }
       });
     }
-
     if (body.length < 50) {
       array.push('A review of at least 50 characters');
     }
@@ -59,7 +56,6 @@ const AddReviewModal = ({ open, closeModal, metaData, product, productName }) =>
     if (!validateEmail(email)) {
       array.push('A valid email');
     }
-
     return array;
   };
 
