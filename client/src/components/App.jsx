@@ -15,7 +15,7 @@ const App = () => {
       <p>Hello Neptune</p>
       <Overview productId={product} />
       <RelatedAndComparisons currentProduct={product} setCurrentProduct={setProduct}/>
-      <RatingsAndReviews product={product} setProduct={setProduct}/>
+      <RatingsAndReviews product={product}/>
     </section>
   );
 };

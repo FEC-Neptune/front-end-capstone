@@ -1,38 +1,39 @@
-#ratingsAndReviews
+#ratings-and-reviews
   display: flex
   flex-direction: column
   margin-bottom: 30px
   padding: 7px
 
-  #mainTitle
+  #main-title
     font-weight: thick
     font-size: 22px
     margin-top: 60px
     margin-bottom: 30px
 
-  #breakdownAndReviews
+  .breakdown-and-reviews
     display: flex
     flex-direction: row
     justify-content: space-around
 
-    #breakdownAndCharacteristics
+    .breakdown-and-characteristics
       display: flex
       flex-direction: column
 
-      #breakdown
+      .breakdown
         display: flex
+        position: relative
         flex-direction: column
         font-size: 18px
 
-        #averageRatingHeading
+        .average-rating-heading
           display: flex
           flex-direction: row
 
-          #averageRatingNumber
+          .average-rating-number
             font-weight: bold
             font-size: 70px
 
-          #averageRatingStars
+          .average-rating-stars
             display: flex
             flex-direction: row
             margin-top: 10px
@@ -52,39 +53,39 @@
         #recommendPercentage
           font-size: 14px
 
-    #reviewsListAndButtons
+    .reviews-list-and-buttons
       min-width: 800px
       display: flex
       flex-direction: column
+      position: relative
 
       #listSortHeading
         font-size: 20px
         font-weight: bold
         margin-bottom: 3px
+        position: relative
 
         .sort-word
           text-decoration: underline
           cursor: pointer
 
       .drop-down
+        position: absolute
         display: flex
         flex-direction: column
         justify-content: space-around
         min-height: 50px
         text-decoration: underline
         cursor: pointer
-        position: relative
         font-size: 20px
         font-weight: bold
-        top: 0%
+        top: 20px
         left: 207px
-        z-index: 1000
+        z-index: 9999
         border-bottom: 1px solid grey
         border-left: 1px solid grey
         border-right: 1px solid grey
         max-width: 110px
-
-
 
       #reviewsList
         min-width: 922px
@@ -94,8 +95,11 @@
         display: flex
         flex-direction: column
         justify-content: center
+        z-index: 0
 
         .reviewTile
+          position: relative
+          z-index: 0
           border-bottom: 1px solid grey
           display: flex
           flex-direction: column
@@ -269,13 +273,24 @@
                     align-items: center
                     text-align: center
 
-
             .reviewInput
               text-align: left
 
             #reviewPhotos
               margin-top: 15px
               margin-bottom: 15px
+
+            .thumbnails
+              padding: 8px
+              display: flex
+              flex-direction: row
+
+              .thumbnail
+                margin-right: 10px
+
+            .add-photo
+              margin-top: 10px
+              margin-bottom: 10px
 
             #email
               margin-bottom: 15px

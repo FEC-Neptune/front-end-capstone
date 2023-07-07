@@ -5,21 +5,23 @@ import { getReviewsMeta } from '../../lib/requestHelpers.js';
 
 
 
-const RatingBreakdown = ({ metaData, reveiws, setReviews, sortReviews, activeStars, removeAllFilters }) => {
+const RatingBreakdown = ({ ratings, metaData, setReviews, sortReviews, activeStars, removeAllFilters }) => {
 
-  const [filterActive, setFilterActive] = useState(false);
+  if (metaData === null) {
+    return null;
+  }
 
-  let ratings = metaData.ratings;
   let totalReviews = calculateTotalReviews(ratings);
   let averageRating = getAverageRating(ratings, 1);
   let percentage = calculateRatingsPercentage(ratings, totalReviews);
   let recommendPercentage = getRecommendPercentage(metaData.recommended);
 
+
   return (
-    <div id="breakdown">
-      <div id="averageRatingHeading">
-        <div id="averageRatingNumber">{averageRating}</div>
-        <div id="averageRatingStars">
+    <div className="breakdown">
+      <div className="average-rating-heading">
+        <div className="average-rating-number">{averageRating}</div>
+        <div className="average-rating-stars">
           {convertRatingToStars(averageRating)}
         </div>
       </div>

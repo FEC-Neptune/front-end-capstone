@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 
-const ReviewsList = ({reviews, visibleReviews, setVisibleReviews }) => {
+const ReviewsList = ({visibleReviews}) => {
 
-  useEffect(() => {
-    setVisibleReviews(reviews.slice(0, 2));
-  }, []);
-
-
+  if (visibleReviews === null) {
+    return null;
+  }
 
   return (
     <div id="reviewsList">
-      {visibleReviews.map((review) =>
+      {visibleReviews.map((review, i) =>
         <ReviewTile review={review} key={review.review_id}/>
       )}
     </div>

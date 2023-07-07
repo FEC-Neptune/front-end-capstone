@@ -1,6 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-const Characteristics = ({metaData}) => {
+const Characteristics = ({ metaData }) => {
+
+  if (metaData === null) {
+    return null;
+  }
 
   let charsArray = [];
   for (var key in metaData.characteristics) {
@@ -11,7 +15,7 @@ const Characteristics = ({metaData}) => {
   }
 
   return (
-    <div id="characteristics">{charsArray.map((pair) => {
+    <div className="characteristics">{charsArray.map((pair) => {
       return <div key={pair[0]}>{pair[0]}: {pair[1]}</div>;
     })}
     </div>
