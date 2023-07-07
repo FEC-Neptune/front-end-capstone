@@ -18,15 +18,13 @@ const RatingBreakdown = ({ ratings, metaData, setReviews, sortReviews, activeSta
 
 
   return (
-    <div className="breakdown">
+    <div className="rating-breakdown">
       <div className="average-rating-heading">
         <div className="average-rating-number">{averageRating}</div>
         <div className="average-rating-stars">
           {convertRatingToStars(averageRating)}
         </div>
       </div>
-
-
       <div onClick={() => {
         sortReviews(5);
       }}>
@@ -35,6 +33,7 @@ const RatingBreakdown = ({ ratings, metaData, setReviews, sortReviews, activeSta
           <div className="progress-bar">
             <div className="filler" style={{ width: `${percentage['5']}%` }}></div>
           </div>
+          {ratings['5']}
         </span>
       </div>
       <div onClick={() => {
@@ -44,6 +43,7 @@ const RatingBreakdown = ({ ratings, metaData, setReviews, sortReviews, activeSta
           <div className="progress-bar">
             <div className="filler" style={{ width: `${percentage['4']}%` }}></div>
           </div>
+          {ratings['4']}
         </span>
       </div>
       <div onClick={() => {
@@ -53,6 +53,7 @@ const RatingBreakdown = ({ ratings, metaData, setReviews, sortReviews, activeSta
           <div className="progress-bar">
             <div className="filler" style={{ width: `${percentage['3']}%` }}></div>
           </div>
+          {ratings['3']}
         </span>
       </div>
       <div onClick={() => {
@@ -62,6 +63,7 @@ const RatingBreakdown = ({ ratings, metaData, setReviews, sortReviews, activeSta
           <div className="progress-bar">
             <div className="filler" style={{ width: `${percentage['2']}%` }}></div>
           </div>
+          {ratings['2']}
         </span>
       </div>
       <div onClick={() => {
@@ -71,18 +73,16 @@ const RatingBreakdown = ({ ratings, metaData, setReviews, sortReviews, activeSta
           <div className="progress-bar">
             <div className="filler" style={{ width: `${percentage['1']}%` }}></div>
           </div>
+          {ratings['1']}
         </span>
       </div>
-
       <div className="recommend-percentage">{recommendPercentage}% of reviews recommend this product</div>
-
-      {activeStars.length ? <div id="filterDisplay">
+      {activeStars.length > 0 && <div className="filter-display">
         {activeStars.map((star, i) => {
-          return <div key={i}>Showing {star} star reviews</div>;
+          return <div className="filter-message" key={i}>Showing {star} star reviews</div>;
         })}
-        <button onClick={removeAllFilters}>Remove all filters</button>
-      </div> : null}
-
+        <button className="remove-filter-button" onClick={removeAllFilters}>Remove all filters</button>
+      </div>}
     </div>
   );
 };
