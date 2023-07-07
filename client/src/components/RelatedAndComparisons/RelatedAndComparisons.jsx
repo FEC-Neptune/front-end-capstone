@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { fetchProducts } from '../../lib/requestHelpers.js';
 import Related from './Related.jsx';
 import Outfit from './Outfit.jsx';
+import ComparisonsModal from './ComparisonsModal.jsx';
 
 const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
   const [prodArr, setProdArr] = useState([]);
@@ -12,6 +13,12 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
   const [outfitIndex, setOutfitIndex] = useState(0);
   const [relatedPosition, setRelatedPosition] = useState();
   const [outfitPosition, setOutfitPosition] = useState();
+  const [compareProduct, setCompareProduct] = useState('');
+  const [mainCompareProduct, setMainCompareProduct] = useState('');
+  const [modalToggle, setModalToggle] = useState(false);
+
+  const openModal = () => setModalToggle(true);
+  const closeModal = () => setModalToggle(false);
 
   const visArrows = (arrowClass) => {
     arrowClass.forEach(arrow => {
@@ -79,7 +86,7 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
         });
       }
     }
-    if ((-arrLength >= relatedIndex - 1) && (relatedIndex <= -4) || (-arrLength === outfitIndex - 1) && (outfitIndex <= -4)) {
+    if (buttonClass.includes('related') && (-arrLength >= relatedIndex - 1) && (relatedIndex <= -4) || (-arrLength === outfitIndex - 1) && (outfitIndex <= -4)) {
       event.target.style.visibility = 'hidden';
       event.target.style.transition = 'opacity 500ms ease-in, visibility 0ms ease-in 500ms';
       event.target.style.opacity = 0;
@@ -123,12 +130,13 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
         transform: `translateX(${-relatedPosition}px)`,
         transition: 'transform .5s ease-in-out',
       }}><div className='carousel-title'>Related Items</div></div>
-      <Related setCurrentProduct={setCurrentProduct} currentProduct={currentProduct} products={prodArr} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={relatedPosition}/>
+      <Related modalToggle={modalToggle} openModal={openModal} closeModal={closeModal} mainCompareProduct={mainCompareProduct} setMainCompareProduct={setMainCompareProduct} setCompareProduct={setCompareProduct} setCurrentProduct={setCurrentProduct} currentProduct={currentProduct} products={prodArr} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={relatedPosition}/>
       <div className='carousel-title-container' id='outfit-title-container' style={{
         transform: `translateX(${-outfitPosition}px)`,
         transition: 'transform .5s ease-in-out',
       }}><div className='carousel-title'>Your Outfit</div></div>
       <Outfit setCurrentProduct={setCurrentProduct} currentProduct={currentProduct} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={outfitPosition}/>
+      <ComparisonsModal isOpen={modalToggle} closeModal={closeModal} currentProduct={currentProduct} compareProduct={compareProduct}/>
     </div>
   );
 

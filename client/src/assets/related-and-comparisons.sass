@@ -13,6 +13,59 @@
   margin-bottom: 10px
   overflow: hidden
 
+  #modal-container
+    position: fixed
+    z-index: 12
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: rgba(0, 0, 0, 0.5)
+    padding: 20px
+    display: flex
+    justify-content: center
+    align-items: center
+
+  #comparisons-modal
+    position: fixed
+    top: 25%
+    left: 25%
+    width: 50%
+    height: 50%
+    background-color: #f9f8f8
+    padding: 20px
+    display: flex
+    justify-content: center
+    align-items: center
+
+  #comparisons-table
+    height: 80%
+    width: 90%
+    text-align: center
+    font-family: 'verdana'
+    font-size: 14px
+    color: #395657
+    font-weight: bold
+    border-style: solid
+    border-width: 2px
+    border-color: #2c474f
+
+  .th
+    font-size: 18px
+    text-decoration: underline
+    height: 32px
+    color: #2c474f
+    border-style: solid
+    border-width: 2px
+    border-color: #2c474f
+
+  .td
+    vertical-align: middle
+    min-width: 175px
+    border-style: solid
+    border-width: 2px
+
+
   .carousel-title-container
     display: flex
     justify-content: center
@@ -122,6 +175,7 @@
         font-size: 24px
         color: #ccc
         transition: color 0.2s
+        z-index: 10
 
       .related-action-button:hover
         color: #2c474f
@@ -137,7 +191,6 @@
         padding-top: 10px
         transition: 'opacity 500ms ease-in, visibility 0ms ease-in 250ms'
         opacity: 1
-
 
         .thumbnail-container
           display: flex
@@ -172,11 +225,15 @@
           color: #809791
 
         .info-name-text
+          cursor: pointer
           display: flex
           flex-wrap: wrap
           color: #2c474f
           font-size: 16px
           font-weight: bold
+
+        .info-name-text:hover
+          color: #809791
 
         .info-category-container
           display: flex
