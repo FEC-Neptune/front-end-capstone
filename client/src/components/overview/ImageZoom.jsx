@@ -6,12 +6,14 @@ const ImageZoom = ({ photoURL, setPhotoURL, toggleZoomedView, bounds, setZoomedM
   const imgProps = useRef({});
   const [top, setTop] = useState(0);
   const [left, setLeft] = useState(0);
+  const zoomScale = 2.5;
+
 
   useEffect(() => {
     imgProps.current = getDefaults();
     imgProps.current.bounds = bounds;
     setPhotoURL(photoURL);
-  }, [photoURL, bounds]);
+  }, [bounds]);
 
   useEffect(() => {
     const scaledDimensions = getScaledDimensions(zoomImg.current, zoomScale);
@@ -29,22 +31,22 @@ const ImageZoom = ({ photoURL, setPhotoURL, toggleZoomedView, bounds, setZoomedM
       -imgProps.current.bounds.top
     );
 
-  }, [zoomImg.current]);
+  }, [zoomImg.current, bounds]);
 
-  const zoomScale = 2.5;
 
   const handleMouseMove = (e) => {
-    let left = e.pageX - imgProps.current.offsets.x;
-    let top = e.pageY - imgProps.current.offsets.y;
 
-    left = Math.max(Math.min(left, imgProps.current.bounds.width), 0);
-    top = Math.max(Math.min(top, imgProps.current.bounds.height), 0);
+    let tempLeft = e.pageX + imgProps.current.offsets.x;
+    let tempTop = e.pageY + imgProps.current.offsets.y;
 
-    if (isNaN(left) || isNaN(top)) {
+    tempLeft = Math.max(Math.min(tempLeft, imgProps.current.bounds.width), 0);
+    tempTop = Math.max(Math.min(tempTop, imgProps.current.bounds.height), 0);
+
+    if (isNaN(tempLeft) || isNaN(tempTop)) {
       return;
     } else {
-      setLeft(left * -imgProps.current.ratios.x);
-      setTop(top * -imgProps.current.ratios.y);
+      setLeft(tempLeft * -imgProps.current.ratios.x);
+      setTop(tempTop * -imgProps.current.ratios.y);
     }
   };
 
