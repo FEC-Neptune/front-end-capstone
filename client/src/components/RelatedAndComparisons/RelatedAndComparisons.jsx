@@ -69,7 +69,7 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
 
     if (buttonClass.includes('related')) {
       visArrows(rightArrowsRel);
-      if (relatedIndex >= -4 && -arrLength <= relatedIndex) {
+      if (relatedIndex >= -4 && -arrLength <= relatedIndex + 1) {
         setRelatedIndex((prevIndex) => {
           const newIndex = prevIndex - 1;
           scrollToCard(newIndex, buttonClass);
@@ -130,7 +130,7 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
         transform: `translateX(${-relatedPosition}px)`,
         transition: 'transform .5s ease-in-out',
       }}><div className='carousel-title'>Related Items</div></div>
-      <Related modalToggle={modalToggle} openModal={openModal} closeModal={closeModal} mainCompareProduct={mainCompareProduct} setMainCompareProduct={setMainCompareProduct} setCompareProduct={setCompareProduct} setCurrentProduct={setCurrentProduct} currentProduct={currentProduct} products={prodArr} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={relatedPosition}/>
+      <Related modalToggle={modalToggle} openModal={openModal} closeModal={closeModal} setCompareProduct={setCompareProduct} setCurrentProduct={setCurrentProduct} currentProduct={currentProduct} products={prodArr} handleLeftClick={handleLeftClick} handleRightClick={handleRightClick} scrollPosition={relatedPosition}/>
       <div className='carousel-title-container' id='outfit-title-container' style={{
         transform: `translateX(${-outfitPosition}px)`,
         transition: 'transform .5s ease-in-out',
