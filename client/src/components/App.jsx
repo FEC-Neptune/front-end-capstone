@@ -13,7 +13,7 @@ const App = () => {
   return (
     <div id="body-container">
       <nav>
-        <h1><span>galax-e-</span>commerce</h1>
+        <h1><span>galaxy</span>commerce</h1>
       </nav>
       <section id="container">
         <Overview productId={product} />
