@@ -11,12 +11,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
+        test: /\.png/,
+        type: 'asset/resource'
       },
       {
         test: /\.(js|jsx)$/,

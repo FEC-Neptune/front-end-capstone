@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter, faPinterest } from '@fortawesome/free-brands-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { getAverageRating } from '../../lib/ratingsAndReviewsHelpers.js';
+import Stars from './Stars.jsx';
 
 const ProductInformation = ({product, style, reviewsData}) => {
+
+  const [rating, setRating] = useState(0);
+
+  useEffect(() => {
+    if (!!reviewsData.average) {
+      setRating(Number(reviewsData.average));
+    } else {
+      setRating(0);
+    }
+
+  }, [reviewsData]);
+
   return (
     <section id="product-info">
       <div id="product-reviews-container">
         <div id="product-rating-container">
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
+          <Stars starRating={rating} />
         </div>
-        <a hred="#" id="product-review-count-text">Read all {reviewsData.count} reviews</a>
+        <a href="#ratings-and-reviews" id="product-review-count-text">Read all {reviewsData.count} reviews</a>
       </div>
       <div id="product-category-container">
         <span id="product-category-text">{product.category ? (product.category) : ''}</span>
