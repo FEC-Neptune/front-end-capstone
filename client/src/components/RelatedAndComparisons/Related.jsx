@@ -1,8 +1,26 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Card from './Card.jsx';
+// import axios from 'axios';
+// import { getAverageRating, convertRatingToStars} from '../../lib/ratingsAndReviewsHelpers.js';
+// import { TOKEN } from '../../../../config.js';
 
 const Related = ( { products, handleLeftClick, handleRightClick, scrollPosition, setMainCompareProduct, setCurrentProduct, setCompareProduct, currentProduct, openModal, closeModal, modalToggle } ) => {
+
+  // const stars = (product) => useEffect(() => {
+  //   const fetchRating = () => {
+  //     let options = {
+  //       headers: {
+  //         'Authorization': TOKEN
+  //       }
+  //     };
+  //     axios
+  //       .get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta?product_id=${product.id}`, options)
+  //       .then(res => convertRatingToStars(getAverageRating(res.data.ratings, 1)))
+  //       .catch(err => console.log(err));
+  //   };
+  //   fetchRating();
+  // }, []);
 
 
   return (

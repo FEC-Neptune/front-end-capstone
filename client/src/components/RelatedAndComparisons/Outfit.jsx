@@ -29,6 +29,14 @@ const Outfit = ( {outfitClick, outfitItems, handleLeftClick, handleRightClick, s
     }
   };
 
+  const removeOutfitClick = (productID) => {
+    let shallowOutfits = outfits.filter(outfit => outfit.id !== productID);
+    let shallowOutfitIDs = outfitIDs.filter(outfit => outfit !== productID);
+    setOutfits(shallowOutfits);
+    shallowOutfits.length > 0 ? Cookies.set('User_Outfit', JSON.stringify(shallowOutfits)) : Cookies.set('User_Outfit', []);
+    shallowOutfitIDs.length > 0 ? Cookies.set('Outfit_IDs', JSON.stringify(shallowOutfitIDs)) : Cookies.set('Outfit_IDs', []);
+  };
+
   return (
     <div>
       <div className='carousel' id='outfit-carousel'>
@@ -40,9 +48,9 @@ const Outfit = ( {outfitClick, outfitItems, handleLeftClick, handleRightClick, s
             <button className='add-outfit-button' onClick={() => handleOutfitClick()}>+</button>
           </div>
           {outfits.map((product) =>
-            <div onClick={() => setCurrentProduct(product.id)} className='card-container outfit-card-container' key={product.id} >
-              <Card product={product} key={product.id}/>
-              <button className='action-button outfit-action-button' >X</button>
+            <div className='card-container outfit-card-container' key={product.id} >
+              <Card product={product} key={product.id} setCurrentProduct={setCurrentProduct} />
+              <button className='action-button outfit-action-button' onClick={() => { removeOutfitClick(product.id); }} >X</button>
             </div>
           )}
         </div>
