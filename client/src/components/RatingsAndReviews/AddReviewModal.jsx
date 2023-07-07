@@ -102,6 +102,7 @@ const AddReviewModal = ({ open, closeModal, metaData, product, productName }) =>
     setNickname('');
     setEmail('');
     setCharacteristics({});
+    setPhotos([]);
   };
 
   return (
@@ -158,8 +159,6 @@ const AddReviewModal = ({ open, closeModal, metaData, product, productName }) =>
                             <label htmlFor={option} >{option}</label>
                           </div>
                         );
-
-
                       })}
                     </div>
                   </div>

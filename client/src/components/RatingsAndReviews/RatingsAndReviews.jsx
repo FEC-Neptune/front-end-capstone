@@ -23,8 +23,6 @@ const RatingsAndReviews = ({ product }) => {
 
   const sortOptions = ['relevance', 'helpfulness', 'newest'];
 
-
-
   useEffect(() => {
     getReviews(product, currentSort)
       .then((reviews) => {
@@ -142,25 +140,28 @@ const RatingsAndReviews = ({ product }) => {
 
   return (
     <>
-      <div id="ratings-and-reviews">
+      <div onClick={() => {
+        setDropDownOpen(false);
+      }} id="ratings-and-reviews">
 
         <div id="main-title">RATINGS AND REVIEWS</div>
 
         <section className="breakdown-and-reviews">
+
           <div className="breakdown-and-characteristics">
             <RatingBreakdown ratings={ratings} sortReviews={sortReviews} metaData={metaData} setReviews={setReviews} activeStars={activeStars} removeAllFilters={removeAllFilters} />
             <Characteristics metaData={metaData} />
           </div>
 
           <div className="reviews-list-and-buttons">
-            <div id="listSortHeading">{reviews.length} reviews, sorted by <span className="sort-word" onClick={() => {
+            <div id="listSortHeading">{reviews.length} reviews, sorted by <span className="sort-word" onClick={(e) => {
+              e.stopPropagation();
               setDropDownOpen(!dropDownOpen);
             }}> {currentSort} ∨</span></div>
             <DropDownSort resetReviews={resetReviews} setCurrentSort={setCurrentSort} onClose={setDropDownOpen} currentSort={currentSort} sortOptions={sortOptions} open={dropDownOpen} />
             <ReviewsList visibleReviews={visibleReviews} />
 
             <div id="bottomButtons">
-
               {reviews.length === 0 ? null : <button className="reviewButton" onClick={addReviews}>MORE REVIEWS</button>}
 
               <button className="reviewButton" onClick={() => {
@@ -170,8 +171,8 @@ const RatingsAndReviews = ({ product }) => {
                 setModalOpen(false);
               }} />
             </div>
-
           </div>
+
         </section>
 
       </div>

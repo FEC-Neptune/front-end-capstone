@@ -7,7 +7,9 @@ const DropDownSort = ({ resetReviews, open, sortOptions, setCurrentSort, current
   }
 
   return (
-    <div className="drop-down">
+    <div onClick={(e) => {
+      e.stopPropagation();
+    }}className="drop-down">
       {sortOptions.map((word) => {
         if (word === currentSort) {
           return null;
