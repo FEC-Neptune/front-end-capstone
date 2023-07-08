@@ -33,12 +33,12 @@ const Related = ( { products, handleLeftClick, handleRightClick, scrollPosition,
           {products.map((product) =>
             <div className='card-container related-card-container' key={product.id}>
               <Card product={product} key={product.id} setCurrentProduct={setCurrentProduct} />
-              <button className='action-button related-action-button' onClick={() => { setCompareProduct(product); modalToggle ? closeModal() : openModal(); } }>&#9733;</button>
+              <button className='action-button related-action-button' aria-label='item comparison button' onClick={() => { setCompareProduct(product); modalToggle ? closeModal() : openModal(); } }>&#9733;</button>
             </div>
           )}
         </div>
-        <button className='arrow-button left-arrow-button left-arrow-related' onClick={handleLeftClick}></button>
-        <button className='arrow-button right-arrow-button right-arrow-related' onClick={handleRightClick}></button>
+        <button className='arrow-button left-arrow-button left-arrow-related' aria-label='Left arrow related items scroll' onClick={handleLeftClick}></button>
+        <button className='arrow-button right-arrow-button right-arrow-related' aria-label='Right arrow related items scroll' onClick={handleRightClick}></button>
       </div>
     </div>
   );

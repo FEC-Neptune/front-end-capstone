@@ -21,7 +21,7 @@ const CurrentImage = ( { product } ) => {
 
   return (
     <div className='thumbnail-container'>
-      <img className='thumbnail' src={currentThumbnail} alt='Related product thumbnail image'/>
+      <img height='640' width='360' className='thumbnail' src={currentThumbnail} alt='Related product thumbnail image'/>
     </div>
   );
 
