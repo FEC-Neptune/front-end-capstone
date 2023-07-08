@@ -6,3 +6,5 @@ bundle.js.map
 config.js
 coverage/
 jest.config.js
+bundle.js.LICENSE.txt
+bundle.js.br
