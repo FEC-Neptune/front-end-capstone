@@ -29,7 +29,7 @@ const ReviewTile = ({ review }) => {
           {review.body}
         </div>
         {review.photos.map((photo) => {
-          return <img className="thumbnail" src={photo.url} width="50" height="50" key={photo.url}></img>;
+          return <img className="thumbnail" src={photo.url} alt='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png' width="50" height="50" key={photo.url}></img>;
         })}
         {review.recommend && <div className="recommend"><FaCheck className="check"/><div>I recommend this product</div></div>}
         {review.response && <div>
