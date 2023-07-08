@@ -6,7 +6,8 @@
   "scripts": {
     "client-prod": "npx webpack --watch --mode production & npx live-server --open=./client/dist/index.html",
     "client-dev": "npx webpack --watch --mode development & npx live-server --open=./client/dist/index.html",
-    "build": "npx webpack",
+    "build-dev": "npx webpack --mode development",
+    "build-prod": "npx webpack --mode production",
     "server": "npx live-server --open=./client/dist/index.html",
     "test": "jest"
   },

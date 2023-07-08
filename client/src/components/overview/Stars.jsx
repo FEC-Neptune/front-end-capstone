@@ -44,7 +44,7 @@ const Stars = ({starRating}) => {
         {starArray.map((starSrc, i) => {
           return (
             <div key={i} className="star-container">
-              <img src={starSrc} />
+              <img src={starSrc} alt={`Image of star representing product rating of ${starRating}`}/>
             </div>
           );
         })}
