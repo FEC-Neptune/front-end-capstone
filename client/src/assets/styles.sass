@@ -1,3 +1,5 @@
+$large-screen: 1200px
+
 // Global Styling
 html
   font-family: Arial, Helvetica, sans-serif, verdana
@@ -59,6 +61,8 @@ textarea
   display: flex
   justify-content: center
   background-color: #f9f8f8
+  @media (max-width: $large-screen)
+    justify-content: flex-start
 
 #container
   display: flex
