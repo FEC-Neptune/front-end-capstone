@@ -24,7 +24,7 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
   const visArrows = (arrowClass) => {
     arrowClass.forEach(arrow => {
       arrow.style.visibility = 'visible';
-      arrow.style.transition = 'opacity 500ms ease-in, visibility 0ms ease-in 0ms';
+      arrow.style.transition = 'opacity 500ms ease-in';
       arrow.style.opacity = 1;
     });
   };
@@ -32,7 +32,7 @@ const RelatedAndComparisons = ( { currentProduct, setCurrentProduct } ) => {
   const disArrows = (arrowClass) => {
     arrowClass.forEach(arrow => {
       arrow.style.visibility = 'hidden';
-      arrow.style.transition = 'opacity 500ms ease-in, visibility 0ms ease-in 250ms';
+      arrow.style.transition = 'opacity 500ms ease-in';
       arrow.style.opacity = 0;
     });
   };
