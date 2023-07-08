@@ -1,12 +1,32 @@
 const path = require('path');
+const CompressionPlugin = require('compression-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
   entry: path.join(__dirname, '/client/src/index.jsx'),
   output: {
     path: path.join(__dirname, '/client/dist'),
     filename: 'bundle.js',
   },
+
+  optimization: {
+    minimizer: [new TerserPlugin()],
+  },
+
+  plugins: [
+    new CompressionPlugin({
+      filename: '[path][base].br',
+      algorithm: 'brotliCompress',
+      test: /\.js(\?.*)?$/i,
+      compressionOptions: {
+        level: 11,
+      },
+      threshold: 10240,
+      minRatio: 0.8,
+      deleteOriginalAssets: false,
+    }),
+  ],
+
   devtool: 'source-map',
   module: {
     rules: [
