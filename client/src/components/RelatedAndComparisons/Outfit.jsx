@@ -50,12 +50,12 @@ const Outfit = ( {outfitClick, outfitItems, handleLeftClick, handleRightClick, s
           {outfits.map((product) =>
             <div className='card-container outfit-card-container' key={product.id} >
               <Card product={product} key={product.id} setCurrentProduct={setCurrentProduct} />
-              <button className='action-button outfit-action-button' onClick={() => { removeOutfitClick(product.id); }} >X</button>
+              <button className='action-button outfit-action-button' aria-label='remove from outfit button' onClick={() => { removeOutfitClick(product.id); }} >X</button>
             </div>
           )}
         </div>
-        <button className='arrow-button left-arrow-button left-arrow-outfit' onClick={handleLeftClick}></button>
-        <button className='arrow-button right-arrow-button right-arrow-outfit' onClick={handleRightClick}></button>
+        <button className='arrow-button left-arrow-button left-arrow-outfit' aria-label='Left arrow outfit scroll' onClick={handleLeftClick}></button>
+        <button className='arrow-button right-arrow-button right-arrow-outfit' aria-label='Right arrow outfit scroll' onClick={handleRightClick}></button>
       </div>
     </div>
   );
