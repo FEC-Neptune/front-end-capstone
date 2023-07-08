@@ -4,7 +4,8 @@
   "description": "FEC Project",
   "main": "client/src/index.jsx",
   "scripts": {
-    "client-dev": "npx webpack --watch & npx live-server --open=./client/dist/index.html",
+    "client-prod": "npx webpack --watch --mode production & npx live-server --open=./client/dist/index.html",
+    "client-dev": "npx webpack --watch --mode development & npx live-server --open=./client/dist/index.html",
     "build": "npx webpack",
     "server": "npx live-server --open=./client/dist/index.html",
     "test": "jest"
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "compression-webpack-plugin": "^10.0.0",
     "css-loader": "^6.8.1",
     "eslint": "^8.43.0",
     "eslint-plugin-react": "^7.32.2",
@@ -30,6 +32,7 @@
     "nodemon": "^2.0.7",
     "sass": "^1.63.6",
     "style-loader": "^3.3.3",
+    "terser-webpack-plugin": "^5.3.9",
     "val-loader": "^5.0.1",
     "webpack-cli": "^5.1.4"
   },
