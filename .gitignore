@@ -3,6 +3,7 @@ node_modules/
 .DS_Store
 bundle.js
 bundle.js.map
+bundle.js.br
 config.js
 coverage/
 jest.config.js

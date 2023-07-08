@@ -8,7 +8,8 @@
     "client-dev": "npx webpack --watch --mode development & npx live-server --open=./client/dist/index.html",
     "build": "npx webpack",
     "server": "npx live-server --open=./client/dist/index.html",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest coverage"
   },
   "repository": {
     "type": "git",
