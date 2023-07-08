@@ -198,7 +198,7 @@ const AddReviewModal = ({ open, closeModal, metaData, product, productName }) =>
           <div className="thumbnails">
 
             {photos.map((photo) => {
-              return <img className="thumbnail" src={photo} width="50" height="50" key={photo}></img>;
+              return <img className="thumbnail" src={photo} alt='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png' width="50" height="50" key={photo}></img>;
             })}
           </div>
           {photos.length < 5 && <button className="add-photo" onClick={() => {
