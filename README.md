@@ -24,13 +24,19 @@ The Product Overview module provides general information and images of the viewe
 
 The Product Overview module's Image Gallery feature enables users to browse photos of the product. After clicking within the bounds of the Image Gallery, the Image Gallery view will expand to the full width of the webpage. To review the image in further detail, the user can then click within the bounds of the Image Gallery view to enable the Zoomed mode, which zooms the image to 2.5X the original scale of the image.
 
+<img width="1092" alt="Screenshot 2023-08-15 at 8 40 24 AM" src="https://github.com/FEC-Neptune/front-end-capstone/assets/6109223/ce33144a-4f09-4bda-82ef-d030afeaf2dd">
+
 ### Related Products & Comparisons
 
 The Related Products and Comparisons module lists similar products and, when clicked, will show a comparison of features of the currently viewed product with the selected related product. Additionally this module grants the visitor the ability to add the currently viewed product to "My Wardrobe" which is a cookie-based persistent feature.
 
+<img width="1100" alt="Screenshot 2023-08-15 at 8 53 22 AM" src="https://github.com/FEC-Neptune/front-end-capstone/assets/6109223/1ad2b77e-5d23-4d05-8298-198b0c0b9555">
+
 ### Reviews & Ratings
 
 The Reviews module provides the visitor with reviews of the currently viewed product. These reviews can be sorted by date created, helpfulness, or relevancy. Additionally reviews can be filtered by score. Within the Reviews module the visitor can also leave a review for the product.
+
+<img width="1169" alt="Screenshot 2023-08-15 at 8 53 44 AM" src="https://github.com/FEC-Neptune/front-end-capstone/assets/6109223/2ba0f7ad-40f9-4c4c-9630-2a436b0885ed">
 
 ## Installation
 
